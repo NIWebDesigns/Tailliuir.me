@@ -1,1 +1,88 @@
-index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Accessing Personal Data...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #000;
+      color: #00ff00;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .terminal {
+      padding: 40px;
+      font-size: 1.2em;
+      max-width: 800px;
+      margin: 0 auto;
+      white-space: pre;
+      min-height: 100vh;
+    }
+    .blink {
+      animation: blink 1s steps(1) infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="terminal" id="terminal"></div>
+  <script>
+    // Sample person data
+    const person = {
+      "Name": "Jane Doe",
+      "Date of Birth": "1990-01-01",
+      "Email": "janedoe@email.com",
+      "Phone": "+44 1234 567890",
+      "Address": "42 Cyber Street, Belfast, BT1 1AA",
+      "Nationality": "British",
+      "Occupation": "Software Engineer"
+    };
+
+    // Hacked style intro
+    const introLines = [
+      ">>> ACCESSING DATABASE...",
+      ">>> BYPASSING FIREWALL...",
+      ">>> DECRYPTING FILES...",
+      "",
+      ">>> PERSONAL INFORMATION FOUND:",
+      ""
+    ];
+
+    // Format person data as lines
+    const infoLines = Object.entries(person).map(([key, value]) => `    ${key}: ${value}`);
+
+    // Combine all lines
+    const allLines = [...introLines, ...infoLines, "", ">>> DOWNLOAD COMPLETE."];
+    let currentLine = 0, currentChar = 0;
+    const terminal = document.getElementById('terminal');
+    let displayText = "";
+
+    function typeLine() {
+      if (currentLine < allLines.length) {
+        let line = allLines[currentLine];
+        if (currentChar < line.length) {
+          displayText += line[currentChar];
+          currentChar++;
+          terminal.innerHTML = displayText + '<span class="blink">_</span>';
+          setTimeout(typeLine, 30 + Math.random() * 40); // random typing speed
+        } else {
+          displayText += '\n';
+          currentLine++;
+          currentChar = 0;
+          setTimeout(typeLine, 250);
+        }
+      } else {
+        terminal.innerHTML = displayText + '<span class="blink">_</span>';
+      }
+    }
+
+    typeLine();
+  </script>
+</body>
+</html>
