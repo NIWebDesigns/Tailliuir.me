@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Accessing Personal Data...</title>
+  <title>ACCESSING USER DATA...</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -33,56 +33,125 @@
 <body>
   <div class="terminal" id="terminal"></div>
   <script>
-    // Sample person data
-    const person = {
-      "Name": "Jane Doe",
-      "Date of Birth": "1990-01-01",
-      "Email": "janedoe@email.com",
-      "Phone": "+44 1234 567890",
-      "Address": "42 Cyber Street, Belfast, BT1 1AA",
-      "Nationality": "British",
-      "Occupation": "Software Engineer"
-    };
+    // Helper to get browser info
+    function getBrowserInfo() {
+      const ua = navigator.userAgent;
+      let browser = "Unknown";
+      if (ua.indexOf("Firefox") !== -1) browser = "Firefox";
+      else if (ua.indexOf("Edg") !== -1) browser = "Edge";
+      else if (ua.indexOf("Chrome") !== -1) browser = "Chrome";
+      else if (ua.indexOf("Safari") !== -1) browser = "Safari";
+      else if (ua.indexOf("Opera") !== -1) browser = "Opera";
+      return browser;
+    }
 
-    // Hacked style intro
+    // Helper to get OS info
+    function getOSInfo() {
+      const platform = navigator.platform;
+      if (platform.startsWith("Win")) return "Windows";
+      if (platform.startsWith("Mac")) return "MacOS";
+      if (platform.startsWith("Linux")) return "Linux";
+      if (/Android/.test(navigator.userAgent)) return "Android";
+      if (/iPhone|iPad|iPod/.test(navigator.userAgent)) return "iOS";
+      return platform;
+    }
+
+    // Collects all available info
+    async function collectInfo() {
+      let ipData = {};
+      try {
+        // Use a public API to get IP and location (limited)
+        const res = await fetch('https://ipapi.co/json/');
+        ipData = await res.json();
+      } catch (e) { /* ignore errors */ }
+
+      // Try geolocation (user must allow)
+      let geo = {};
+      if (navigator.geolocation) {
+        try {
+          geo = await new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(
+              pos => resolve({
+                latitude: pos.coords.latitude,
+                longitude: pos.coords.longitude,
+                accuracy: pos.coords.accuracy + " meters"
+              }),
+              err => resolve({ latitude: "Permission denied" }),
+              {timeout: 3000}
+            );
+          });
+        } catch (e) { geo = { latitude: "Unavailable" }; }
+      }
+
+      return {
+        "IP Address": ipData.ip || "Unavailable",
+        "City": ipData.city || "Unavailable",
+        "Region": ipData.region || "Unavailable",
+        "Country": ipData.country_name || "Unavailable",
+        "Browser": getBrowserInfo(),
+        "Operating System": getOSInfo(),
+        "Language": navigator.language,
+        "Timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
+        "Screen Size": `${window.screen.width} x ${window.screen.height}`,
+        "Referrer": document.referrer || "None",
+        "Geolocation": geo.latitude ? 
+          `Lat: ${geo.latitude}, Lon: ${geo.longitude}, Accuracy: ${geo.accuracy || 'N/A'}` 
+          : "Unavailable"
+      };
+    }
+
+    // Terminal effect
     const introLines = [
-      ">>> ACCESSING DATABASE...",
-      ">>> BYPASSING FIREWALL...",
-      ">>> DECRYPTING FILES...",
-      "",
-      ">>> PERSONAL INFORMATION FOUND:",
+      ">>> ACCESSING USER DATA...",
+      ">>> BYPASSING SECURITY...",
+      ">>> EXTRACTING INFORMATION...",
       ""
     ];
 
-    // Format person data as lines
-    const infoLines = Object.entries(person).map(([key, value]) => `    ${key}: ${value}`);
+    const warningLines = [
+      "",
+      ">>> UNAUTHORIZED ACCESS DETECTED.",
+      ">>> PASSING INFORMATION TO LOCAL AUTHORITIES...",
+      ""
+    ];
 
-    // Combine all lines
-    const allLines = [...introLines, ...infoLines, "", ">>> DOWNLOAD COMPLETE."];
-    let currentLine = 0, currentChar = 0;
-    const terminal = document.getElementById('terminal');
-    let displayText = "";
-
-    function typeLine() {
-      if (currentLine < allLines.length) {
-        let line = allLines[currentLine];
-        if (currentChar < line.length) {
-          displayText += line[currentChar];
-          currentChar++;
-          terminal.innerHTML = displayText + '<span class="blink">_</span>';
-          setTimeout(typeLine, 30 + Math.random() * 40); // random typing speed
-        } else {
-          displayText += '\n';
-          currentLine++;
-          currentChar = 0;
-          setTimeout(typeLine, 250);
-        }
-      } else {
-        terminal.innerHTML = displayText + '<span class="blink">_</span>';
-      }
+    function formatInfoLines(info) {
+      return Object.entries(info).map(([key, value]) => `    ${key}: ${value}`);
     }
 
-    typeLine();
+    async function startTerminal() {
+      const terminal = document.getElementById('terminal');
+      let displayText = "";
+      let lines = [...introLines];
+
+      // Collect info
+      const info = await collectInfo();
+      lines = [...lines, ...formatInfoLines(info), ...warningLines];
+
+      let currentLine = 0, currentChar = 0;
+
+      function typeLine() {
+        if (currentLine < lines.length) {
+          let line = lines[currentLine];
+          if (currentChar < line.length) {
+            displayText += line[currentChar];
+            currentChar++;
+            terminal.innerHTML = displayText + '<span class="blink">_</span>';
+            setTimeout(typeLine, 25 + Math.random() * 30);
+          } else {
+            displayText += '\n';
+            currentLine++;
+            currentChar = 0;
+            setTimeout(typeLine, 200);
+          }
+        } else {
+          terminal.innerHTML = displayText + '<span class="blink">_</span>';
+        }
+      }
+      typeLine();
+    }
+
+    startTerminal();
   </script>
 </body>
 </html>
