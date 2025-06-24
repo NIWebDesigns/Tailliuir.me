@@ -28,10 +28,12 @@
     @keyframes blink {
       50% { opacity: 0; }
     }
+    a { color: #00ff00; }
   </style>
 </head>
 <body>
   <div class="terminal" id="terminal"></div>
+  <script src="https://openfpcdn.io/fingerprintjs/v3"></script>
   <script>
     // Helper to get browser info
     function getBrowserInfo() {
@@ -56,44 +58,95 @@
       return platform;
     }
 
+    // Helper to get device type
+    function getDeviceType() {
+      const ua = navigator.userAgent;
+      if (/Mobi|Android/i.test(ua)) return "Mobile";
+      if (/Tablet|iPad/i.test(ua)) return "Tablet";
+      return "Desktop";
+    }
+
+    // Helper to get battery info
+    async function getBatteryInfo() {
+      if (navigator.getBattery) {
+        try {
+          const battery = await navigator.getBattery();
+          return {
+            level: (battery.level * 100) + "%",
+            charging: battery.charging ? "Yes" : "No"
+          };
+        } catch (e) {}
+      }
+      return { level: "Unavailable", charging: "Unavailable" };
+    }
+
+    // Helper to get geolocation
+    async function getGeolocation() {
+      return new Promise(resolve => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            pos => resolve({
+              latitude: pos.coords.latitude,
+              longitude: pos.coords.longitude,
+              accuracy: pos.coords.accuracy + " meters"
+            }),
+            err => resolve({ latitude: "Permission denied" }),
+            {timeout: 5000}
+          );
+        } else {
+          resolve({ latitude: "Unavailable" });
+        }
+      });
+    }
+
+    // Helper to get IP/location info
+    async function getIPInfo() {
+      try {
+        const res = await fetch('https://ipapi.co/json/');
+        return await res.json();
+      } catch (e) {
+        return {};
+      }
+    }
+
+    // Helper to get fingerprint
+    async function getFingerprint() {
+      if (window.FingerprintJS) {
+        const fp = await FingerprintJS.load();
+        const result = await fp.get();
+        return result.visitorId;
+      }
+      return "Unavailable";
+    }
+
     // Collects all available info
     async function collectInfo() {
-      let ipData = {};
-      try {
-        // Use a public API to get IP and location (limited)
-        const res = await fetch('https://ipapi.co/json/');
-        ipData = await res.json();
-      } catch (e) { /* ignore errors */ }
-
-      // Try geolocation (user must allow)
-      let geo = {};
-      if (navigator.geolocation) {
-        try {
-          geo = await new Promise((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(
-              pos => resolve({
-                latitude: pos.coords.latitude,
-                longitude: pos.coords.longitude,
-                accuracy: pos.coords.accuracy + " meters"
-              }),
-              err => resolve({ latitude: "Permission denied" }),
-              {timeout: 3000}
-            );
-          });
-        } catch (e) { geo = { latitude: "Unavailable" }; }
-      }
-
+      const [ipData, battery, geo, fingerprint] = await Promise.all([
+        getIPInfo(),
+        getBatteryInfo(),
+        getGeolocation(),
+        getFingerprint()
+      ]);
       return {
         "IP Address": ipData.ip || "Unavailable",
         "City": ipData.city || "Unavailable",
         "Region": ipData.region || "Unavailable",
         "Country": ipData.country_name || "Unavailable",
         "Browser": getBrowserInfo(),
+        "Browser Version": navigator.userAgent,
         "Operating System": getOSInfo(),
-        "Language": navigator.language,
-        "Timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
+        "Device Type": getDeviceType(),
         "Screen Size": `${window.screen.width} x ${window.screen.height}`,
+        "Color Depth": window.screen.colorDepth + "-bit",
+        "Browser Language": navigator.language,
+        "All Languages": navigator.languages ? navigator.languages.join(", ") : "Unavailable",
+        "Timezone": Intl.DateTimeFormat().resolvedOptions().timeZone,
         "Referrer": document.referrer || "None",
+        "Cookies Enabled": navigator.cookieEnabled ? "Yes" : "No",
+        "Battery Level": battery.level,
+        "Battery Charging": battery.charging,
+        "Date & Time": new Date().toString(),
+        "Browser Fingerprint": fingerprint,
         "Geolocation": geo.latitude ? 
           `Lat: ${geo.latitude}, Lon: ${geo.longitude}, Accuracy: ${geo.accuracy || 'N/A'}` 
           : "Unavailable"
@@ -137,12 +190,12 @@
             displayText += line[currentChar];
             currentChar++;
             terminal.innerHTML = displayText + '<span class="blink">_</span>';
-            setTimeout(typeLine, 25 + Math.random() * 30);
+            setTimeout(typeLine, 18 + Math.random() * 28);
           } else {
             displayText += '\n';
             currentLine++;
             currentChar = 0;
-            setTimeout(typeLine, 200);
+            setTimeout(typeLine, 180);
           }
         } else {
           terminal.innerHTML = displayText + '<span class="blink">_</span>';
