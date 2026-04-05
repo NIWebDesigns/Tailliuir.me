@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Launcher">
+<meta name="theme-color" content="#000000">
+<title>Encrypted Pixel Launcher</title>
+
+<script>
+/* PWA manifest injected as Blob URL — required by Brave/Chrome for "Install app" */
+(function () {
+  function makePNG(size) {
+    var c = document.createElement('canvas');
+    c.width = c.height = size;
+    var ctx = c.getContext('2d');
+    ctx.fillStyle = '#000'; ctx.fillRect(0,0,size,size);
+    ctx.fillStyle = '#fff';
+    var pad = size*0.18, cell = (size-pad*2)/3, r = cell*0.28;
+    for (var row=0;row<3;row++) for (var col=0;col<3;col++) {
+      ctx.beginPath();
+      ctx.arc(pad+col*cell+cell/2, pad+row*cell+cell/2, r, 0, Math.PI*2);
+      ctx.fill();
+    }
+    return c.toDataURL('image/png');
+  }
+  var i192=makePNG(192), i512=makePNG(512);
+  var m={ name:'Encrypted Pixel Launcher', short_name:'Launcher', start_url:'./', scope:'./',
+    display:'standalone', orientation:'portrait-primary',
+    background_color:'#000000', theme_color:'#000000',
+    icons:[
+      {src:i192,sizes:'192x192',type:'image/png',purpose:'any'},
+      {src:i192,sizes:'192x192',type:'image/png',purpose:'maskable'},
+      {src:i512,sizes:'512x512',type:'image/png',purpose:'any'},
+      {src:i512,sizes:'512x512',type:'image/png',purpose:'maskable'}
+    ]};
+  var blob=new Blob([JSON.stringify(m)],{type:'application/manifest+json'});
+  var link=document.createElement('link');
+  link.rel='manifest'; link.href=URL.createObjectURL(blob);
+  document.head.appendChild(link);
+}());
+
+/* Service Worker via Blob — unlocks "Install app" in Brave */
+if ('serviceWorker' in navigator) {
+  var sw=`self.addEventListener('install',e=>{self.skipWaiting();});
+self.addEventListener('activate',e=>{e.waitUntil(clients.claim());});
+self.addEventListener('fetch',e=>{e.respondWith(fetch(e.request).catch(()=>caches.match(e.request)));});`;
+  navigator.serviceWorker.register(
+    URL.createObjectURL(new Blob([sw],{type:'application/javascript'})),
+    {scope:'./'}
+  ).catch(()=>{});
+}
+</script>
+
+<style>
+/* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
+*, *::before, *::after {
+  margin:0; padding:0; box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-touch-callout:none;
+}
+html, body {
+  width:100%; height:100%;
+  overflow:hidden;
+  background:#000;
+  font-family:'Google Sans','Roboto',sans-serif;
+  user-select:none;
+  -webkit-user-select:none;
+}
+
+/* ═══════════════════════════════════════
+   HOME SCREEN
+═══════════════════════════════════════ */
+#homescreen {
+  position:fixed; inset:0;
+  background:#000;
+  z-index:1;
+  overflow:hidden;
+}
+
+/* Icon/folder grid — anchored to bottom above dock */
+.home-grid {
+  position:absolute;
+  left:0; right:0;
+  bottom:168px; /* dock(88px) + pill(28px) + gap(52px) */
+  padding:0 8px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  row-gap:28px;
+}
+
+/* ═══════════════════════════════════════
+   DOCK — 4 icons on pure black, no background
+═══════════════════════════════════════ */
+#dock {
+  position:fixed;
+  bottom:28px; left:0; right:0;
+  height:88px;
+  display:flex; align-items:center; justify-content:space-around;
+  padding:0 10px;
+  z-index:10;
+}
+
+/* ═══════════════════════════════════════
+   NAV PILL — centred in the gap below the dock
+   Tap = open drawer
+═══════════════════════════════════════ */
+#nav-pill {
+  position:fixed;
+  bottom:0; left:0; right:0;
+  /* exactly the gap below the dock (dock is at bottom:28px) */
+  height:28px;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; z-index:10;
+}
+#nav-pill .bar {
+  width:25vw; height:4px;
+  background:rgba(255,255,255,0.75);
+  border-radius:2px;
+  transition:background 0.12s;
+}
+#nav-pill:active .bar { background:rgba(255,255,255,0.95); }
+
+/* ═══════════════════════════════════════
+   APP DRAWER — bottom sheet, rounded top corners
+═══════════════════════════════════════ */
+#appdrawer {
+  position:fixed;
+  top:0; left:0; right:0; bottom:0;
+  background:rgb(178,182,210);
+  border-radius:28px 28px 0 0;
+  z-index:100;
+  display:flex; flex-direction:column;
+  overflow:hidden;
+  transform:translateY(100%);
+  transition:transform 0.32s cubic-bezier(0.4,0,0.2,1);
+  box-shadow:0 -4px 24px rgba(0,0,0,0.4);
+}
+#appdrawer.open { transform:translateY(0); }
+
+/* Pill at top of drawer — tap to close */
+#drawer-pill {
+  flex-shrink:0;
+  height:28px; margin-top:8px;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+}
+#drawer-pill .bar {
+  width:36px; height:4px;
+  background:rgba(80,85,130,0.55);
+  border-radius:2px;
+  transition:background 0.12s;
+}
+#drawer-pill:active .bar { background:rgba(80,85,130,0.8); }
+
+/* Gap between pill and search bar — matches screenshot */
+.drawer-gap { height:46px; flex-shrink:0; }
+
+/* Search bar */
+#search-wrap {
+  flex-shrink:0;
+  margin:0 16px;
+  background:rgba(210,214,235,0.9);
+  border-radius:32px;
+  display:flex; align-items:center;
+  padding:11px 18px; gap:12px;
+  box-shadow:0 1px 6px rgba(0,0,0,0.1);
+}
+#search-wrap svg { width:18px; height:18px; fill:#777; flex-shrink:0; display:block; }
+#search-input {
+  flex:1; border:none; background:transparent;
+  font-size:15px; color:#333;
+  font-family:inherit; outline:none;
+}
+#search-input::placeholder { color:#888; }
+
+/* Scrollable app grid */
+.drawer-grid {
+  flex:1; overflow-y:auto;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  align-content:start;
+  padding:10px 8px 60px;
+  row-gap:20px;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+}
+.drawer-grid::-webkit-scrollbar { display:none; }
+
+#no-results {
+  grid-column:1/-1;
+  text-align:center; color:#555;
+  font-size:14px; padding-top:30px;
+  display:none;
+}
+
+/* ═══════════════════════════════════════
+   SHARED ICON STYLES
+═══════════════════════════════════════ */
+.app-icon {
+  display:flex; flex-direction:column; align-items:center; gap:5px;
+  text-decoration:none; cursor:pointer; padding:0 2px;
+}
+.app-icon:active .icon-img { transform:scale(0.84); }
+
+.icon-img {
+  width:58px; height:58px;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+  transition:transform 0.1s ease;
+  flex-shrink:0;
+  background:#ccc;
+}
+/* All images inside icon circles are clipped to circle automatically */
+.icon-img img {
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+  border-radius:50%;
+}
+
+.app-label {
+  font-size:11px; color:#fff;
+  text-shadow:0 1px 4px rgba(0,0,0,0.95);
+  text-align:center;
+  max-width:72px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  line-height:1.3;
+}
+.dark-label {
+  color:#18192c !important;
+  text-shadow:none !important;
+}
+
+/* ═══════════════════════════════════════
+   FOLDER ICONS — circular bubbles
+═══════════════════════════════════════ */
+.folder-icon {
+  display:flex; flex-direction:column; align-items:center; gap:5px;
+  cursor:pointer;
+}
+.folder-bubble {
+  width:58px; height:58px;
+  border-radius:50%;
+  background:rgba(148,156,204,0.44);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr;
+  gap:2px; padding:8px;
+  transition:transform 0.1s ease;
+  overflow:hidden;
+}
+.folder-icon:active .folder-bubble { transform:scale(0.84); }
+.folder-mini {
+  border-radius:50%; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+  width:100%; height:100%;
+  background:#bbb;
+}
+.folder-mini img {
+  width:100%; height:100%;
+  object-fit:cover; display:block;
+}
+.folder-label {
+  font-size:12px; font-weight:500; color:#fff;
+  text-shadow:0 1px 4px rgba(0,0,0,0.95);
+  text-align:center;
+  max-width:72px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+
+/* ═══════════════════════════════════════
+   FOLDER POPUP — expands near the tapped folder
+   No full-screen overlay, just the card + dim bg
+═══════════════════════════════════════ */
+#folder-overlay {
+  position:fixed; inset:0;
+  z-index:400;
+  background:rgba(0,0,0,0);
+  opacity:0; pointer-events:none;
+  transition:opacity 0.15s ease;
+}
+#folder-overlay.open { opacity:1; pointer-events:all; }
+
+.folder-popup {
+  position:absolute;
+  /* JS sets top/left dynamically based on tapped folder position */
+  background:rgba(235,237,248,0.97);
+  border-radius:22px;
+  padding:18px 16px 14px;
+  /* width adapts: 2 cols = ~230px, more set by JS */
+  width:230px;
+  display:flex; flex-direction:column; align-items:center; gap:12px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.3);
+  transform:scale(0.85);
+  transform-origin:top left;
+  transition:transform 0.18s cubic-bezier(0.34,1.56,0.64,1), opacity 0.15s ease;
+  opacity:0;
+}
+#folder-overlay.open .folder-popup {
+  transform:scale(1);
+  opacity:1;
+}
+
+.folder-popup-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px 12px;
+  width:100%; justify-items:center;
+}
+.folder-popup-name {
+  font-size:14px; font-weight:500; color:#1a1b2e;
+  margin-top:2px;
+}
+</style>
+</head>
+<body>
+
+<!-- HOME SCREEN -->
+<div id="homescreen">
+  <div class="home-grid" id="home-grid"></div>
+</div>
+
+<!-- DOCK -->
+<div id="dock"></div>
+
+<!-- NAV PILL — tap opens drawer -->
+<div id="nav-pill" onclick="openDrawer()">
+  <div class="bar"></div>
+</div>
+
+<!-- APP DRAWER -->
+<div id="appdrawer">
+  <div id="drawer-pill" onclick="closeDrawer()">
+    <div class="bar"></div>
+  </div>
+  <div class="drawer-gap"></div>
+  <div id="search-wrap">
+    <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+    <input id="search-input" type="text" placeholder="Search apps" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  </div>
+  <div class="drawer-grid" id="drawer-grid">
+    <div id="no-results">No apps found</div>
+  </div>
+</div>
+
+<!-- FOLDER OVERLAY -->
+<div id="folder-overlay" onclick="closeFolder(event)">
+  <div class="folder-popup" onclick="event.stopPropagation()">
+    <div class="folder-popup-grid" id="folder-popup-grid"></div>
+    <div class="folder-popup-name" id="folder-popup-name"></div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   YOUR LAUNCHER DATA — Edit everything in this section
+   ═══════════════════════════════════════════════════════════════
+
+   HOW ICONS WORK — super simple, just paste any image URL:
+   ──────────────────────────────────────────────────────────
+     icon: 'https://example.com/image.png'   ← any URL works
+                                                .webp .jpg .png .svg etc.
+                                                Always clipped to a circle
+
+   EASIEST WAY TO GET ICONS — Google's favicon service:
+     'https://www.google.com/s2/favicons?sz=128&domain=YOURSITE.com'
+   Just replace YOURSITE.com with the app's website domain.
+   Example: 'https://www.google.com/s2/favicons?sz=128&domain=whatsapp.com'
+
+   OR paste any direct image URL you find online (right-click image → Copy image address)
+
+   FALLBACK — if you don't have an image URL yet, use colour + initials:
+     icon: { color:'#25D366', text:'WA' }
+
+   ═══════════════════════════════════════════════════════════════
+   ADDING AN APP: copy any entry, change name / url / icon
+   ADDING A FOLDER: add a block to FOLDERS, then add to HOME_ITEMS
+   HOME GRID: 4 columns — { type:'empty' } = blank cell
+═══════════════════════════════════════════════════════════════ */
+
+
+/* ─────────────────────────────────────────────────
+   DOCK APPS — the 4 icons on the bottom bar
+   Change these to whatever 4 apps you want
+───────────────────────────────────────────────── */
+const DOCK_APPS = [
+  {
+    name: 'Google',
+    url:  'Https://google.com',
+    icon: 'https://play-lh.googleusercontent.com/Eh-N9HKWJgQ4Oa5wmhaE5RbHkB3m3Ud9tsW6saUHis05BL7Xnpubi5iamR5lDKd-Ew=w240-h480-rw',
+  },
+  {
+    name: 'DuckDuckGo',
+    url:  'https://duckduckgo.com',
+    icon: 'https://play-lh.googleusercontent.com/NW2ASwJ4qtxfThhVIpm4641sR4o-yGv80yqaJnOnpC4lEmdxEcNTFcF6-TlZYtmdaA=w240-h480-rw',
+  },
+  {
+    name: 'Brave',
+    url:  'https://search.brave.com',
+    icon: 'https://play-lh.googleusercontent.com/UBrZnuXGb-QACU0uUdF5r_n5nx5oBbdfPyEbtsr0xXv00RN7rpaTVu3GjLeE90aHFmNlbaCmm8vNcmY0eE98U9E=w240-h480-rw',
+  },
+  {
+    name: 'Startpage',
+    url:  'https://www.startpage.com/',
+    icon: 'https://play-lh.googleusercontent.com/gi88CWE9V2iacwlr3yimBdwgYGRn6dyek_I6tNl6kUtBMkX9zgijfK5xW44Aq9GAg5yG=w240-h480-rw',
+  },
+];
+
+
+
+/* ─────────────────────────────────────────────────
+   APP DRAWER — all your apps (auto sorted A→Z)
+   icon = any image URL, or { color:'#hex', text:'AB' }
+───────────────────────────────────────────────── */
+const APPS = [
+  {
+    name: 'Moonpig',
+    url:  'https://www.moonpig.com/uk/account/login',
+    icon: 'https://play-lh.googleusercontent.com/GAD-cEBL5PtfEmaMl0W48b4o6mTQsBRmBzjzT6V_UItGmxd4-0lgMqIX1H7rHQJrMbc=w480-h960-rw',
+  },
+  {
+    name: 'GL.iNet',
+    url:  'http://192.168.8.1',
+    icon: 'https://play-lh.googleusercontent.com/ddRnwLXMWuvqBLf5MUKDE0JN6S_rAXadJC7gzMtEjqZYenzbUkQQDY_wE6sVvVUpkrU=w240-h480-rw',
+  },
+  {
+    name: 'Virgin Media Router',
+    url:  'http://192.168.0.1/',
+    icon: 'https://play-lh.googleusercontent.com/JtX6-PzqhH_6DGqiN9jnZ5zg7MO5AYxRdbUbG6OMfXd5wAHk7uPMxB7U832obp34jQ=w240-h480-rw',
+  },
+  {
+    name: 'Banned.Video',
+    url:  'https://banned.video',
+    icon: 'https://play-lh.googleusercontent.com/375NW5yL8owK_hW9igW9sh-YJbda9ZcygpDXuVvK_R7l-yJp-fuhb4qvUw_FE4XW4ms=s96-rw',
+  },
+  {
+    name: 'Amazon Uk',
+    url:  'https://amazon.co.uk',
+    icon: 'https://play-lh.googleusercontent.com/1Ns1T_qN0pEXMvZeZ5lQNAR8z4blP7ce2J2Nn5doXvt2T1g_W7VMORdWHaApkOooupI=s96-rw',
+  },
+  {
+    name: 'Amazon USA',
+    url:  'https://amazon.com',
+    icon: 'https://play-lh.googleusercontent.com/1Ns1T_qN0pEXMvZeZ5lQNAR8z4blP7ce2J2Nn5doXvt2T1g_W7VMORdWHaApkOooupI=s96-rw',
+  },
+  {
+    name: 'Perplexity AI',
+    url:  'https://www.perplexity.ai',
+    icon: 'https://play-lh.googleusercontent.com/6STp0lYx2ctvQ-JZpXA1LeAAZIlq6qN9gpy7swLPlRhmp-hfvZePcBxqwVkqN2BH1g=s96-rw',
+  },
+  {
+    name: 'Chrome Remote Desktop',
+    url:  'https://remotedesktop.google.com/access',
+    icon: 'https://play-lh.googleusercontent.com/I4DRWoABrUQsaAIQFVSKha98q1u2ilEdrwPJBaf9Mb8KdGZnXzs5DObrwcwUZovgOA=w480-h960-rw',
+  },
+  {
+    name: 'Reddit',
+    url:  'https://www.reddit.com/',
+    icon: 'https://play-lh.googleusercontent.com/NaFAbO7ExS4NRAvt2GYkNY6OQf9oVXwmdMTZzA6zrgjjSxhQuTCnjHyf7TgYcoSGqQ=w480-h960-rw',
+  },
+  {
+    name: 'TikTok',
+    url:  'https://www.tiktok.com/en',
+    icon: 'https://play-lh.googleusercontent.com/DkTxmSymkcxHiady0xd_JsIxLLg0f1ducCtMTpO8El-kTW7VF1gCC6ZzhgTgTGwEqqI=w480-h960-rw',
+  },
+  {
+    name: 'Discord',
+    url:  'https://discord.com/login',
+    icon: 'https://play-lh.googleusercontent.com/0oO5sAneb9lJP6l8c6DH4aj6f85qNpplQVHmPmbbBxAukDnlO7DarDW0b-kEIHa8SQ=s96-rw',
+  },
+  {
+    name: 'Trakt',
+    url:  'https://trakt.tv/auth/signin',
+    icon: 'https://play-lh.googleusercontent.com/M63_Kd-QKXNAHALDSdwr2Ha01SOud0lWMoNcEJctAxA6Z6NxgroOnIYnT87NCu7dcg=w480-h960-rw',
+  },
+  {
+    name: 'Cyberlogy',
+    url:  'https://cyberology.church/',
+    icon: 'https://play-lh.googleusercontent.com/Sb9JbN_fQC9IalzbGxCMBYVxKSrZMUVPeKV7La2312WKVx-wFlKF5bJJ7-t2uqKfl8cSGWgdIHatrI9doS_Q5A=w480-h960-rw',
+  },
+  {
+    name: 'Chat',
+    url:  'https://spicychat.ai/',
+    icon: 'https://sk0.blr1.cdn.digitaloceanspaces.com/users/320037/w300/avatar_1724763149.jpeg',
+  },
+  {
+    name: 'IPTV Panel',
+    url:  'https://login.freqdns.com/',
+    icon: 'https://play-lh.googleusercontent.com/ogxniIVkA_NDWLbPPhbzitf3tOMRBXhRLKr6nbIdrRTu1t1KC4QDDu4EDvltUeSog9I=w480-h960-rw',
+  },
+  {
+    name: 'GMX',
+    url:  'https://gmx.com',
+    icon: 'https://play-lh.googleusercontent.com/mvM6p9uIkQc52i4nx18j9SdfSUdWH_wenNGIwuuYYjHH8TZLyaKZBV_S1CEhu7iTZbs=w480-h960-rw',
+  },
+  {
+    name: 'Mail',
+    url:  'https://www.mail.com',
+    icon: 'https://play-lh.googleusercontent.com/0iZnDRkCMzcK6ZxLbg83jSlR_GZHLCPc32sfNt01lfMRUqnOyKW9qKE_-64YnSpq3A=w480-h960-rw',
+  },
+  {
+    name: 'Github',
+    url:  'https://www.github.com',
+    icon: 'https://play-lh.googleusercontent.com/PCpXdqvUWfCW1mXhH1Y_98yBpgsWxuTSTofy3NGMo9yBTATDyzVkqU580bfSln50bFU=s96-rw',
+  },
+  {
+    name: 'PocketBook',
+    url:  'https://cloud.pocketbook.digital/browser/en/user/3355447/',
+    icon: 'https://play-lh.googleusercontent.com/BX_GK46RKT0OeO2trRJcHnDoZxQPLLLo63fkX3umKR7LuHzdSM9hIgYqCG3g_I9oiQ=s96-rw',
+  },
+  {
+    name: 'UKPostBox',
+    url:  'https://gateway.ipostalmail.net/oauth2.0/Account/Login',
+    icon: 'https://play-lh.googleusercontent.com/Lp8tca49HWxxixFj-87XNbPxZp2N1-xUAUwyeFdg9NTyS5W10r4loNkFS2BZ5-kf7w=w480-h960-rw',
+  },
+  {
+    name: 'Simple Login',
+    url:  'https://app.simplelogin.io/dashboard/',
+    icon: 'https://play-lh.googleusercontent.com/EMDdIjOW7r2d2p5_nbnHxBwqLujyRriopTSQ5mqJPa_PY5Ohrjx3WGb3F_KK9OJOxyQ=w480-h960-rw',
+  },
+  {
+    name: 'SkyBet',
+    url:  'https://m.skybet.com/',
+    icon: 'https://play-lh.googleusercontent.com/TlyGwfrPgYA9hjskNtnlYGF6mvvMS5_l3PY1gXgHvrLRf749oAD2Ysica19d04HEO-WU=w480-h960-rw',
+  },
+  {
+    name: 'SmartDNS',
+    url:  'https://www.smartdnsproxy.com/',
+    icon: 'https://play-lh.googleusercontent.com/JIlio5sDWQw09aRb-WnYtOcYXn5wq8nh29ZSmtvZXChoBP_Ac9TCmTJfxldNhclpBZE=w480-h960-rw',
+  },
+  {
+    name: 'AdGuard',
+    url:  'https://adguard-dns.io/en/public-dns.html',
+    icon: 'https://play-lh.googleusercontent.com/W9EgY8d2SZj5uUGa48qlPW_BgRI6SH3jL0XK1MXkwR1-TZdVqBHqC6Z7JGBuiT4GqvjgLkDpQEbQ2HzaLsGRog=w480-h960-rw',
+  },
+  {
+    name: 'Ground News',
+    url:  'https://ground.news',
+    icon: 'https://play-lh.googleusercontent.com/61Y1REKFBgC1C6YxQwZA56516gR1zCw-HIaNyP_WV_MnR6Fuofzd8-uWBHzKxZP7mwM=w240-h480-rw',
+  },
+  {
+    name: 'Cloudflare',
+    url:  'https://dash.cloudflare.com/7db67c77d92214e27eb9b9ecb9251d56/tailliuir.me/rules/settings/bulk-redirects/redirect-list/47f84ad259394966853562f65bf6d6a1/edit-redirects',
+    icon: 'https://play-lh.googleusercontent.com/pv_SHfe2qgxC42a16yAqRULrFs9WHaV9Mvt-cd1G78JdnXeURdksV-J6Fp_UlZYEOA=w240-h480-rw',
+  },
+];
+
+
+/* ─────────────────────────────────────────────────
+   FOLDERS — apps that live inside folder circles
+   icon = any image URL, or { color:'#hex', text:'AB' }
+───────────────────────────────────────────────── */
+const FOLDERS = {
+
+  Torrenting: { apps: [
+    { name:'IPTorrents',        url:'https://iptorrents.com/',            icon:'https://play-lh.googleusercontent.com/aZK3uobLdwBSbSq_-kxqtZwXOB7zJCdF6Hlx2yUB2_MVAMcuscbwu7XekP9N81Ttvw=w240-h480-rw' },
+    { name:'TorrentLeech',   url:'https://torrentleech.org/', icon:'https://play-lh.googleusercontent.com/aZK3uobLdwBSbSq_-kxqtZwXOB7zJCdF6Hlx2yUB2_MVAMcuscbwu7XekP9N81Ttvw=w240-h480-rw' },
+    { name:'Torrenting',   url:'https://torrenting.com/',       icon:'https://play-lh.googleusercontent.com/aZK3uobLdwBSbSq_-kxqtZwXOB7zJCdF6Hlx2yUB2_MVAMcuscbwu7XekP9N81Ttvw=w240-h480-rw' },
+    { name:'TorrentDay', url:'https://torrentday.com/',      icon:'https://play-lh.googleusercontent.com/aZK3uobLdwBSbSq_-kxqtZwXOB7zJCdF6Hlx2yUB2_MVAMcuscbwu7XekP9N81Ttvw=w240-h480-rw' },
+    { name:'EXT', url:'https://ext.to',      icon:'https://play-lh.googleusercontent.com/aZK3uobLdwBSbSq_-kxqtZwXOB7zJCdF6Hlx2yUB2_MVAMcuscbwu7XekP9N81Ttvw=w240-h480-rw' },
+    { name:'PirateBay', url:'https://thepiratebay.org',      icon:'https://play-lh.googleusercontent.com/aZK3uobLdwBSbSq_-kxqtZwXOB7zJCdF6Hlx2yUB2_MVAMcuscbwu7XekP9N81Ttvw=w240-h480-rw' },
+    { name:'1337x', url:'https://www.1337x.tw',      icon:'https://play-lh.googleusercontent.com/aZK3uobLdwBSbSq_-kxqtZwXOB7zJCdF6Hlx2yUB2_MVAMcuscbwu7XekP9N81Ttvw=w240-h480-rw' },
+    { name:'EZTV', url:'https://eztvx.to',      icon:'https://play-lh.googleusercontent.com/aZK3uobLdwBSbSq_-kxqtZwXOB7zJCdF6Hlx2yUB2_MVAMcuscbwu7XekP9N81Ttvw=w240-h480-rw' },
+    { name:'LimeTorrent', url:'https://limetorrents.lol',      icon:'https://play-lh.googleusercontent.com/aZK3uobLdwBSbSq_-kxqtZwXOB7zJCdF6Hlx2yUB2_MVAMcuscbwu7XekP9N81Ttvw=w240-h480-rw' },
+    { name:'RARBG', url:'https://rarbg.to',      icon:'https://play-lh.googleusercontent.com/aZK3uobLdwBSbSq_-kxqtZwXOB7zJCdF6Hlx2yUB2_MVAMcuscbwu7XekP9N81Ttvw=w240-h480-rw' },
+    { name:'Torlock', url:'https://torlock.com',      icon:'https://play-lh.googleusercontent.com/aZK3uobLdwBSbSq_-kxqtZwXOB7zJCdF6Hlx2yUB2_MVAMcuscbwu7XekP9N81Ttvw=w240-h480-rw' },
+    { name:'Magnetz', url:'https://magnetz.eu',      icon:'https://play-lh.googleusercontent.com/aZK3uobLdwBSbSq_-kxqtZwXOB7zJCdF6Hlx2yUB2_MVAMcuscbwu7XekP9N81Ttvw=w240-h480-rw' },
+  ]},
+
+  Learning: { apps: [
+    { name:'Duolingo',  url:'https://www.duolingo.com/?isLoggingIn=true', icon:'https://play-lh.googleusercontent.com/tw_coGKgk1K_zO-Ypf9zBKV1s-KT3dYN1MIUxIqtnbfmON5x_YmuoAr31gE4oSfJHNtA-aStTd-qe9R8S6NVyA=w240-h480-rw' },
+    { name:'Qlango',    url:'https://app.qlango.com/#/login',        icon:'https://play-lh.googleusercontent.com/2ScOWxIrqET0jsJGDHt4fQ4R0nLRjtQW8UZAoU8X0YPfNEKrNpSg_Pg0Luat1oKFQRc=w240-h480-rw' },
+  ]},
+
+  Cloud: { apps: [
+    { name:'NAS',  url:'https://ug.link',   icon:'https://play-lh.googleusercontent.com/p39gXqHx927dP7wd3d2ttBYbDmwpb_ai8CCipI2qemKBGPKR3fC6-q-Jj7Tevimjtis=w240-h480-rw' },
+    { name:'PikPak', url:'https://mypikpak.com/drive/all',      icon:'https://play-lh.googleusercontent.com/fbQ_Bu7iMqDnX06u7TLdJhyvEDFHaeLCD4GrCn-W7F5CWb69hFZwppXInq0lbnmxyor3=w240-h480-rw' },
+    { name:'Terabox',  url:'https://www.terabox.com/main?category=all',       icon:'https://play-lh.googleusercontent.com/b9KKZIvnQ_X3eIqHXeR4e0Ftd3lrDgAIkJ8N1fAvgl6zpTLuX8m74aVlRnoeLQCcAnLMbSMRJGLvsmghheZe=w240-h480-rw' },
+    { name:'Torbox',  url:'https://torbox.app/dashboard',       icon:'https://avatars.githubusercontent.com/u/144096078?s=280&v=4' },
+    { name:'Yandex Disk',  url:'https://disk.yandex.com',       icon:'https://play-lh.googleusercontent.com/4cgBFqmSPTUfGTbZxF-aXHT0x82fbADvS9aCiUrsdbRLsvMRPk7gHx3hp1a8NzNil7_p=w240-h480-rw' },
+    { name:'Proton Drive',  url:'https://drive.proton.me',       icon:'https://play-lh.googleusercontent.com/AvaTTF1BKzC6BiGR9BI6i6_Cyow4OTl_xRrjZY1pUIxQBMO2zRJtRDralcmm-V5IRQY=w240-h480-rw' },
+    { name:'Ente Photos',  url:'https://web.ente.io',       icon:'https://play-lh.googleusercontent.com/CfFyMjEYUJEnYKBy1h13-qlLa0Xn2o5Jsh7hIUNOygaH71a57Y2XLrLwQx6V4V3JrLU=w480-h960-rw' },
+  ]},
+
+  Work: { apps: [
+    { name:'uTRAC',  url:'https://app.utrac.online/login',   icon:'https://play-lh.googleusercontent.com/BwRfnn85PhvWwDffvVje3Z_1nLwcz1oqcuBpg6LKq4lVm2MPdv5AmheFBX3ez26Qsdc=w240-h480-rw' },
+    { name:'uTRAC Download',  url:'https://app.utrac.online/login',   icon:'https://play-lh.googleusercontent.com/BwRfnn85PhvWwDffvVje3Z_1nLwcz1oqcuBpg6LKq4lVm2MPdv5AmheFBX3ez26Qsdc=w240-h480-rw' },
+    { name:'Eventsec Training',  url:'https://onlinetraining.eventsec.co.uk/login/index.php',   icon:'https://play-lh.googleusercontent.com/WETi4kiHx6KfyGBDsZ1-jgPdAATt8n6Fq4tK05TOBe_z6NxsoWjrGkDyy8PIW29pvJw=s48-rw' },
+    { name:'Halo',  url:'https://auth.my.halosystem.cloud/login?client_id=6o2rev82jk9fbqnsdvm2do2ntm&redirect_uri=https://my.halosystem.cloud&response_type=code',   icon:'https://play-lh.googleusercontent.com/katJuAHIwAUz1fM9SKgRN7Z1hW7QRiub6hD7lJd4Weu-Ew-FtFeREZrypbOcFEOowkt0zUmASbhQR766d2UGdQ=w240-h480-rw' },
+    { name:'Protect UK',  url:'https://www.protectuk.police.uk/user/login',   icon:'https://play-lh.googleusercontent.com/BwRfnn85PhvWwDffvVje3Z_1nLwcz1oqcuBpg6LKq4lVm2MPdv5AmheFBX3ez26Qsdc=w240-h480-rw' },
+    { name:'SIA',  url:'https://services.sia.homeoffice.gov.uk/login',   icon:'https://play-lh.googleusercontent.com/BwRfnn85PhvWwDffvVje3Z_1nLwcz1oqcuBpg6LKq4lVm2MPdv5AmheFBX3ez26Qsdc=w240-h480-rw' },
+    { name:'PSA',  url:'https://renewals.psa.gov.ie',   icon:'https://play-lh.googleusercontent.com/BwRfnn85PhvWwDffvVje3Z_1nLwcz1oqcuBpg6LKq4lVm2MPdv5AmheFBX3ez26Qsdc=w240-h480-rw' },
+    { name:'JMS Validator',  url:'https://eu-merchant-prod.j-pass.com',   icon:'https://play-lh.googleusercontent.com/UpQZxT9a_BsP4vYsivBosEukc4WhE7dHVdUvpB8zimSUH_XTnPg3iTXIW-B5tVy_GVo=w240-h480-rw' },
+    { name:'JMS',  url:'http://192.168.156.5:8080/janus/index.html',   icon:'https://play-lh.googleusercontent.com/MyOJgr5RhKufd_7IKeXYgghH2NqPyx18MwQCDl1eUkh-CbHM3LgXLJFEb61CrYI2rg=w240-h480-rw' },
+    { name:'Emergency List',  url:'https://ntd.theodyssey.co.uk/PWA/signin.html',   icon:'https://play-lh.googleusercontent.com/MyOJgr5RhKufd_7IKeXYgghH2NqPyx18MwQCDl1eUkh-CbHM3LgXLJFEb61CrYI2rg=w240-h480-rw' },
+    { name:'Fire Impairments',  url:'https://docs.google.com/spreadsheets/d/1CzPxYAbTpgaYYzB8S-0MF4kZ8t25ce4ZeiyJODkPCek/edit?gid=0#gid=0',   icon:'https://play-lh.googleusercontent.com/MyOJgr5RhKufd_7IKeXYgghH2NqPyx18MwQCDl1eUkh-CbHM3LgXLJFEb61CrYI2rg=w240-h480-rw' },
+  ]},
+
+  Health: { apps: [
+    { name:'HSCNI',         url:'https://mycare.encompass.hscni.net/MyChart/Home/',              icon:'https://play-lh.googleusercontent.com/YPtBGr6THchfNi4KIo9P4A5TePEia_daTtMtsqwsURjYqngsLCRV1-NUah09z0kcBXs=w480-h960-rw' },
+    { name:'KingsBridge',      url:'https://patients.kingsbridgehealthcaregroup.com/onlinebookings',          icon:'https://patients.kingsbridgehealthcaregroup.com/favicon.ico' },
+  ]},
+
+  Streaming: { apps: [
+    { name:'IPTV',         url:'http://webplayer.online/?url=http://freqdns.com/get.php?username=trial@bannedapps.uk&password=cP4TqnG&type=m3u&output=ts',              icon:'https://play-lh.googleusercontent.com/ogxniIVkA_NDWLbPPhbzitf3tOMRBXhRLKr6nbIdrRTu1t1KC4QDDu4EDvltUeSog9I=w480-h960-rw' },
+    { name:'Streamio',      url:'https://web.stremio.com/',          icon:'https://play-lh.googleusercontent.com/k3489BQdgNeGZKMV8HIOMVZlMyY2EXkiWB0MN6yTl5omfd3_MCSCU75UTXqwh-7j-Qs=w480-h960-rw' },
+    { name:'Smarters',      url:'http://webtv-new.iptvsmarters.com/',          icon:'https://play-lh.googleusercontent.com/dxRsuHvEgFhzWzWdIXxZLypCAIgETKfP0aEKqL48Yglj89x769N_guAIvWHU0LpDyw=w480-h960-rw' },
+    { name:'Plex',      url:'https://app.plex.tv',          icon:'https://play-lh.googleusercontent.com/slZYN_wnlAZ4BmyTZZakwfwAGm8JE5btL7u7AifhqCtUuxhtVVxQ1mcgpGOYC7MsAaU=w480-h960-rw' },
+    { name:'Emby',      url:'https://app.emby.media/#!/startup/connectlogin.html',          icon:'https://play-lh.googleusercontent.com/x2eHcquFzIsSuhwXmbvD_xouXUxMkAfdak0z8zayXU_OzC9yYxBdbur3nE_kE4kazg=w480-h960-rw' },
+  ]},
+
+  Travel: { apps: [
+    { name:'Polarsteps',  url:'https://www.polarsteps.com/itsmat32143',                            icon:'https://play-lh.googleusercontent.com/NsMrrReYHBvFlAqM2TYni4mlYdV25h6LVWmiW0T7AuDon0a34CGrFpNiQPJygAeUWLg=w480-h960-rw' },
+    { name:'Wanderlog',  url:'https://wanderlog.com/u/itsmat32143',      icon:'https://play-lh.googleusercontent.com/UPCPofy2GzRCOSvrJh1Vf03KJ-yoZlzPn9F8X3wmZ3Q8Ja2cFSgMVTW9RzISEKLJ9us=w480-h960-rw' },
+    { name:'iVisa',      url:'https://www.ivisa.com/login',      icon:'https://play-lh.googleusercontent.com/ZBip8O5FUmTZXBTFGhtf0wnVY_rjq_ssEMelh8cOLPxfub7f5bEAfDDm9cGaOcAzHw=w480-h960-rw' },
+  ]},
+
+  Transport: { apps: [
+    { name:'FonaCAB',     url:'https://fonacab.webbooker.icabbi.com/',     icon:'https://play-lh.googleusercontent.com/t5E6XQnccsHzUNVGzeCjPg4RXGvk-03biXbntnhZHD9Au15g3RUDHCEh-RT7hp9fA8g=w480-h960-rw' },
+    { name:'Value Cabs',        url:'https://eb3.autocab.net/#/31515',     icon:'https://play-lh.googleusercontent.com/Rv4fU32Rm3NjNaeZGyxHjvgUhj5UeW_yjHlZ5uSNQw6fOybbGbfS5Q9itsFVUab8xys=w480-h960-rw' },
+    { name:'Uber',        url:'https://www.uber.com/gb/en/rider-home/?_csid=mcxNdVgmImhhYWEC_0ndew&sm_flow_id=qHSfw4dg&state=tEIX8rQwpjjjBlbgcZxtbrx6cGn4qUUITNtX8NEk5Ck%3D',                           icon:'https://play-lh.googleusercontent.com/n109V9dur2NFwV7Fbr8lwlU-isXRR0K7Q-pvp1LCyRwTVP2DfJaR-dklmXzK0MhQuz9E=w480-h960-rw' },
+    { name:'Translink',      url:'https://www.translink.co.uk/journeyplanner?DepartureOrArrivalDate=2025-10-14T14%3A45%3A31&DestinationId&DestinationName&DestinationType&FindBusDepartures=true&FindTrainDepartures=true&FromAirport=false&HasStaffedStations=false&HasStepFreeAccess=false&IsEnterpriseOnly=false&IsQuickBuy=false&OriginId&OriginName&OriginType&ToAirport=false&isSearchByDepartureDate=true',           icon:'https://play-lh.googleusercontent.com/edEryi_t9Mvjn_56gdGxxsC-HC2rA-02yKgb-f0ljbvPvLtmPOOgoY4tMPB62ro-fhE=w480-h960-rw' },
+  ]},
+
+  GOS: { apps: [
+    { name:'Graphene OS',     url:'https://grapheneos.org/releases#komodo',            icon:'https://play-lh.googleusercontent.com/OHZBKD68E5aFJceGQ9JnAz8ABHh4Hll_4mSuB37gaZ7jpuI-ynyR_gSTZOpuDsOjOQ=s94-rw' },
+    { name:'Prey',            url:'https://panel.preyproject.com/login',            icon:'https://play-lh.googleusercontent.com/Up0vGP6xqAcXhSoEEOoeNoO4wN9jf5U7vfJXDJtfefMUeChq8YiIJDKoGFL3w4Xj1w=w240-h480-rw' },
+    { name:'FMD',             url:'https://server.fmd-foss.org/',            icon:'https://f-droid.org/repo/de.nulide.findmydevice/en-US/icon_r3DNfcAtWSXKkZ76EhIi7CxSYVW0-uRx4Q-dynD4Qag=.png' },
+    { name:'Honest Mobile',   url:'https://my.honestmobile.com/',            icon:'https://play-lh.googleusercontent.com/hjwA52NV02EvWGP3BUItrPD0NijnQgJVNCsYFdhcG1p7d2P9d1RWdxbV7evUTwqaxnHD=w240-h480-rw' },
+    { name:'1pMobile',        url:'https://www.1pmobile.com/log-in',            icon:'https://play-lh.googleusercontent.com/pO9UwVga_Lm_HP7vdrJdiXD2qXDUHFs19cRQYU8YOaez4ePKLfz2_KS1p4KWiBqmBmQU-VzO_Tzlv0iB4SJRJns=w240-h480-rw' },
+    { name:'RustDesk',        url:'https://rustdesk.com/web',            icon:'https://f-droid.org/repo/com.carriez.flutter_hbb/en-US/icon_Bb-9xE8gZdmNFh3GBMlw1CPUs7u8Xh_PJFmkIYk-uRY=.png' },
+  ]},
+
+  Proton: { apps: [
+    { name:'Mail',     url:'https://mail.proton.me',     icon:'https://play-lh.googleusercontent.com/99IPL5W1HvN1TM7awcJ2gihUie-LQ5Ae7W9g0FgCBFJ8hNZnFIOJElyBPNcx4Wcx7A=w240-h480-rw' },
+    { name:'Calendar',        url:'https://calendar.proton.me',     icon:'https://play-lh.googleusercontent.com/v1Qfdb9p3Fi09V9uTOQpapUedtH96_SGG3rDbkd2D8iso0B4cmDUrJJfqH0RBJjtM_o=w240-h480-rw' },
+    { name:'Pass',        url:'https://pass.proton.me',                           icon:'https://play-lh.googleusercontent.com/3Rk4gR7Bp4DXCMdsaQXr9tJhGSraIuLDaTGt6Y_BzGofYy8TwJq0NTtiIMoweT69kug=w240-h480-rw' },
+    { name:'Drive',      url:'https://drive.proton.me',           icon:'https://play-lh.googleusercontent.com/AvaTTF1BKzC6BiGR9BI6i6_Cyow4OTl_xRrjZY1pUIxQBMO2zRJtRDralcmm-V5IRQY=w240-h480-rw' },
+    { name:'Wallet',      url:'https://wallet.proton.me',           icon:'https://play-lh.googleusercontent.com/mP-OaPTfuDjBt75z3rGDQUAHVnnK9xsYyoiostWsZLtipq0zFEs44DG-tvXov06HRg=w240-h480-rw' },
+    { name:'Lumo',      url:'https://lumo.proton.me',           icon:'https://play-lh.googleusercontent.com/4Bhm86glDwIkBQmAJfoUkEJNiZ9oWfmkv_fP4bhUzRvZ_1aaxGVwywzwVNJ3u87w41Y=w240-h480-rw' },
+    { name:'Proton Suite',      url:'https://account.proton.me/apps',           icon:'https://play-lh.googleusercontent.com/nvEW0VaXhpl9pkhWuxiT6KSdWWDKhuQcnOHTpRphtAezumonyZWCEf8xdZh95n02QU0=s188-rw' },
+  ]},
+  
+  Skiila: { apps: [
+    { name:'Cox',     url:'https://www.cox.com/content/dam/cox/okta/signin.html?onsuccess=',     icon:'https://play-lh.googleusercontent.com/LWdDho86ZhERLeWoWpQbayGA-1CdFyhJMo0OBAuJiqS3chsstgF2T_Oq-6KpEdTTuw=w240-h480-rw' },
+    { name:'Taylors Flower Shop',     url:'https://taylorsflowershop.com/subscriptionflowers/manage',     icon:'https://play-lh.googleusercontent.com/eb5CQVR76eQCm_1_PUZG39pVZaOpJ9IhQGaohoPm_9m22WFCSIvX3S1e_S4wUBhdOg=s48-rw' },
+  ]},
+};
+
+
+/* ─────────────────────────────────────────────────
+   HOME SCREEN LAYOUT — 4 column grid
+   { type:'folder', name:'FolderName' }
+   { type:'empty' }  ← leaves a blank cell
+───────────────────────────────────────────────── */
+const HOME_ITEMS = [
+  { type:'folder', name:'Torrenting' },
+  { type:'folder', name:'Learning'   },
+  { type:'folder', name:'Cloud'     },
+  { type:'folder', name:'GOS'     },
+  { type:'folder', name:'Health'       },
+  { type:'folder', name:'Streaming'       },
+  { type:'folder', name:'Travel'     },
+  { type:'folder', name:'Transport'       },
+  { type:'folder', name:'Work'     },
+  { type:'folder', name:'Proton'     },
+  { type:'folder', name:'Skiila'     },
+];
+
+
+/* ═══════════════════════════════════════════════════
+   ENGINE — no need to edit below this line
+═══════════════════════════════════════════════════ */
+
+/**
+ * Build a circular icon element.
+ * icon = string URL  → image clipped to circle (webp/png/jpg/svg all work)
+ * icon = { color, text } → solid colour circle with text initials
+ */
+function buildIcon(icon, size) {
+  const el = document.createElement('div');
+  el.className = 'icon-img';
+  el.style.width = size;
+  el.style.height = size;
+
+  if (typeof icon === 'string' && icon) {
+    el.style.background = '#ddd';
+    const img = document.createElement('img');
+    img.src = icon;
+    img.onerror = function() {
+      el.style.background = '#888';
+      this.remove();
+    };
+    el.appendChild(img);
+  } else if (icon && icon.color) {
+    el.style.background = icon.color;
+    el.style.display = 'flex';
+    el.style.alignItems = 'center';
+    el.style.justifyContent = 'center';
+    el.style.fontSize = (icon.text && icon.text.length > 3) ? '9px' : (icon.text && icon.text.length > 2) ? '10px' : '13px';
+    el.style.fontWeight = '700';
+    el.style.color = '#fff';
+    el.style.letterSpacing = '-0.3px';
+    el.textContent = icon.text || '?';
+  } else {
+    el.style.background = '#888';
+  }
+  return el;
+}
+
+/** Build an app icon link element */
+function buildAppIcon(app, size, darkLabel) {
+  const a = document.createElement('a');
+  a.className = 'app-icon';
+  a.href = app.url || '#';
+  const u = app.url || '';
+  if (u && u !== '#' && !u.startsWith('tel') && !u.startsWith('sms') && !u.startsWith('contacts')) {
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+  }
+  a.appendChild(buildIcon(app.icon, size || '58px'));
+  const lbl = document.createElement('span');
+  lbl.className = 'app-label' + (darkLabel ? ' dark-label' : '');
+  lbl.textContent = app.name;
+  a.appendChild(lbl);
+  return a;
+}
+
+/** Build folder 2×2 preview mini icons */
+function buildFolderMini(apps) {
+  const b = document.createElement('div');
+  b.className = 'folder-bubble';
+  apps.slice(0, 4).forEach(function(app) {
+    const m = document.createElement('div');
+    m.className = 'folder-mini';
+    if (typeof app.icon === 'string' && app.icon) {
+      m.style.background = '#bbb';
+      const img = document.createElement('img');
+      img.src = app.icon;
+      img.onerror = function() { m.style.background = '#888'; this.remove(); };
+      m.appendChild(img);
+    } else if (app.icon && app.icon.color) {
+      m.style.background = app.icon.color;
+      m.style.display = 'flex';
+      m.style.alignItems = 'center';
+      m.style.justifyContent = 'center';
+      m.style.fontSize = '7px';
+      m.style.fontWeight = '700';
+      m.style.color = '#fff';
+      m.textContent = app.icon.text || '';
+    } else {
+      m.style.background = '#888';
+    }
+    b.appendChild(m);
+  });
+  while (b.children.length < 4) {
+    const empty = document.createElement('div');
+    empty.className = 'folder-mini';
+    b.appendChild(empty);
+  }
+  return b;
+}
+
+/** Render home screen grid */
+function renderHome() {
+  const grid = document.getElementById('home-grid');
+  grid.innerHTML = '';
+  HOME_ITEMS.forEach(function(item) {
+    if (item.type === 'empty') {
+      grid.appendChild(document.createElement('div'));
+      return;
+    }
+    const folder = FOLDERS[item.name] || { apps: [] };
+    const wrap = document.createElement('div');
+    wrap.className = 'folder-icon';
+    wrap.appendChild(buildFolderMini(folder.apps));
+    const lbl = document.createElement('span');
+    lbl.className = 'folder-label';
+    lbl.textContent = item.name;
+    wrap.appendChild(lbl);
+    wrap.addEventListener('click', function() { openFolder(item.name, wrap); });
+    grid.appendChild(wrap);
+  });
+}
+
+/** Render dock */
+function renderDock() {
+  const dock = document.getElementById('dock');
+  dock.innerHTML = '';
+  DOCK_APPS.forEach(function(app) {
+    dock.appendChild(buildAppIcon(app, '58px', false));
+  });
+}
+
+/** Sort apps A→Z once */
+const sortedApps = [...APPS].sort(function(a, b) {
+  return a.name.localeCompare(b.name);
+});
+
+/** Render app drawer, optionally filtered */
+function renderDrawer(q) {
+  const grid = document.getElementById('drawer-grid');
+  const noRes = document.getElementById('no-results');
+  Array.from(grid.querySelectorAll('.app-icon')).forEach(function(el) { el.remove(); });
+  const query = (q || '').trim().toLowerCase();
+  const list = query ? sortedApps.filter(function(a) { return a.name.toLowerCase().includes(query); }) : sortedApps;
+  if (!list.length) { noRes.style.display = 'block'; return; }
+  noRes.style.display = 'none';
+  list.forEach(function(app) {
+    grid.insertBefore(buildAppIcon(app, '58px', true), noRes);
+  });
+}
+
+/** Open folder popup — positioned exactly like Pixel launcher */
+function openFolder(name, triggerEl) {
+  const folder = FOLDERS[name];
+  if (!folder) return;
+
+  const popupGrid = document.getElementById('folder-popup-grid');
+  popupGrid.innerHTML = '';
+  document.getElementById('folder-popup-name').textContent = name;
+
+  const apps = folder.apps;
+  const count = apps.length;
+
+  // Columns: 2 for ≤4, 3 for 5-6, 4 for 7+
+  const cols = count <= 4 ? 2 : count <= 6 ? 3 : 4;
+  popupGrid.style.gridTemplateColumns = 'repeat(' + cols + ', 1fr)';
+
+  apps.forEach(function(app) {
+    popupGrid.appendChild(buildAppIcon(app, '56px', true));
+  });
+
+  const overlay = document.getElementById('folder-overlay');
+  const popup   = overlay.querySelector('.folder-popup');
+
+  // Popup width based on columns
+  const popupW = cols === 2 ? 210 : cols === 3 ? 290 : 360;
+  popup.style.width = popupW + 'px';
+
+  // Temporarily show off-screen to measure height
+  popup.style.visibility = 'hidden';
+  popup.style.top  = '-9999px';
+  popup.style.left = '-9999px';
+  overlay.classList.add('open');
+
+  requestAnimationFrame(function() {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const popupH = popup.offsetHeight;
+
+    // Dock occupies bottom ~116px (height 88 + bottom 28), pill is in the bottom 28px
+    const dockTop = vh - 28 - 88; // top edge of dock area
+
+    let top, left;
+    let originX = '50%';
+    let originY = '50%';
+
+    if (triggerEl) {
+      const rect = triggerEl.getBoundingClientRect();
+      const folderCX = rect.left + rect.width  / 2;
+      const folderCY = rect.top  + rect.height / 2;
+
+      // Horizontal: centre popup on folder, clamped to screen
+      left = folderCX - popupW / 2;
+      left = Math.max(10, Math.min(left, vw - popupW - 10));
+
+      // Vertical logic — like Pixel launcher:
+      // Normally: centre popup vertically on folder centre
+      // Near bottom (folder bottom edge close to dock): align popup BOTTOM to folder bottom
+      const folderBottom = rect.bottom;
+      const nearDock = folderBottom > dockTop - 20;
+
+      if (nearDock) {
+        // Bottom of popup aligns with bottom of folder icon
+        top = folderBottom - popupH;
+        originY = '100%';
+      } else {
+        // Centre popup on folder centre
+        top = folderCY - popupH / 2;
+        originY = '50%';
+      }
+
+      // Never go above top of screen
+      if (top < 10) {
+        top = 10;
+        originY = '0%';
+      }
+      // Never go below dock
+      if (top + popupH > dockTop - 10) {
+        top = dockTop - popupH - 10;
+      }
+
+      // Transform origin X relative to popup left edge
+      const ox = ((folderCX - left) / popupW * 100).toFixed(1);
+      originX = ox + '%';
+    } else {
+      left = vw / 2 - popupW / 2;
+      top  = vh / 2 - popupH / 2;
+    }
+
+    popup.style.top        = top  + 'px';
+    popup.style.left       = left + 'px';
+    popup.style.transformOrigin = originX + ' ' + originY;
+    popup.style.visibility = 'visible';
+  });
+}
+
+function closeFolder(e) {
+  document.getElementById('folder-overlay').classList.remove('open');
+}
+
+/** Drawer open/close */
+function openDrawer() {
+  document.getElementById('appdrawer').classList.add('open');
+  document.getElementById('search-input').value = '';
+  renderDrawer('');
+}
+function closeDrawer() {
+  document.getElementById('appdrawer').classList.remove('open');
+  document.getElementById('search-input').blur();
+}
+
+/** Live search */
+document.getElementById('search-input').addEventListener('input', function() {
+  renderDrawer(this.value);
+});
+
+/** ESC key */
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closeFolder(); closeDrawer(); }
+});
+
+/** Init */
+renderHome();
+renderDock();
+renderDrawer('');
+</script>
+</body>
+</html>
