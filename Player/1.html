@@ -35,7 +35,7 @@ button,input{font:inherit;color:inherit}
 </head>
 <body>
 
-<video id="video" playsinline webkit-playsinline preload="metadata"></video>
+<video id="video" playsinline webkit-playsinline preload="metadata" controls></video>
 
 <div class="top-time" id="time">00:00 / 00:00</div>
 <div class="clock" id="clock"></div>
@@ -64,7 +64,6 @@ const status = document.getElementById("status");
 let barVisible = true;
 let tapTimeout;
 let isPlaying = false;
-
 let hls = null;
 let dashPlayer = null;
 const torrentClient = new WebTorrent();
@@ -76,13 +75,8 @@ function toggleBar() {
 }
 
 function updateTopVisibility() {
-  if (isPlaying) {
-    timeEl.classList.add("hidden");
-    clockEl.classList.add("hidden");
-  } else {
-    timeEl.classList.remove("hidden");
-    clockEl.classList.remove("hidden");
-  }
+  if (isPlaying) { timeEl.classList.add("hidden"); clockEl.classList.add("hidden"); }
+  else { timeEl.classList.remove("hidden"); clockEl.classList.remove("hidden"); }
 }
 
 function hideBarDelayed() {
@@ -128,9 +122,9 @@ function loadVideo(url) {
   if(clean.startsWith("magnet:") || clean.endsWith(".torrent")) {
     torrentClient.add(clean, torrent=>{
       const file = torrent.files.find(f=>f.name.endsWith(".mp4")||f.name.endsWith(".webm"));
-      if(!file) return setStatus("No video file in torrent");
-      file.renderTo(video, {autoplay:true});
-      setStatus("Streaming torrent...");
+      if(!file) return setStatus("No playable video in torrent");
+      file.renderTo(video, { autoplay:true });
+      setStatus("Streaming torrent: " + file.name);
     });
     return;
   }
@@ -158,7 +152,7 @@ function loadVideo(url) {
     return;
   }
 
-  // fallback
+  // fallback native
   fallbackNative(clean);
 }
 
