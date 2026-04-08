@@ -8,30 +8,44 @@
 <style>
 body {
   margin: 0;
-  font-family: monospace;
-  background: #111;
-  color: #eee;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #0f0f0f;
+  color: #fff;
 }
 
 /* Header */
 #header {
-  padding: 12px;
-  background: #1a1a1a;
-  text-align: center;
-  font-weight: bold;
+  padding: 16px;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 /* Editor */
 #editor {
   width: 100%;
-  height: calc(100vh - 110px);
+  height: calc(100vh - 120px);
   border: none;
   outline: none;
-  padding: 12px;
-  background: #111;
-  color: #eee;
+  padding: 16px;
+  background: transparent;
+  color: #fff;
   font-size: 16px;
-  resize: none;
+  line-height: 1.5;
+}
+
+/* Floating button */
+#fab {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #8ab4f8;
+  color: black;
+  font-size: 30px;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
 
 /* Bottom bar */
@@ -40,43 +54,44 @@ body {
   bottom: 0;
   width: 100%;
   display: flex;
-  background: #1a1a1a;
+  background: #1c1c1c;
   border-top: 1px solid #333;
 }
 
 #bottomBar button {
   flex: 1;
-  padding: 15px;
+  padding: 14px;
   background: none;
   border: none;
-  color: #eee;
-  font-size: 16px;
+  color: #ccc;
+  font-size: 18px;
 }
 
-/* Notes drawer */
-#drawer {
+/* Bottom sheet */
+#sheet {
   position: fixed;
-  top: 0;
-  left: -100%;
-  width: 80%;
-  height: 100%;
-  background: #1a1a1a;
-  overflow-y: auto;
+  bottom: -100%;
+  width: 100%;
+  height: 60%;
+  background: #1c1c1c;
+  border-radius: 16px 16px 0 0;
   transition: 0.3s;
-  border-right: 1px solid #333;
+  overflow-y: auto;
 }
 
-#drawer.open {
-  left: 0;
+#sheet.open {
+  bottom: 0;
 }
 
-.noteItem {
-  padding: 12px;
-  border-bottom: 1px solid #222;
+.note {
+  padding: 14px;
+  margin: 10px;
+  background: #2a2a2a;
+  border-radius: 12px;
 }
 
-.noteItem:hover {
-  background: #333;
+.note.active {
+  background: #3a3a3a;
 }
 
 /* Overlay */
@@ -102,15 +117,16 @@ body {
 
 <textarea id="editor" placeholder="Start typing..."></textarea>
 
+<button id="fab" onclick="newNote()">+</button>
+
 <div id="bottomBar">
-  <button onclick="toggleDrawer()">☰</button>
-  <button onclick="newNote()">＋</button>
+  <button onclick="toggleSheet()">📋</button>
   <button onclick="deleteNote()">🗑</button>
   <button onclick="exportNotes()">⬇</button>
 </div>
 
-<div id="drawer"></div>
-<div id="overlay" onclick="toggleDrawer()"></div>
+<div id="sheet"></div>
+<div id="overlay" onclick="toggleSheet()"></div>
 
 <script>
 let notes = JSON.parse(localStorage.getItem("notes") || "[]");
@@ -125,8 +141,7 @@ function newNote() {
   notes.unshift(note);
   current = note.id;
   save();
-  renderDrawer();
-  renderEditor();
+  render();
 }
 
 function deleteNote() {
@@ -134,25 +149,12 @@ function deleteNote() {
   notes = notes.filter(n => n.id !== current);
   current = notes.length ? notes[0].id : null;
   save();
-  renderDrawer();
-  renderEditor();
+  render();
 }
 
-function renderDrawer() {
-  const drawer = document.getElementById("drawer");
-  drawer.innerHTML = "";
-
-  notes.forEach(n => {
-    const div = document.createElement("div");
-    div.className = "noteItem";
-    div.textContent = n.content.split("\n")[0] || "Untitled";
-    div.onclick = () => {
-      current = n.id;
-      renderEditor();
-      toggleDrawer();
-    };
-    drawer.appendChild(div);
-  });
+function render() {
+  renderEditor();
+  renderSheet();
 }
 
 function renderEditor() {
@@ -160,17 +162,34 @@ function renderEditor() {
   document.getElementById("editor").value = note ? note.content : "";
 }
 
+function renderSheet() {
+  const sheet = document.getElementById("sheet");
+  sheet.innerHTML = "";
+
+  notes.forEach(n => {
+    const div = document.createElement("div");
+    div.className = "note" + (n.id === current ? " active" : "");
+    div.textContent = n.content.split("\n")[0] || "Untitled";
+    div.onclick = () => {
+      current = n.id;
+      render();
+      toggleSheet();
+    };
+    sheet.appendChild(div);
+  });
+}
+
 document.getElementById("editor").addEventListener("input", e => {
   const note = notes.find(n => n.id === current);
   if (note) {
     note.content = e.target.value;
     save();
-    renderDrawer();
+    renderSheet();
   }
 });
 
-function toggleDrawer() {
-  document.getElementById("drawer").classList.toggle("open");
+function toggleSheet() {
+  document.getElementById("sheet").classList.toggle("open");
   document.getElementById("overlay").classList.toggle("show");
 }
 
@@ -182,8 +201,7 @@ function exportNotes() {
   a.click();
 }
 
-renderDrawer();
-renderEditor();
+render();
 </script>
 
 </body>
