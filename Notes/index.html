@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notes</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: monospace;
+  background: #111;
+  color: #eee;
+}
+
+/* Header */
+#header {
+  padding: 12px;
+  background: #1a1a1a;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Editor */
+#editor {
+  width: 100%;
+  height: calc(100vh - 110px);
+  border: none;
+  outline: none;
+  padding: 12px;
+  background: #111;
+  color: #eee;
+  font-size: 16px;
+  resize: none;
+}
+
+/* Bottom bar */
+#bottomBar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  background: #1a1a1a;
+  border-top: 1px solid #333;
+}
+
+#bottomBar button {
+  flex: 1;
+  padding: 15px;
+  background: none;
+  border: none;
+  color: #eee;
+  font-size: 16px;
+}
+
+/* Notes drawer */
+#drawer {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 80%;
+  height: 100%;
+  background: #1a1a1a;
+  overflow-y: auto;
+  transition: 0.3s;
+  border-right: 1px solid #333;
+}
+
+#drawer.open {
+  left: 0;
+}
+
+.noteItem {
+  padding: 12px;
+  border-bottom: 1px solid #222;
+}
+
+.noteItem:hover {
+  background: #333;
+}
+
+/* Overlay */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: none;
+}
+
+#overlay.show {
+  display: block;
+}
+</style>
+</head>
+
+<body>
+
+<div id="header">Notes</div>
+
+<textarea id="editor" placeholder="Start typing..."></textarea>
+
+<div id="bottomBar">
+  <button onclick="toggleDrawer()">☰</button>
+  <button onclick="newNote()">＋</button>
+  <button onclick="deleteNote()">🗑</button>
+  <button onclick="exportNotes()">⬇</button>
+</div>
+
+<div id="drawer"></div>
+<div id="overlay" onclick="toggleDrawer()"></div>
+
+<script>
+let notes = JSON.parse(localStorage.getItem("notes") || "[]");
+let current = null;
+
+function save() {
+  localStorage.setItem("notes", JSON.stringify(notes));
+}
+
+function newNote() {
+  const note = { id: Date.now(), content: "" };
+  notes.unshift(note);
+  current = note.id;
+  save();
+  renderDrawer();
+  renderEditor();
+}
+
+function deleteNote() {
+  if (!current) return;
+  notes = notes.filter(n => n.id !== current);
+  current = notes.length ? notes[0].id : null;
+  save();
+  renderDrawer();
+  renderEditor();
+}
+
+function renderDrawer() {
+  const drawer = document.getElementById("drawer");
+  drawer.innerHTML = "";
+
+  notes.forEach(n => {
+    const div = document.createElement("div");
+    div.className = "noteItem";
+    div.textContent = n.content.split("\n")[0] || "Untitled";
+    div.onclick = () => {
+      current = n.id;
+      renderEditor();
+      toggleDrawer();
+    };
+    drawer.appendChild(div);
+  });
+}
+
+function renderEditor() {
+  const note = notes.find(n => n.id === current);
+  document.getElementById("editor").value = note ? note.content : "";
+}
+
+document.getElementById("editor").addEventListener("input", e => {
+  const note = notes.find(n => n.id === current);
+  if (note) {
+    note.content = e.target.value;
+    save();
+    renderDrawer();
+  }
+});
+
+function toggleDrawer() {
+  document.getElementById("drawer").classList.toggle("open");
+  document.getElementById("overlay").classList.toggle("show");
+}
+
+function exportNotes() {
+  const blob = new Blob([JSON.stringify(notes)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "notes.json";
+  a.click();
+}
+
+renderDrawer();
+renderEditor();
+</script>
+
+</body>
+</html>
