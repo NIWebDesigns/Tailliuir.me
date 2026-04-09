@@ -12,11 +12,21 @@
   --accent: #8ab4f8;
   --text: #e8eaed;
 }
-body {
+
+html, body {
   margin: 0;
+  padding: 0;
+  height: 100%;
   font-family: 'Google Sans', 'Roboto', system-ui, sans-serif;
   background: var(--bg);
   color: var(--text);
+}
+
+/* Flex layout to handle scroll properly */
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 /* Top bar */
@@ -30,26 +40,34 @@ body {
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
   font-size: 20px;
   font-weight: 500;
+  flex-shrink: 0;
 }
 
-/* Editor */
+/* Editor container flexes */
+#editorContainer {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+}
+
+/* Editor textarea */
 #editor {
   width: 100%;
-  height: calc(100vh - 64px);
+  min-height: 100%;
   border: none;
   outline: none;
-  padding: 16px;
-  font-size: 16px;
   background: transparent;
   color: var(--text);
+  font-size: 16px;
   line-height: 1.6;
   resize: none;
 }
 
-/* FAB */
+/* Floating Action Button */
 #fab {
   position: fixed;
-  bottom: 80px;
+  bottom: calc(20px + env(safe-area-inset-bottom));
   right: 20px;
   width: 56px;
   height: 56px;
@@ -83,9 +101,17 @@ body {
   font-weight: 500;
   background: var(--surface);
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  flex-shrink: 0;
 }
 
 /* Notes list */
+#notesList {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
 .note {
   margin: 10px 16px;
   padding: 14px;
@@ -100,13 +126,18 @@ body {
 </head>
 <body>
 
-<div id="topbar">
-  <button onclick="openNotes()">☰</button>
-  <span>Pixel Notes</span>
-  <button onclick="newNote()">＋</button>
+<div id="app">
+  <div id="topbar">
+    <button onclick="openNotes()">☰</button>
+    <span>Pixel Notes</span>
+    <button onclick="newNote()">＋</button>
+  </div>
+
+  <div id="editorContainer">
+    <textarea id="editor" placeholder="Start typing..."></textarea>
+  </div>
 </div>
 
-<textarea id="editor" placeholder="Start typing..."></textarea>
 <button id="fab" onclick="newNote()">＋</button>
 
 <div id="notesOverlay">
@@ -118,14 +149,14 @@ body {
 </div>
 
 <script>
-// Data
+// Notes data
 let notes = JSON.parse(localStorage.getItem("notes") || "[]");
 let current = notes.length ? notes[0].id : null;
 
-// Save notes
+// Save
 function save() { localStorage.setItem("notes", JSON.stringify(notes)); }
 
-// Create new note
+// New note
 function newNote() {
   const note = { id: Date.now(), content: "" };
   notes.unshift(note);
@@ -140,7 +171,7 @@ function renderEditor() {
   document.getElementById("editor").value = note ? note.content : "";
 }
 
-// Render notes overlay
+// Render overlay
 function renderOverlay() {
   const list = document.getElementById("notesList");
   list.innerHTML = "";
@@ -163,10 +194,11 @@ document.getElementById("editor").addEventListener("input", e => {
 function openNotes() { renderOverlay(); document.getElementById("notesOverlay").classList.add("open"); }
 function closeNotes() { document.getElementById("notesOverlay").classList.remove("open"); }
 
-// Initialize
+// Init
 if (!current) newNote();
 function render() { renderEditor(); renderOverlay(); }
 render();
 </script>
+
 </body>
 </html>
