@@ -1,0 +1,5 @@
+# robots.txt - block all bots entirely
+User-agent: *
+Disallow: /
+Crawl-delay: 999999
+Noindex: /
