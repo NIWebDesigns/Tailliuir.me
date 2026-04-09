@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Tailliuir Notes</title>
+<title>Pixel Notes</title>
 <!-- Google Fonts for a clean, modern look -->
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
 <style>
@@ -30,7 +30,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: background-color 0.3s;
   }
 
   header.dark {
@@ -52,11 +51,6 @@
     cursor: pointer;
     padding: 4px 8px;
     border-radius: 4px;
-    transition: background 0.2s;
-  }
-
-  #themeToggle:hover {
-    background-color: rgba(0,0,0,0.1);
   }
 
   /* Buttons for export/import */
@@ -73,11 +67,6 @@
     cursor: pointer;
     background-color: #4285f4;
     color: #fff;
-    transition: background-color 0.2s;
-  }
-
-  .control-btn:hover {
-    background-color: #357ae8;
   }
 
   #searchBar {
@@ -87,11 +76,6 @@
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    outline: none;
-  }
-
-  #searchBar:focus {
-    border-color: #4285f4;
   }
 
   #notesContainer {
@@ -102,12 +86,11 @@
   }
 
   .note {
-    background: #ffffff;
+    background: #fff;
     padding: 16px;
     border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
     position: relative;
-    transition: box-shadow 0.2s, opacity 0.2s, transform 0.2s;
     cursor: pointer;
   }
 
@@ -135,7 +118,6 @@
     color: #757575;
     font-size: 20px;
     cursor: pointer;
-    transition: color 0.2s;
   }
 
   body.dark .delete-btn {
@@ -146,7 +128,6 @@
     color: #e53935;
   }
 
-  /* Floating Action Button (FAB) */
   #addNoteBtn {
     position: fixed;
     bottom: 24px;
@@ -159,18 +140,12 @@
     font-size: 36px;
     border: none;
     box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   #addNoteBtn:hover {
     background-color: #357ae8;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
   }
 
-  /* Modal styles */
   #modal {
     display: none;
     position: fixed; 
@@ -197,7 +172,6 @@
     transform: translateY(-20px);
     transition: opacity 0.3s, transform 0.3s;
   }
-
   #modal.show {
     opacity: 1;
     transform: translateY(0);
@@ -210,8 +184,6 @@
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    resize: vertical;
-    font-family: 'Roboto', sans-serif;
   }
 
   .modal-buttons {
@@ -227,7 +199,6 @@
     font-size: 14px;
     cursor: pointer;
     margin-left: 8px;
-    transition: background-color 0.2s;
   }
 
   #saveBtn {
@@ -241,14 +212,12 @@
 
   #cancelBtn {
     background-color: #e0e0e0;
-    color: #202124;
   }
 
   #cancelBtn:hover {
     background-color: #d5d5d5;
   }
 
-  /* Feedback message styles */
   #message {
     position: fixed;
     bottom: 80px;
@@ -284,7 +253,6 @@
 
 <div id="notesContainer"></div>
 
-<!-- Floating Action Button -->
 <button id="addNoteBtn" aria-label="Add Note">+</button>
 
 <!-- Modal for adding/editing notes -->
@@ -322,7 +290,6 @@
   let notes = [];
   let editingIndex = null;
 
-  // Load notes from local storage
   function loadNotes() {
     const storedNotes = localStorage.getItem('notes');
     if (storedNotes) {
@@ -333,12 +300,10 @@
     renderNotes();
   }
 
-  // Save notes to local storage
   function saveNotes() {
     localStorage.setItem('notes', JSON.stringify(notes));
   }
 
-  // Show message
   function showMessage(text) {
     messageDiv.textContent = text;
     messageDiv.classList.add('show');
@@ -347,7 +312,6 @@
     }, 3000);
   }
 
-  // Render notes with search filter
   function renderNotes() {
     const query = searchBar.value.toLowerCase();
     notesContainer.innerHTML = '';
@@ -378,21 +342,18 @@
     });
   }
 
-  // Delete note
   function deleteNote(index) {
     notes.splice(index, 1);
     saveNotes();
     renderNotes();
   }
 
-  // Edit note
   function editNote(index) {
     editingIndex = index;
     noteInput.value = notes[index];
     showModal();
   }
 
-  // Show modal for new note
   addNoteBtn.onclick = () => {
     editingIndex = null;
     noteInput.value = '';
@@ -407,7 +368,13 @@
     noteInput.focus();
   }
 
-  // Save note
+  function hideModal() {
+    document.getElementById('modalContent').classList.remove('show');
+    setTimeout(() => {
+      modal.style.display = 'none';
+    }, 300);
+  }
+
   saveBtn.onclick = () => {
     const text = noteInput.value.trim();
     if (text) {
@@ -422,13 +389,6 @@
     }
   };
 
-  function hideModal() {
-    document.getElementById('modalContent').classList.remove('show');
-    setTimeout(() => {
-      modal.style.display = 'none';
-    }, 300);
-  }
-
   cancelBtn.onclick = () => {
     hideModal();
   };
@@ -439,12 +399,10 @@
     }
   };
 
-  // Search filter
   searchBar.oninput = () => {
     renderNotes();
   };
 
-  // Theme toggle
   themeToggle.onclick = () => {
     body.classList.toggle('dark');
     document.querySelector('header').classList.toggle('dark');
@@ -491,7 +449,6 @@
     }
   };
 
-  // Initialize
   loadNotes();
 </script>
 </body>
