@@ -1,32 +1,67 @@
-# 🚀 John Doe
-### Digital Creator & Software Engineer
+<div align="center">
+
+# 🦖 `TAILLIUIR // NETWORK_NODE`
+`==============================================`
+
+```text
+       _                 _ 
+
+      | |               | |
+  _  _| | _____ ___  ___| |  _
+ / /|_  _||_____) _ \(___) |_/ /
+ \ \  | |_      | |_| |  |  _\ \
+  \_\  \__)      \___/    \__)_ \
+```
+
+`[ INFRASTRUCTURE: ACTIVE ] • [ PROTOCOL: SECURE ]`
 
 ---
 
-## 🔗 Quick Links
+## ⚡ CORE REDIRECTS
 
-*   **[🌐 Portfolio Website](https://example.com)**
-    *   *My latest projects and case studies.*
-*   **[💼 LinkedIn Profile](https://linkedin.com)**
-    *   *Professional network and resume.*
-*   **[💻 GitHub Repositories](https://github.com)**
-    *   *Open-source tools and code experiments.*
-*   **[📝 Tech Blog](https://medium.com)**
-    *   *Weekly articles on development and design.*
+<table width="100%">
+  <tr>
+    <td width="50%">
+      <h3>🌐 CORE HUB</h3>
+      <p><b><a href="https://tailliuir.me">ENTER PORTFOLIO ➔</a></b></p>
+      <p><i>Host: niwebdesigns.github.io</i></p>
+    </td>
+    <td width="50%">
+      <h3>📸 VISUAL VAULT</h3>
+      <p><b><a href="https://📸.tailliuir.me">OPEN ENTE GALLERY ➔</a></b></p>
+      <p><i>Host: ://ente.com</i></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h3>🖇️ LINK UTILITY</h3>
+      <p><b><a href="https://🖇.tailliuir.me">URL DISPATCHER ➔</a></b></p>
+      <p><i>Host: cname.short.io</i></p>
+    </td>
+    <td width="50%">
+      <h3>🧬 THE BEAST</h3>
+      <p><b><a href="https://🚀🔥👾👑🤖🍕🎸🛸💎🍦🌮🎰🧿🎈🔮🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉.🍇🍟🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉🍇🍟🛸💎🍦🌮🎰🧿🎈🔮🤖🍕🎸🚀.🔥👾👑🤖🍕🎸🛸💎🍦🌮🎰🧿🎈🔮🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉🍇.🍟🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉🍇🍟🛸💎🍦🌮🎰🧿🎈.tailliuir.me">EMOJI WARP ➔</a></b></p>
+      <p><i>Host: google.com</i></p>
+    </td>
+  </tr>
+</table>
 
 ---
 
-## 📸 Social Media
+## 💾 DNS MAP
 
-*   **[📷 Instagram](https://instagram.com)**
-*   **[🐦 X / Twitter](https://x.com)**
-*   **[🎥 YouTube Channel](https://youtube.com)**
+</div>
 
----
+```nginx
+[💾 CNAME RECORD MAPPINGS]
+├── 🦖            ──► niwebdesigns.github.io
+├── 📸            ──► ://ente.com
+├── 🖇            ──► cname.short.io
+└── 🚀🔥...🎈     ──► google.com (Max Length Node)
+```
 
-## ✉️ Contact & Support
+<div align="center">
 
-*   **[📩 Email Me](mailto:hello@example.com)**
-*   **[☕ Buy Me a Coffee](https://buymeacoffee.com)**
+`[ EOF // DISCONNECT ]`
 
----
+</div>
