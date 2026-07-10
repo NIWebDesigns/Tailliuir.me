@@ -22,8 +22,8 @@
   </tr>
   <tr>
     <td width="50%">
-      <h3>🖇️ LINK UTILITY</h3>
-      <p><b><a href="https://🖇.tailliuir.me">URL DISPATCHER ➔</a></b></p>
+      <h3>🖇.tailliuir.me</h3>
+      <p><b><a href="🖇.tailliuir.me">🖇.tailliuir.me</a></b></p>
       <p><i>Host: cname.short.io</i></p>
     </td>
     <td width="50%">
