@@ -15,8 +15,8 @@
       <p><i>Host: niwebdesigns.github.io</i></p>
     </td>
     <td width="50%">
-      <h3>📸 VISUAL VAULT</h3>
-      <p><b><a href="https://📸.tailliuir.me">OPEN ENTE GALLERY ➔</a></b></p>
+      <h3>🦖.tailliuir.me</h3>
+      <p><b><a href="🦖.tailliuir.me">🦖.tailliuir.me</a></b></p>
       <p><i>Host: ://ente.com</i></p>
     </td>
   </tr>
