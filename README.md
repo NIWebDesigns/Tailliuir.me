@@ -12,15 +12,36 @@
     <td width="50%">
       <h3>📸.tailliuir.me</h3>
       <p><b><a href="📸.tailliuir.me">📸.tailliuir.me</a></b></p>
-      <p><b><a href="https://ente.com">📸.tailliuir.me</a></b></p>
-      <p><i>ENTE</i></p>
+      <p><b><a href="https://ente.com">ENTE</a></b></p>
     </td>
     <td width="50%">
       <h3>🦖.tailliuir.me</h3>
       <p><b><a href="🦖.tailliuir.me">🦖.tailliuir.me</a></b></p>
-      <p><i>Host: ://ente.com</i></p>
+      <p><b><a href="🦖.tailliuir.me">🦖.tailliuir.me</a></b></p>
     </td>
   </tr>
+
+
+
+
+
+ <td width="50%">
+      <h3>🖇.tailliuir.me</h3>
+      <p><b><a href="🖇.tailliuir.me">🖇.tailliuir.me</a></b></p>
+      <p><b><a href="https://short.io">🖇.tailliuir.me</a></b></p>
+    </td>
+  </tr>
+
+
+
+
+
+
+
+
+
+
+   
   <tr>
     <td width="50%">
       <h3>🖇.tailliuir.me</h3>
