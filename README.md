@@ -1,19 +1,7 @@
 <div align="center">
-
-# 🦖 `TAILLIUIR // NETWORK_NODE`
+# TAILLIUIR NETWORK
 `==============================================`
 
-```text
-       _                 _ 
-
-      | |               | |
-  _  _| | _____ ___  ___| |  _
- / /|_  _||_____) _ \(___) |_/ /
- \ \  | |_      | |_| |  |  _\ \
-  \_\  \__)      \___/    \__)_ \
-```
-
-`[ INFRASTRUCTURE: ACTIVE ] • [ PROTOCOL: SECURE ]`
 
 ---
 
@@ -65,73 +53,3 @@
 `[ EOF // DISCONNECT ]`
 
 </div>
-
-
-
-
-# 🪐 TAILLIUIR // SYSTEMS
-
-<p align="left">
-  <img src="https://shields.io" alt="Network Status">
-  <img src="https://shields.io" alt="Security Layer">
-  <img src="https://shields.io" alt="Environment">
-</p>
-
-A high-performance routing hub managing edge deployments, decentralized asset storage, and advanced proxy architectures.
-
----
-
-## ⚡ CORE INSTANCES
-
-### 🌌 01 // PRODUCTION APEX
-> **Host Name:** `🦖.tailliuir.me`
-```🚀 DISPATCH_NODE: Active
-└── Target Engine ──► niwebdesigns.github.io
-```
-*   **Access Core Interface:** **[tailliuir.me ↗](https://tailliuir.me)**
-*   *Telemetry:* Central staging cluster housing engineering architecture, technical deployments, and system assets.
-
-### 🔒 02 // SECURE DATA DEPOT
-> **Host Name:** `📸.tailliuir.me`
-```📡 STORAGE_RECON: Encrypted
-└── Target Vault  ──► ://ente.com
-```
-*   **Access Asset Gateway:** **[📸.tailliuir.me ↗](https://📸.tailliuir.me)**
-*   *Telemetry:* Cryptographically hardened, zero-knowledge storage framework for decoupled media processing.
-
-### 🔌 03 // TRAFFIC BALANCER
-> **Host Name:** `🖇.tailliuir.me`
-```🔗 ROUTING_MATRIX: Operational
-└── Target Engine ──► cname.short.io
-```
-*   **Access Link Engine:** **[🖇.tailliuir.me ↗](https://🖇.tailliuir.me)**
-*   *Telemetry:* Low-latency tracking node running telemetry dispatchers, request splitting, and alias mapping.
-
----
-
-## ☣️ HYPER-STRING SANDBOX
-
-```diff
-- CRITICAL: UNICODE STRING LIMIT EXCEEDED
-+ STATUS: STAGING // RESOLVING PROXY UPSTREAM
-```
-
-*   **`[ 🎰 UNICODE OVERFLOW NODE ]` ➔ [INITIALIZE WARP DRIVE](https://🚀🔥👾👑🤖🍕🎸🛸💎🍦🌮🎰🧿🎈🔮🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉.🍇🍟🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉🍇🍟🛸💎🍦🌮🎰🧿🎈🔮🤖🍕🎸🚀.🔥👾👑🤖🍕🎸🛸💎🍦🌮🎰🧿🎈🔮🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉🍇.🍟🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉🍇🍟🛸💎🍦🌮🎰🧿🎈.tailliuir.me)**
-    *   *System Footprint:* Multi-byte IDN mapping pointing directly to `google.com`. Highly unstable visualization layer testing limits of localized DNS configurations.
-
----
-
-## 🌐 MAP MATRIX
-
-```toml
-[network.infrastructure.cname]
-"🦖.tailliuir.me" = { proxy = true, target = "niwebdesigns.github.io" }
-"📸.tailliuir.me" = { proxy = true, target = "://ente.com" }
-"🖇.tailliuir.me" = { proxy = true, target = "cname.short.io" }
-"🚀🔥...🎈"       = { proxy = true, target = "google.com" }
-```
-
----
-<p align="center">
-  <code>SYSTEM DISCONNECT // END OF TRANSMISSION</code>
-</p>
