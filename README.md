@@ -12,12 +12,12 @@
     <td width="50%">
       <h3>📸.tailliuir.me</h3>
       <p><b><a href="https://📸.tailliuir.me">📸.tailliuir.me</a></b></p>
-      <p><b><a href="https://ente.com">ENTE</a></b></p>
+      <p><b><a href="https://ente.com">ENTE.COM</a></b></p>
     </td>
     <td width="50%">
       <h3>🦖.tailliuir.me</h3>
       <p><b><a href="https://🦖.tailliuir.me">🦖.tailliuir.me</a></b></p>
-      <p><b><a href="https://🦖.tailliuir.me">🦖.tailliuir.me</a></b></p>
+      <p><b><a href="https://🦖.tailliuir.me">TAILLIUIR.ME</a></b></p>
     </td>
   </tr>
   <tr>
