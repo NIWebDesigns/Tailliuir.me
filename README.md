@@ -1,7 +1,7 @@
 <div align="center">
+
 # TAILLIUIR NETWORK
 `==============================================`
-
 
 ---
 
@@ -9,35 +9,23 @@
 
 <table width="100%">
   <tr>
-    
     <td width="50%">
       <h3>📸.tailliuir.me</h3>
-      <p><b><a href="📸.tailliuir.me">📸.tailliuir.me</a></b></p>
+      <p><b><a href="https://📸.tailliuir.me">📸.tailliuir.me</a></b></p>
       <p><b><a href="https://ente.com">ENTE</a></b></p>
     </td>
-    
     <td width="50%">
       <h3>🦖.tailliuir.me</h3>
-      <p><b><a href="🦖.tailliuir.me">🦖.tailliuir.me</a></b></p>
-      <p><b><a href="🦖.tailliuir.me">🦖.tailliuir.me</a></b></p>
+      <p><b><a href="https://🦖.tailliuir.me">🦖.tailliuir.me</a></b></p>
+      <p><b><a href="https://🦖.tailliuir.me">🦖.tailliuir.me</a></b></p>
     </td>
   </tr>
-
- <td width="50%">
-      <h3>🖇.tailliuir.me</h3>
-      <p><b><a href="🖇.tailliuir.me">🖇.tailliuir.me</a></b></p>
-      <p><b><a href="https://short.io">🖇.tailliuir.me</a></b></p>
-    </td>
-  </tr>
-   
   <tr>
     <td width="50%">
       <h3>🖇.tailliuir.me</h3>
-      <p><b><a href="🖇.tailliuir.me">🖇.tailliuir.me</a></b></p>
-      <p><b><a href="https://short.io">🖇.tailliuir.me</a></b></p>
+      <p><b><a href="https://🖇.tailliuir.me">🖇.tailliuir.me</a></b></p>
+      <p><b><a href="https://short.io">SHORT.IO</a></b></p>
     </td>
-  </tr>
-
     <td width="50%">
       <h3>🧬 THE BEAST</h3>
       <p><b><a href="https://🚀🔥👾👑🤖🍕🎸🛸💎🍦🌮🎰🧿🎈🔮🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉.🍇🍟🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉🍇🍟🛸💎🍦🌮🎰🧿🎈🔮🤖🍕🎸🚀.🔥👾👑🤖🍕🎸🛸💎🍦🌮🎰🧿🎈🔮🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉🍇.🍟🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉🍇🍟🛸💎🍦🌮🎰🧿🎈.tailliuir.me">EMOJI WARP ➔</a></b></p>
@@ -55,7 +43,7 @@
 ```nginx
 [💾 CNAME RECORD MAPPINGS]
 ├── 🦖            ──► niwebdesigns.github.io
-├── 📸            ──► ://ente.com
+├── 📸            ──► https://ente.com
 ├── 🖇            ──► cname.short.io
 └── 🚀🔥...🎈     ──► google.com (Max Length Node)
 ```
