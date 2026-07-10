@@ -10,19 +10,19 @@
 <table width="100%">
   <tr>
     <td width="50%">
-      <h3>📸.tailliuir.me</h3>
+      <h3>📸</h3>
       <p><b><a href="https://📸.tailliuir.me">📸.tailliuir.me</a></b></p>
       <p><b><a href="https://ente.com">ENTE.COM</a></b></p>
     </td>
     <td width="50%">
-      <h3>🦖.tailliuir.me</h3>
+      <h3>🦖</h3>
       <p><b><a href="https://🦖.tailliuir.me">🦖.tailliuir.me</a></b></p>
       <p><b><a href="https://🦖.tailliuir.me">TAILLIUIR.ME</a></b></p>
     </td>
   </tr>
   <tr>
     <td width="50%">
-      <h3>🖇.tailliuir.me</h3>
+      <h3>🖇</h3>
       <p><b><a href="https://🖇.tailliuir.me">🖇.tailliuir.me</a></b></p>
       <p><b><a href="https://short.io">SHORT.IO</a></b></p>
     </td>
