@@ -11,7 +11,7 @@
   <tr>
     <td width="50%">
       <h3>📸.tailliuir.me</h3>
-      <p><b><a href="📸.tailliuir.me">📸.tailliuir.me ➔</a></b></p>
+      <p><b><a href="📸.tailliuir.me">📸.tailliuir.me</a></b></p>
       <p><i>Host: niwebdesigns.github.io</i></p>
     </td>
     <td width="50%">
