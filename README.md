@@ -1,138 +1,82 @@
-<div align="center">
+# maebatsu Official: Twitch, Twitter | Linktree
+[![](https://ugc.production.linktr.ee/gemXM09eQvOmRXjt2Jie_MaebatsuLogo.png?io=true&size=thumbnail-stack_v1_0)
 
-# 🦖 `TAILLIUIR // NETWORK_NODE`
-`==============================================`
-
-```text
-       _                 _ 
-
-      | |               | |
-  _  _| | _____ ___  ___| |  _
- / /|_  _||_____) _ \(___) |_/ /
- \ \  | |_      | |_| |  |  _\ \
-  \_\  \__)      \___/    \__)_ \
-```
-
-`[ INFRASTRUCTURE: ACTIVE ] • [ PROTOCOL: SECURE ]`
-
----
-
-## ⚡ CORE REDIRECTS
-
-<table width="100%">
-  <tr>
-    <td width="50%">
-      <h3>🌐 CORE HUB</h3>
-      <p><b><a href="https://tailliuir.me">ENTER PORTFOLIO ➔</a></b></p>
-      <p><i>Host: niwebdesigns.github.io</i></p>
-    </td>
-    <td width="50%">
-      <h3>📸 VISUAL VAULT</h3>
-      <p><b><a href="https://📸.tailliuir.me">OPEN ENTE GALLERY ➔</a></b></p>
-      <p><i>Host: ://ente.com</i></p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <h3>🖇️ LINK UTILITY</h3>
-      <p><b><a href="https://🖇.tailliuir.me">URL DISPATCHER ➔</a></b></p>
-      <p><i>Host: cname.short.io</i></p>
-    </td>
-    <td width="50%">
-      <h3>🧬 THE BEAST</h3>
-      <p><b><a href="https://🚀🔥👾👑🤖🍕🎸🛸💎🍦🌮🎰🧿🎈🔮🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉.🍇🍟🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉🍇🍟🛸💎🍦🌮🎰🧿🎈🔮🤖🍕🎸🚀.🔥👾👑🤖🍕🎸🛸💎🍦🌮🎰🧿🎈🔮🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉🍇.🍟🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉🍇🍟🛸💎🍦🌮🎰🧿🎈.tailliuir.me">EMOJI WARP ➔</a></b></p>
-      <p><i>Host: google.com</i></p>
-    </td>
-  </tr>
-</table>
-
----
-
-## 💾 DNS MAP
-
-</div>
-
-```nginx
-[💾 CNAME RECORD MAPPINGS]
-├── 🦖            ──► niwebdesigns.github.io
-├── 📸            ──► ://ente.com
-├── 🖇            ──► cname.short.io
-└── 🚀🔥...🎈     ──► google.com (Max Length Node)
-```
-
-<div align="center">
-
-`[ EOF // DISCONNECT ]`
-
-</div>
+Twitter
 
 
 
+](http://twitter.com/maebatsu)
 
-# 🪐 TAILLIUIR // SYSTEMS
+[![](https://ugc.production.linktr.ee/UvNko4hRiyCTtrXcr0zw_twitch_logo3.jpg?io=true&size=thumbnail-stack_v1_0)
 
-<p align="left">
-  <img src="https://shields.io" alt="Network Status">
-  <img src="https://shields.io" alt="Security Layer">
-  <img src="https://shields.io" alt="Environment">
-</p>
+Twitch
 
-A high-performance routing hub managing edge deployments, decentralized asset storage, and advanced proxy architectures.
 
----
 
-## ⚡ CORE INSTANCES
+](http://twitch.tv/maebatsu)
 
-### 🌌 01 // PRODUCTION APEX
-> **Host Name:** `🦖.tailliuir.me`
-```🚀 DISPATCH_NODE: Active
-└── Target Engine ──► niwebdesigns.github.io
-```
-*   **Access Core Interface:** **[tailliuir.me ↗](https://tailliuir.me)**
-*   *Telemetry:* Central staging cluster housing engineering architecture, technical deployments, and system assets.
+[![](https://ugc.production.linktr.ee/9c769353-835c-4a94-8cc7-ff995b0b74ed_ctY26C7M1SLq5Fk6Xi589i1tU-8UxG44R0umqRx9FAsXEyOkzxV5QL78H3CIATBS-ScqA5HUww-s900-c-k-c0x00ffffff-no-r.jpeg?io=true&size=thumbnail-stack_v1_0)
 
-### 🔒 02 // SECURE DATA DEPOT
-> **Host Name:** `📸.tailliuir.me`
-```📡 STORAGE_RECON: Encrypted
-└── Target Vault  ──► ://ente.com
-```
-*   **Access Asset Gateway:** **[📸.tailliuir.me ↗](https://📸.tailliuir.me)**
-*   *Telemetry:* Cryptographically hardened, zero-knowledge storage framework for decoupled media processing.
+YouTube
 
-### 🔌 03 // TRAFFIC BALANCER
-> **Host Name:** `🖇.tailliuir.me`
-```🔗 ROUTING_MATRIX: Operational
-└── Target Engine ──► cname.short.io
-```
-*   **Access Link Engine:** **[🖇.tailliuir.me ↗](https://🖇.tailliuir.me)**
-*   *Telemetry:* Low-latency tracking node running telemetry dispatchers, request splitting, and alias mapping.
 
----
 
-## ☣️ HYPER-STRING SANDBOX
+](https://www.youtube.com/@MaebatsuCh)
 
-```diff
-- CRITICAL: UNICODE STRING LIMIT EXCEEDED
-+ STATUS: STAGING // RESOLVING PROXY UPSTREAM
-```
+[![](https://ugc.production.linktr.ee/q00147ehTaoiqET6r7gs_AndroidIcon.png?io=true&size=thumbnail-stack_v1_0)
 
-*   **`[ 🎰 UNICODE OVERFLOW NODE ]` ➔ [INITIALIZE WARP DRIVE](https://🚀🔥👾👑🤖🍕🎸🛸💎🍦🌮🎰🧿🎈🔮🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉.🍇🍟🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉🍇🍟🛸💎🍦🌮🎰🧿🎈🔮🤖🍕🎸🚀.🔥👾👑🤖🍕🎸🛸💎🍦🌮🎰🧿🎈🔮🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉🍇.🍟🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉🍇🍟🛸💎🍦🌮🎰🧿🎈.tailliuir.me)**
-    *   *System Footprint:* Multi-byte IDN mapping pointing directly to `google.com`. Highly unstable visualization layer testing limits of localized DNS configurations.
+OPTCGSim Latest Versions
 
----
 
-## 🌐 MAP MATRIX
 
-```toml
-[network.infrastructure.cname]
-"🦖.tailliuir.me" = { proxy = true, target = "niwebdesigns.github.io" }
-"📸.tailliuir.me" = { proxy = true, target = "://ente.com" }
-"🖇.tailliuir.me" = { proxy = true, target = "cname.short.io" }
-"🚀🔥...🎈"       = { proxy = true, target = "google.com" }
-```
+](http://optcgsim.com/)
 
----
-<p align="center">
-  <code>SYSTEM DISCONNECT // END OF TRANSMISSION</code>
-</p>
+[![](https://ugc.production.linktr.ee/fzIMSt82R0CuKSqUUeZI_86e8e4bf3058d5a5dd20b0a31ad7e1ce.jpg?io=true&size=thumbnail-stack_v1_0)
 
+Batsucord
+
+
+
+](http://discord.gg/bbwcq6r)
+
+[![](https://ugc.production.linktr.ee/nnwDSMrER0KeTDPOwO9O_dc7d7ad0098332f8427b0857c470eaea.jpg?io=true&size=thumbnail-stack_v1_0)
+
+Main English OPCG Discord
+
+Discord Server • Free to join
+
+
+
+](https://discord.gg/ub9GEWaTaC)
+
+[![](https://ugc.production.linktr.ee/VVKJDGuQViF5FYxksHwQ_c879659836aaef13ba5a5b688c60097d.jpg?io=true&size=thumbnail-stack_v1_0)
+
+Idolmaster Shinymas ENG Patch Discord
+
+
+
+](https://discord.gg/xuFcKzW)
+
+[![](https://ugc.production.linktr.ee/HK8zirYHTk6C0D0bBP9s_convert.png?io=true&size=thumbnail-stack_v1_0)
+
+ShinyColors: ENG TL Patch
+
+
+
+](https://github.com/snowyivu/ShinyColors)
+
+[![](https://ugc.production.linktr.ee/K75N7opzS5e5lb4Vpt20_tubeicon2.png?io=true&size=thumbnail-stack_v1_0)
+
+YT: Shiny Colors Translation Videos
+
+
+
+](https://www.youtube.com/@Maebatsu?sub_confirmation=1)
+
+[![](https://ugc.production.linktr.ee/ScBHYbL2T8uJ8lczfynY_icon.png?io=true&size=thumbnail-stack_v1_0)
+
+Patreon
+
+
+
+](https://www.patreon.com/BatsuApps)
