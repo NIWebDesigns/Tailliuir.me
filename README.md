@@ -12,7 +12,7 @@
     <td width="50%">
       <h3>📸.tailliuir.me</h3>
       <p><b><a href="📸.tailliuir.me">📸.tailliuir.me</a></b></p>
-      <p><i>Host: niwebdesigns.github.io</i></p>
+      <p><i>ENTE</i></p>
     </td>
     <td width="50%">
       <h3>🦖.tailliuir.me</h3>
@@ -24,7 +24,7 @@
     <td width="50%">
       <h3>🖇.tailliuir.me</h3>
       <p><b><a href="🖇.tailliuir.me">🖇.tailliuir.me</a></b></p>
-      <p><i>Host: cname.short.io</i></p>
+      <p><i>SHORT</i></p>
     </td>
     <td width="50%">
       <h3>🧬 THE BEAST</h3>
