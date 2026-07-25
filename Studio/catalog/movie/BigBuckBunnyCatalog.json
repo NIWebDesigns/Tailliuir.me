@@ -14,9 +14,9 @@
       "id": "Rule2",
       "name": "🎁 Donations 🎁",
       "year": 2000,
-      "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVpSnChE3BSmm0rqaU5tOj0lpIprNrP3CaEPygcgaRUG7ulGIEr4UqJSM5&s=10",
+      "poster": "https://public-api.qr-code-generator.com/v1/create/extended?image_format=PNG&image_width=300&qr_code_text=https%3A%2F%2Frevolut.me%2Fitsmat32143&foreground_color=%23000000&background_color=%23FFFFFF&frame_name=qrcg-scan-me-bottom-frame",
       "posterShape": "landscape",
-      "banner": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVpSnChE3BSmm0rqaU5tOj0lpIprNrP3CaEPygcgaRUG7ulGIEr4UqJSM5&s=10",
+      "banner": "https://public-api.qr-code-generator.com/v1/create/extended?image_format=PNG&image_width=300&qr_code_text=https%3A%2F%2Frevolut.me%2Fitsmat32143&foreground_color=%23000000&background_color=%23FFFFFF&frame_name=qrcg-scan-me-bottom-frame",
       "isFree": true,
       "type": "movie"
     }
