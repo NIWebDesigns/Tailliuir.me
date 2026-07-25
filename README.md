@@ -28,8 +28,8 @@
     </td>
     <td width="50%">
       <h3>🦖</h3>
-      <p><b><a href="🦖.tailliuir.me/Studio">Studio</a></b></p>
-      <p><i>Host: google.com</i></p>
+      <p><b><a href="https://🦖.tailliuir.me/Studio">🦖.tailliuir.me/Studio</a></b></p>
+      <p><b><a href="https://🦖.tailliuir.me/Studio">TAILLIUIR.ME/STUDIO</a></b></p>
     </td>
   </tr>
 </table>
