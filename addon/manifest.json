@@ -1,25 +1,19 @@
 {
-  "id": "community.infostation",
+  "id": "community.tailliuir.warning",
   "version": "1.0.0",
-  "name": "Tailliuir Rules",
+  "name": "Tailliuir Network Helper",
   "description": "⚠️ READ THIS IMPORTANT INFORMATION BEFORE USING: 🔴 FIRST: ALWAYS USE THE TAILLIUIR NETWORK STREAMS FIRST. 🔴 SECOND: NOTICE THE STREAM COLORS—THE STREAMS ARE TRAFFIC LIGHT COLOURED (GREEN, AMBER, RED) TO SHOW CURRENT SPEED AND RELIABILITY. 🔴 THIRD: IF TAILLIUIR STREAMS ARE BUSY, ONLY THEN USE ANY OTHER OF THE ADDONS AVAILABLE IN THE LIST. 🔴 FOURTH: CRITICAL WARNING—DO NOT CLICK OR SELECT 4K STREAMS IF YOUR STREAMING DEVICE IS NOT 4K COMPATIBLE, AS THEY WILL ABSOLUTELY NOT WORK ON YOUR SCREEN!",
   "logo": "https://placehold.co",
   "resources": [
-    "catalog",
-    "meta"
-  ],
-  "types": [
-    "other"
-  ],
-  "catalogs": [
     {
-      "type": "other",
-      "id": "info_catalog",
-      "name": "Documentary Space"
+      "name": "stream",
+      "types": ["movie", "series"],
+      "idPrefixes": ["tt"]
     }
   ],
-  "background": "https://placehold.co",
-  "idPrefixes": [
-    "info_"
-  ]
+  "types": [
+    "movie",
+    "series"
+  ],
+  "catalogs": []
 }
