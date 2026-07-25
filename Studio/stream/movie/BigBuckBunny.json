@@ -1,21 +1,21 @@
 {
   "streams": [
     {
-      "name": "Install Tailliuir Network to connect",
-      "title": "Install Tailliuir Network to connect",
-      "description": "You need the Tailliuir Network addon installed first — that's what actually connects you to the Tailliuir Studio network. This addon on its own is just information.",
+      "name": "Install Tailliuir Network",
+      "title": "Install Tailliuir Network",
+      "description": "You need the Tailliuir Network addon installed — that's what actually connects you to the Tailliuir Studio. This addon on its own is just information.",
       "url": "https://🦖.tailliuir.me/Studio"
     },
     {
-      "name": "Know your traffic lights",
-      "title": "Know your traffic lights",
-      "description": "🚦 Quality Traffic Lights\n🟢 Green: best link, use first\n🟠 Orange: okay, solid backup\n🔴 Red: avoid, or last resort only. This only applies to the Tailliuir Network addon.",
+      "name": "🚦Quality Traffic Lights🚦",
+      "title": "🚦Quality Traffic Lights🚦",
+      "description": "🟢 Green: best link, use first\n🟠 Orange: okay, solid backup\n🔴 Red: avoid, or last resort only. This only applies to the Tailliuir Network addon.",
       "url": "https://🦖.tailliuir.me/Studio"
     },
     {
-      "name": "Check TorBox status if something's off",
-      "title": "Check TorBox status if something's off",
-      "description": "Before assuming it's broken, check status.torbox.app — most issues are a TorBox outage or maintenance window, not your setup.",
+      "name": "⚠️ Having issues? ⚠️",
+      "title": "⚠️ Having issues? ⚠️",
+      "description": "Check status.torbox.app before assuming it's broken",
       "url": "https://status.torbox.app/"
     },
     {
@@ -25,8 +25,8 @@
       "url": "https://🦖.tailliuir.me/Studio"
     },
     {
-      "name": "Tailliuir Studio",
-      "title": "⑤ Support the network — £10/month runs this",
+      "name": "💰 Donations 💰",
+      "title": "💰 Donations 💰",
       "description": "If you'd like to chip in toward the cost of keeping this running, it's genuinely appreciated: revolut.me/itsmat32143",
       "url": "https://revolut.me/itsmat32143"
     }
