@@ -1,8 +1,16 @@
 {
   "streams": [
     {
-      "availability": 1,
-      "url": "https://🦖.tailliuir.me/Studio"
+      "url": "https://🦖.tailliuir.me/Studio",
+      "name": "Tailliuir Studio",
+      "title": "🟢 1080p · TorBox · Green — best link",
+      "description": "Sourced via Tailliuir Network. Traffic-light rated: green means this is the best link available for this title.",
+      "behaviorHints": {
+        "notWebReady": false,
+        "bingeGroup": "tailliuir-studio-1080p",
+        "filename": "BigBuckBunny.1080p.mp4",
+        "videoSize": 276134947
+      }
     }
   ]
 }
