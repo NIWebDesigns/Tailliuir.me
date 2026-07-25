@@ -8,11 +8,11 @@
   "description": "🧵 Tailliuir Network 🧵 · Powered by TorBox\n\n🚦 Quality Traffic Lights\n🟢 Green: best link, use first\n🟠 Orange: okay, solid backup\n🔴 Red: avoid, or last resort only\n\n⚠️ Having issues? Check status.torbox.app before assuming it's broken\n\n💛 The full set up for this is £10 a month, so if you wanna chip in you can — revolut.me/itsmat32143\n\n⚙️ Want more? Tap the settings wheel for the full site — install links, backups, everything",
   "logo": "https://www.facebook.com/p/T%C3%A1illi%C3%BAir-Studio-100083490837842/",
   "background": "https://www.facebook.com/p/T%C3%A1illi%C3%BAir-Studio-100083490837842/",
-  "behaviorHints": {
+    "behaviorHints": {
     "configurable": true,
-    "configurationRequired": false
-  },
-  "resources": [],
-  "types": [],
-  "catalogs": []
-}
+    "configurationRequired": false,
+    "p2p": false,
+    "adult": false,
+    "cacheMaxAge": 0
+  }
+
