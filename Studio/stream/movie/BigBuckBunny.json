@@ -7,6 +7,12 @@
       "url": "https://🦖.tailliuir.me/Studio"
     },
     {
+      "name": "📺 Not on a 4K device? 📺",
+      "title": "📺 Not on a 4K device? 📺",
+      "description": "If your TV or device isn't 4K, don't use the 4K-tagged links — they won't work on your screen. Pick a lower quality link instead.",
+      "url": "https://🦖.tailliuir.me/Studio"
+    },
+    {
       "name": "🚦Quality Traffic Lights🚦",
       "title": "🚦Quality Traffic Lights🚦",
       "description": "🟢 Green: best link, use first\n🟠 Orange: okay, solid backup\n🔴 Red: avoid, or last resort only. This only applies to the Tailliuir Network addon.",
@@ -19,9 +25,9 @@
       "url": "https://status.torbox.app/"
     },
     {
-      "name": "Tailliuir Studio",
-      "title": "④ Full install links & spares — tap the gear icon",
-      "description": "For install links, backup addons, and everything else, open the settings wheel on this addon to reach the full Tailliuir Studio site.",
+      "name": "☁️Backups & fallbacks☁️",
+      "title": "☁️Backups & fallbacks☁️",
+      "description": "If TorBox is down, backup/fallback addons are available — find them on the full Tailliuir Studio website.",
       "url": "https://🦖.tailliuir.me/Studio"
     },
     {
