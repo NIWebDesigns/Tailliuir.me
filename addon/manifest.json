@@ -2,51 +2,14 @@
   "id": "community.tailliuir.warning",
   "version": "696969696969",
   "name": "Tailliuir Network Helper",
-  "description": "🚀💥 ATTENTION ALL USERS! PLEASE READ THIS CRITICAL SYSTEM NOTICE BEFORE STARTING YOUR STREAMING SESSION! 💥🚀\n\n🔴 [RULE 1]: ALWAYS DEPLOY AND USE THE OFFICIAL TAILLIUIR NETWORK STREAMS FIRST! They are specifically tuned for premium performance! 💎📡\n\n🔴 [RULE 2]: OBSERVE THE SPEED TRAFFIC LIGHTS! 🟢 Green = Maximum speed and perfect reliability. 🟡 Amber = Stable stream with potential minor congestion. 🔴 Red = Heavy load or slower response times. Check before you click! 🚦📊\n\n🔴 [RULE 3]: BACKUP ADDONS ARE FOR EMERGENCIES ONLY! If and only if the Tailliuir streams are completely congested or busy, you may fall back to alternative options available down the list. 🔄⚠️\n\n🔴 [RULE 4]: THE 4K ULTRACLEAN BAN! DO NOT SELECT OR CLICK ANY 4K STREAMS IF YOUR HARDWARE IS NOT FULLY 4K COMPATIBLE! Doing so will result in a black screen, application crashes, or zero playback! 🚫📺❌\n\n FAILURE TO FOLLOW THESE RULES MAY RUIN YOUR VIEWING EXPERIENCE! ENJOY STREAMING RESPONSIBLY! 🎉🍿🎬",
+  "description": "🚀💥 ATTENTION ALL USERS! PLEASE READ THIS CRITICAL SYSTEM NOTICE BEFORE STARTING YOUR STREAMING SESSION! 💥🚀\n\n🔴 [RULE 1]: ALWAYS DEPLOY AND USE THE OFFICIAL TAILLIUIR NETWORK STREAMS FIRST! They are specifically tuned for premium performance! 💎📡\n\n🔴 [RULE 2]: OBSERVE THE SPEED TRAFFIC LIGHTS! 🟢 Green = Maximum speed and perfect reliability. 🟡 Amber = Stable stream with potential minor congestion. 🔴 Red = Heavy load or slower response times. Check before you click! 🚦📊\n\n🔴 [RULE 3]: BACKUP ADDONS ARE FOR EMERGENCIES ONLY! If and only if the Tailliuir streams are completely congested or busy, you may fall back to alternative options available down the list. 🔄⚠️\n\n🔴 [RULE 4]: THE 4K ULTRACLEAN BAN! DO NOT SELECT OR CLICK ANY 4K STREAMS IF YOUR HARDWARE IS NOT FULLY 4K COMPATIBLE! Doing so will result in a black screen, application crashes, or zero playback! 🚫📺❌\n\n⚙️ NEED HELP OR REGISTRATION? Click the Settings icon (gear icon) on this addon to visit our official management dashboard instantly! 🌐💻\n\n FAILURE TO FOLLOW THESE RULES MAY RUIN YOUR VIEWING EXPERIENCE! ENJOY STREAMING RESPONSIBLY! 🎉🍿🎬",
   "logo": "https://placehold.co",
-  "resources": [
-    "catalog"
-  ],
-  "types": [
-    "movie"
-  ],
-  "catalogs": [
-    {
-      "type": "movie",
-      "id": "tailliuir.rules",
-      "name": "🛑 TAILLIUIR NETWORK RULES & WARNINGS 🛑"
-    }
-  ],
-  "metas": {
-    "tailliuir.rules": [
-      {
-        "id": "rule1",
-        "type": "movie",
-        "name": "🔴 RULE 1: Use Tailliuir Streams FIRST",
-        "poster": "https://placehold.co",
-        "description": "Always deploy and use the official Tailliuir network streams first! They are tuned for premium performance."
-      },
-      {
-        "id": "rule2",
-        "type": "movie",
-        "name": "🔴 RULE 2: Watch Traffic Light Colors",
-        "poster": "https://placehold.co",
-        "description": "Green = Maximum speed. Amber = Stable/Minor congestion. Red = Heavy load."
-      },
-      {
-        "id": "rule3",
-        "type": "movie",
-        "name": "🔴 RULE 3: Backups For Emergencies Only",
-        "poster": "https://placehold.co",
-        "description": "If and only if the Tailliuir streams are completely busy, you may fall back to alternative options."
-      },
-      {
-        "id": "rule4",
-        "type": "movie",
-        "name": "🔴 RULE 4: No 4K on Non-4K Screens",
-        "poster": "https://placehold.co+⚠️",
-        "description": "CRITICAL WARNING: Do not click 4K streams if your device is not 4K compatible. It will fail!"
-      }
-    ]
-  }
+  "background": "https://placehold.co",
+  "behaviorHints": {
+    "configurable": true,
+    "configurationRequired": false
+  },
+  "resources": [],
+  "types": [],
+  "catalogs": []
 }
