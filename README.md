@@ -27,8 +27,8 @@
       <p><b><a href="https://short.io">SHORT.IO</a></b></p>
     </td>
     <td width="50%">
-      <h3>🧬 THE BEAST</h3>
-      <p><b><a href="https://🚀🔥👾👑🤖🍕🎸🛸💎🍦🌮🎰🧿🎈🔮🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉.🍇🍟🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉🍇🍟🛸💎🍦🌮🎰🧿🎈🔮🤖🍕🎸🚀.🔥👾👑🤖🍕🎸🛸💎🍦🌮🎰🧿🎈🔮🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉🍇.🍟🦖🦁🦊🐨🐼🐯🦕🐙🦑🍉🍇🍟🛸💎🍦🌮🎰🧿🎈.tailliuir.me">EMOJI WARP ➔</a></b></p>
+      <h3>🦖.tailliuir.me/Studio</h3>
+      <p><b><a href="🦖.tailliuir.me/Studio">EMOJI WARP ➔</a></b></p>
       <p><i>Host: google.com</i></p>
     </td>
   </tr>
