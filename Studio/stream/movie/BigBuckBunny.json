@@ -1,16 +1,34 @@
 {
   "streams": [
     {
-      "url": "https://🦖.tailliuir.me/Studio",
       "name": "Tailliuir Studio",
-      "title": "🟢 1080p · TorBox · Green — best link",
-      "description": "Sourced via Tailliuir Network. Traffic-light rated: green means this is the best link available for this title.",
-      "behaviorHints": {
-        "notWebReady": false,
-        "bingeGroup": "tailliuir-studio-1080p",
-        "filename": "BigBuckBunny.1080p.mp4",
-        "videoSize": 276134947
-      }
+      "title": "① Install Tailliuir Network to connect",
+      "description": "You need the Tailliuir Network addon installed first — that's what actually connects you to the Tailliuir Studio network. This addon on its own is just information.",
+      "url": "https://🦖.tailliuir.me/Studio"
+    },
+    {
+      "name": "Tailliuir Studio",
+      "title": "② Know your traffic lights",
+      "description": "🟢 Green = best link, use first · 🟠 Orange = okay, solid backup · 🔴 Red = avoid, or last resort only. This only applies to the Tailliuir Network addon.",
+      "url": "https://🦖.tailliuir.me/Studio"
+    },
+    {
+      "name": "Tailliuir Studio",
+      "title": "③ Check TorBox status if something's off",
+      "description": "Before assuming it's broken, check status.torbox.app — most issues are a TorBox outage or maintenance window, not your setup.",
+      "url": "https://status.torbox.app/"
+    },
+    {
+      "name": "Tailliuir Studio",
+      "title": "④ Full install links & spares — tap the gear icon",
+      "description": "For install links, backup addons, and everything else, open the settings wheel on this addon to reach the full Tailliuir Studio site.",
+      "url": "https://🦖.tailliuir.me/Studio"
+    },
+    {
+      "name": "Tailliuir Studio",
+      "title": "⑤ Support the network — £10/month runs this",
+      "description": "If you'd like to chip in toward the cost of keeping this running, it's genuinely appreciated: revolut.me/itsmat32143",
+      "url": "https://revolut.me/itsmat32143"
     }
   ]
 }
