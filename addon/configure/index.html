@@ -292,62 +292,42 @@
 </head>
 <body>
 
-<div class="wrap">
+<div class="wrap" id="top">
 
   <div class="hero">
     <div class="tag">
       <p class="eyebrow">Established for the family</p>
       <h1>Tailliuir Network</h1>
-      <p class="tagline">Stremio addons, stitched together — one home for every source we run.</p>
+      <p class="tagline">Addons for Stremio and Nuvio, stitched together — one home for every source we run.</p>
     </div>
   </div>
 
-  <!-- CARE LABEL -->
-  <section class="care-label" aria-labelledby="care-heading">
-    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M12 2 L4 6 V12 C4 17 7.5 20.5 12 22 C16.5 20.5 20 17 20 12 V6 L12 2Z" stroke="#c9a15a" stroke-width="1.5"/>
-      <path d="M12 8 V13 M12 16 V16.3" stroke="#c9a15a" stroke-width="1.5" stroke-linecap="round"/>
-    </svg>
-    <div>
-      <h3 id="care-heading">Care instructions — read before installing</h3>
-      <p><strong>Not on a 4K display?</strong> Skip the addon marked <span style="color:var(--thread-gold-bright)">TorBox · 4K</span> below. It's tailored for 4K playback and streams from it will look wrong, or fail outright, on a 1080p or lower screen.</p>
-      <p>Use one of the addons in the "Spare Thread" section instead — they're not tied to TorBox and work fine on any resolution.</p>
-    </div>
-  </section>
-
-  <div class="seam-divider"></div>
-
-  <!-- STATUS -->
-  <section aria-labelledby="status-heading">
-    <h2 class="section-title" id="status-heading">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="#6fa0a8" stroke-width="1.5"/><path d="M8 12l3 3 5-6" stroke="#6fa0a8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Backend status
+  <!-- FULL INSTALL (moved to top) -->
+  <section aria-labelledby="full-heading">
+    <h2 class="section-title" id="full-heading">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7l8-4 8 4M4 7v10l8 4 8-4V7M4 7l8 4m0 0l8-4m-8 4v10" stroke="#e0bd7a" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      Full install — everything at once
     </h2>
-    <p class="section-sub">The main addon runs on TorBox. If streams are failing or slow, check here before assuming your setup is broken.</p>
-    <div class="status-panel">
-      <div class="status-left">
-        <span class="status-dot" aria-hidden="true"></span>
-        <div class="status-text">
-          <b>TorBox</b>
-          <span>Check live status before reporting an issue in the group chat.</span>
-        </div>
+    <p class="section-sub">One click, every addon on this page: the rules addon, Tailliuir Network, and all seven spares.</p>
+
+    <div class="care-label" style="margin-bottom:16px;">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="#c9a15a" stroke-width="1.5"/><path d="M12 8v5M12 15.5v.3" stroke="#c9a15a" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <div>
+        <h3 style="margin-bottom:8px;">How this works</h3>
+        <p><strong>On Stremio:</strong> "Install everything" opens each addon in turn via a deep link — just tap through the prompts as they pop up. Allow pop-ups for this site if some don't open.</p>
+        <p><strong>On Nuvio:</strong> there's no one-click install. Use "Copy link" on each addon below and paste it into Settings → Addons → Add Addon, one at a time.</p>
+        <p>This page is home base for the whole network — bookmark it, or copy the link below so you never lose it.</p>
       </div>
-      <a class="btn-outline" href="https://status.torbox.app/" target="_blank" rel="noopener">
-        Check TorBox status →
-      </a>
     </div>
-  </section>
 
-  <div class="seam-divider"></div>
-
-  <!-- MAIN THREAD -->
-  <section aria-labelledby="main-heading">
-    <h2 class="section-title" id="main-heading">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h4M16 12h4M8 12a4 4 0 018 0" stroke="#c9a15a" stroke-width="1.5" stroke-linecap="round"/></svg>
-      Main thread
-    </h2>
-    <p class="section-sub">The primary addon, running on TorBox. 4K screens only — see the care label above if that's not you.</p>
-    <div class="patch-grid" id="main-grid"></div>
+    <div class="all-install-row" style="background: rgba(201,161,90,.08); border-color: rgba(201,161,90,.4);">
+      <p>Fires all <span id="full-count"></span> addons in sequence (Stremio only).</p>
+      <button class="btn btn-install" id="install-all-full">Install everything</button>
+    </div>
+    <div class="all-install-row">
+      <p>Save this page so you can always find your addons again.</p>
+      <button class="btn-outline" id="copy-page-link" style="cursor:pointer;">Copy this page's link</button>
+    </div>
   </section>
 
   <div class="seam-divider"></div>
@@ -356,10 +336,49 @@
   <section aria-labelledby="catalog-heading">
     <h2 class="section-title" id="catalog-heading">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2" stroke="#a8a397" stroke-width="1.5"/><path d="M8 9h8M8 13h5" stroke="#a8a397" stroke-width="1.5" stroke-linecap="round"/></svg>
-      Catalog &amp; rules
+      Tailliuir Rules
     </h2>
-    <p class="section-sub">Not a stream source — this just organises what shows up in Stremio's discover pages. Safe to install regardless of your screen.</p>
+    <p class="section-sub">Not a stream source — just adds the discovery/catalog rules to the app. Safe to install regardless of your screen.</p>
     <div class="patch-grid" id="catalog-grid"></div>
+  </section>
+
+  <div class="seam-divider"></div>
+
+  <!-- MAIN THREAD -->
+  <section aria-labelledby="main-heading">
+    <h2 class="section-title" id="main-heading">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h4M16 12h4M8 12a4 4 0 018 0" stroke="#c9a15a" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Tailliuir Network
+    </h2>
+    <p class="section-sub">The main addon, running on TorBox.</p>
+
+    <!-- CARE LABEL: traffic light system, specific to this addon -->
+    <div class="care-label" style="margin-bottom:16px;">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 2 L4 6 V12 C4 17 7.5 20.5 12 22 C16.5 20.5 20 17 20 12 V6 L12 2Z" stroke="#c9a15a" stroke-width="1.5"/>
+        <path d="M12 8 V13 M12 16 V16.3" stroke="#c9a15a" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <h3 id="care-heading">Read before picking a stream</h3>
+        <p>This addon covers every quality, 4K down to unknown, and colour-codes each link like a traffic light: <span style="color:var(--ok-thread)">green</span> is the best link, <span style="color:var(--thread-gold-bright)">orange</span> is okay, <span style="color:var(--danger-thread)">red</span> means avoid it, or only use as a last resort. This traffic-light system is only on this addon — the spares below don't have it.</p>
+        <p><strong>Not on a 4K display?</strong> Just skip the links tagged 4K when you're picking a stream.</p>
+      </div>
+    </div>
+
+    <div class="status-panel" style="margin-bottom:16px;">
+      <div class="status-left">
+        <span class="status-dot" aria-hidden="true"></span>
+        <div class="status-text">
+          <b>TorBox backend</b>
+          <span>Check live status before reporting an issue in the group chat.</span>
+        </div>
+      </div>
+      <a class="btn-outline" href="https://status.torbox.app/" target="_blank" rel="noopener">
+        Check TorBox status →
+      </a>
+    </div>
+
+    <div class="patch-grid" id="main-grid"></div>
   </section>
 
   <div class="seam-divider"></div>
@@ -370,7 +389,7 @@
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v6m0 0l-3-3m3 3l3-3M6 14h12v6H6z" stroke="#6fa0a8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Spare thread — use if TorBox is down
     </h2>
-    <p class="section-sub">Not tied to TorBox. Reach for these if the status page above shows an incident, or if your TV isn't 4K.</p>
+    <p class="section-sub">Not tied to TorBox. Same idea — every quality from 4K to unknown, but no traffic-light colours here. Reach for these if the status page above shows an incident.</p>
 
     <div class="all-install-row">
       <p>Install every backup addon at once. Your browser may block pop-ups — allow them for this site if nothing happens.</p>
@@ -378,6 +397,26 @@
     </div>
 
     <div class="patch-grid" id="backup-grid"></div>
+  </section>
+
+  <div class="seam-divider"></div>
+
+  <!-- DONATE -->
+  <section aria-labelledby="donate-heading">
+    <h2 class="section-title" id="donate-heading">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-7-4.35-9.5-8.5C.8 9 2 5.5 5.5 5 8 4.6 10 6 12 8c2-2 4-3.4 6.5-3 3.5.5 4.7 4 3 7.5C19 16.65 12 21 12 21z" stroke="#e0bd7a" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      Keep the thread running
+    </h2>
+    <p class="section-sub">This whole set up costs about £10 a month to keep going. If you want to chip in, it's genuinely appreciated — no pressure either way.</p>
+    <div class="status-panel">
+      <div class="status-left">
+        <div class="status-text">
+          <b>Support Tailliuir Network</b>
+          <span>Every bit helps keep the lights on for the family.</span>
+        </div>
+      </div>
+      <a class="btn btn-install" href="https://revolut.me/itsmat32143" target="_blank" rel="noopener">Donate via Revolut</a>
+    </div>
   </section>
 
   <footer>
@@ -388,7 +427,7 @@
 <script>
   const addons = {
     main: [
-      { name: "Tailliuir Network", note: "AIOStreams · TorBox backend", pill: "torbox", pillLabel: "TorBox · 4K",
+      { name: "Tailliuir Network", note: "AIOStreams · TorBox backend", pill: "torbox", pillLabel: "TorBox",
         url: "https://aiostreams.elfhosted.com/stremio/36fa182f-e8e2-42d2-824d-c1bac8ea0306/eyJpIjoiWm5YYVdtWEYwREZnY285YkJYdHFTdz09IiwiZSI6IkhmTEpWMGRMTXFiZVAxbzJVS3VGTzVqVUpFK2lrSmkzeEFnVU02RVJrMWc9IiwidCI6ImEifQ/manifest.json" }
     ],
     catalog: [
@@ -456,6 +495,26 @@
       setTimeout(() => {
         window.open(toStremioLink(addon.url), "_blank");
       }, i * 500);
+    });
+  });
+
+  const allAddons = [...addons.main, ...addons.catalog, ...addons.backup];
+  document.getElementById("full-count").textContent = allAddons.length;
+
+  document.getElementById("install-all-full").addEventListener("click", () => {
+    allAddons.forEach((addon, i) => {
+      setTimeout(() => {
+        window.open(toStremioLink(addon.url), "_blank");
+      }, i * 500);
+    });
+  });
+
+  document.getElementById("copy-page-link").addEventListener("click", (e) => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      const btn = e.currentTarget;
+      const original = btn.textContent;
+      btn.textContent = "Link copied ✓";
+      setTimeout(() => { btn.textContent = original; }, 1600);
     });
   });
 </script>
