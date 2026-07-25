@@ -1,0 +1,25 @@
+{
+  "id": "community.infostation",
+  "version": "1.0.0",
+  "name": "Educational Info Station",
+  "description": "A static informational add-on providing curated public domain documentaries and educational feeds.",
+  "logo": "https://placehold.co",
+  "resources": [
+    "catalog",
+    "meta"
+  ],
+  "types": [
+    "other"
+  ],
+  "catalogs": [
+    {
+      "type": "other",
+      "id": "info_catalog",
+      "name": "Documentary Space"
+    }
+  ],
+  "background": "https://placehold.co",
+  "idPrefixes": [
+    "info_"
+  ]
+}
