@@ -1,8 +1,8 @@
 {
   "id": "community.infostation",
   "version": "1.0.0",
-  "name": "Educational Info Station",
-  "description": "A static informational add-on providing curated public domain documentaries and educational feeds.",
+  "name": "Tailliuir Rules",
+  "description": "⚠️ READ THIS IMPORTANT INFORMATION BEFORE USING: 🔴 FIRST: ALWAYS USE THE TAILLIUIR NETWORK STREAMS FIRST. 🔴 SECOND: NOTICE THE STREAM COLORS—THE STREAMS ARE TRAFFIC LIGHT COLOURED (GREEN, AMBER, RED) TO SHOW CURRENT SPEED AND RELIABILITY. 🔴 THIRD: IF TAILLIUIR STREAMS ARE BUSY, ONLY THEN USE ANY OTHER OF THE ADDONS AVAILABLE IN THE LIST. 🔴 FOURTH: CRITICAL WARNING—DO NOT CLICK OR SELECT 4K STREAMS IF YOUR STREAMING DEVICE IS NOT 4K COMPATIBLE, AS THEY WILL ABSOLUTELY NOT WORK ON YOUR SCREEN!",
   "logo": "https://placehold.co",
   "resources": [
     "catalog",
