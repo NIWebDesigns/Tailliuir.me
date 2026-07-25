@@ -1,20 +1,20 @@
 {
   "streams": [
     {
-      "name": "Tailliuir Studio",
-      "title": "① Install Tailliuir Network to connect",
+      "name": "Install Tailliuir Network to connect"",
+      "title": "Install Tailliuir Network to connect",
       "description": "You need the Tailliuir Network addon installed first — that's what actually connects you to the Tailliuir Studio network. This addon on its own is just information.",
       "url": "https://🦖.tailliuir.me/Studio"
     },
     {
-      "name": "Tailliuir Studio",
-      "title": "② Know your traffic lights",
+      "name": "Know your traffic lights",
+      "title": "Know your traffic lights",
       "description": "🟢 Green = best link, use first · 🟠 Orange = okay, solid backup · 🔴 Red = avoid, or last resort only. This only applies to the Tailliuir Network addon.",
       "url": "https://🦖.tailliuir.me/Studio"
     },
     {
-      "name": "Tailliuir Studio",
-      "title": "③ Check TorBox status if something's off",
+      "name": "Check TorBox status if something's off",
+      "title": "Check TorBox status if something's off",
       "description": "Before assuming it's broken, check status.torbox.app — most issues are a TorBox outage or maintenance window, not your setup.",
       "url": "https://status.torbox.app/"
     },
