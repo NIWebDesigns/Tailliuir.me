@@ -1,0 +1,10 @@
+{
+  "id": "com.yourname.globaltextaddon",
+  "version": "1.0.0",
+  "name": "System Status Notice",
+  "description": "Global backup streaming notification text",
+  "resources": ["stream"],
+  "types": ["movie", "series"],
+  "idPrefixes": ["tt"],
+  "catalogs": []
+}
