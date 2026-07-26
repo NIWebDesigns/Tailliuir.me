@@ -44,16 +44,5 @@
       "isFree": true,
       "type": "movie"
     },
-    {
-      "id": "Tile5",
-      "name": "Tailliuir Studio Support",
-      "description": "Need to get in touch directly? Contact details are on the full Tailliuir Studio website — tap the settings wheel on the Tailliuir Network addon to get there.",
-      "year": 2000,
-      "poster": "https://github.com/NIWebDesigns/Tailliuir.me/blob/c96ad8c378ec3ce1d349c940c36872205e90703f/Studio/tailliuir-studio-logo-320x180.png?raw=true",
-      "posterShape": "landscape",
-      "banner": "https://github.com/NIWebDesigns/Tailliuir.me/blob/c96ad8c378ec3ce1d349c940c36872205e90703f/Studio/tailliuir-studio-logo-320x180.png?raw=true",
-      "isFree": true,
-      "type": "movie"
-    }
   ]
 }
