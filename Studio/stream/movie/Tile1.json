@@ -15,8 +15,14 @@
     {
       "name": "⚠️ Having issues? ⚠️",
       "title": "⚠️ Having issues? ⚠️",
+      "description": "Check status.nuvio.tv before assuming it's broken",
+      "url": "https://status.nuvio.tv"
+    },
+        {
+      "name": "⚠️ Having issues? ⚠️",
+      "title": "⚠️ Having issues? ⚠️",
       "description": "Check status.torbox.app before assuming it's broken",
-      "url": "https://status.torbox.app/"
+      "url": "https://status.torbox.app"
     },
     {
       "name": "☁️Backups & fallbacks☁️",
