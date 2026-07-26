@@ -12,14 +12,9 @@
   "catalogs": [
     {
       "type": "movie",
-      "id": "BigBuckBunnyCatalog",
+      "id": "Tile1",
       "name": "Welcome to Tailliuir Studio! Part of the Tailliuir Network"
     },
-    {
-      "type": "movie",
-      "id": "Rule2",
-      "name": "Welcome to Tailliuir Studio! Part of the Tailliuir Network"
-    }
   ],
   "behaviorHints": {
     "configurable": true,
