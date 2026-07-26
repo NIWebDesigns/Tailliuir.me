@@ -14,9 +14,9 @@
       "id": "Rule2",
       "name": "🎁 Donations 🎁",
       "year": 2000,
-      "poster": "https://translate.how/i/donate.webp",
+      "poster": "https://raw.githubusercontent.com/NIWebDesigns/Tailliuir.me/47e4297926fd0f4e7a871e4a1d456214b966dafc/Studio/qr-code-only-320x180.svg?raw=true",
       "posterShape": "landscape",
-      "banner": "https://translate.how/i/donate.webp",
+      "banner": "https://raw.githubusercontent.com/NIWebDesigns/Tailliuir.me/47e4297926fd0f4e7a871e4a1d456214b966dafc/Studio/qr-code-only-320x180.svg?raw=true",
       "isFree": true,
       "type": "movie"
     }
