@@ -4,10 +4,10 @@
     "name": "🎁 Donations 🎁",
     "description": "💛 The full set up for this is £10 a month, so if you wanna chip in you can — revolut.me/itsmat32143",
     "year": 2000,
-    "poster": "https://public-api.qr-code-generator.com/v1/create/extended?image_format=PNG&image_width=300&qr_code_text=https%3A%2F%2Frevolut.me%2Fitsmat32143&foreground_color=%23000000&background_color=%23FFFFFF&frame_name=qrcg-scan-me-bottom-frame",
+    "poster": "https://raw.githubusercontent.com/NIWebDesigns/Tailliuir.me/47e4297926fd0f4e7a871e4a1d456214b966dafc/Studio/qr-code-only-320x180.svg?raw=true",
     "posterShape": "landscape",
-    "logo": "https://public-api.qr-code-generator.com/v1/create/extended?image_format=PNG&image_width=300&qr_code_text=https%3A%2F%2Frevolut.me%2Fitsmat32143&foreground_color=%23000000&background_color=%23FFFFFF&frame_name=qrcg-scan-me-bottom-frame",
-    "background": "https://public-api.qr-code-generator.com/v1/create/extended?image_format=PNG&image_width=300&qr_code_text=https%3A%2F%2Frevolut.me%2Fitsmat32143&foreground_color=%23000000&background_color=%23FFFFFF&frame_name=qrcg-scan-me-bottom-frame",
+    "logo": "https://raw.githubusercontent.com/NIWebDesigns/Tailliuir.me/47e4297926fd0f4e7a871e4a1d456214b966dafc/Studio/qr-code-only-320x180.svg?raw=true",
+    "background": "https://raw.githubusercontent.com/NIWebDesigns/Tailliuir.me/47e4297926fd0f4e7a871e4a1d456214b966dafc/Studio/qr-code-only-320x180.svg?raw=true",
     "isFree": true,
     "type": "movie"
   }
