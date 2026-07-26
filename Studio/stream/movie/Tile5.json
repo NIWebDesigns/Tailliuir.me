@@ -1,0 +1,40 @@
+{
+  "streams": [
+    {
+      "name": "Install Tailliuir Network",
+      "title": "Install Tailliuir Network",
+      "description": "You need the Tailliuir Network addon installed — that's what actually connects you to the Tailliuir Studio. This addon on its own is just information.",
+      "url": "https://🦖.tailliuir.me/Studio"
+    },
+    {
+      "name": "📺 Not on a 4K device? 📺",
+      "title": "📺 Not on a 4K device? 📺",
+      "description": "If your TV or device isn't 4K, don't use the 4K-tagged links — they won't work on your screen. Pick a lower quality link instead.",
+      "url": "https://🦖.tailliuir.me/Studio"
+    },
+    {
+      "name": "🚦Quality Traffic Lights🚦",
+      "title": "🚦Quality Traffic Lights🚦",
+      "description": "🟢 Green: best link, use first\n🟠 Orange: okay, solid backup\n🔴 Red: avoid, or last resort only. This only applies to the Tailliuir Network addon.",
+      "url": "https://🦖.tailliuir.me/Studio"
+    },
+    {
+      "name": "⚠️ Having issues? ⚠️",
+      "title": "⚠️ Having issues? ⚠️",
+      "description": "Check status.torbox.app before assuming it's broken",
+      "url": "https://status.torbox.app/"
+    },
+    {
+      "name": "☁️Backups & fallbacks☁️",
+      "title": "☁️Backups & fallbacks☁️",
+      "description": "If TorBox is down, backup/fallback addons are available — find them on the full Tailliuir Studio website.",
+      "url": "https://🦖.tailliuir.me/Studio"
+    },
+    {
+      "name": "💰 Donations 💰",
+      "title": "💰 Donations 💰",
+      "description": "If you'd like to chip in toward the cost of keeping this running, it's genuinely appreciated: revolut.me/itsmat32143",
+      "url": "https://revolut.me/itsmat32143"
+    }
+  ]
+}
