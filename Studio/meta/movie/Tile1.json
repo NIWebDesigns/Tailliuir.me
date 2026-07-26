@@ -1,7 +1,7 @@
 {
   "meta": {
     "id": "Tile1",
-    "name": "Welcome to Tailliuir Studio",
+    "name": "Tailliuir Studio",
     "description": "🧵 Tailliuir Studio 🧵 · Powered by Tailliuir Network\n\n⚠️ You need the Tailliuir Network addon installed to access Tailliuir Studio.\n\n👍 Quality Rating System\n👍👍 2 Thumbs: Above 1080p (1440p/4K+) - Best for 4K-capable devices.\n👍 1 Thumb: 720p to 1080p - Recommended for most devices.\n👎 Thumb Down: Below 720p - Lowest quality, use only if needed.\n\n💡 If your device isn't 4K, you'll usually want 👍 streams.\nIf your device supports 4K, both 👍 and 👍👍 streams are ideal.\n\n⚠️ Having issues?\nScan the QR codes inside the Studio for:\n• TorBox Status\n• Nuvio Status\n• The Brain AI Status\n• AIOStreams Status\n\n🎁 Want to support the project?\nThere's a donation QR code available inside the Studio.\n\n🆘 Need help?\nA support QR code is also available which contains my contact number.\n\n🔄 Backup Addons\nIf the main AIOStreams addon goes offline, you'll see Backup 1, Backup 2, Backup 3, etc.\n\nThese are alternative streaming sources and should only be used if the Tailliuir Network addon is unavailable.\n\n⚠️ Backup addons do not use the 👍 rating system, so check the listed resolution and choose the one that best matches your device.",
     "year": 2026,
     "isFree": true,
