@@ -16,9 +16,9 @@
       "name": "🎁 Scan To Donate 🎁",
       "description": "Running Tailliuir Studio costs about £10 a month. If you'd like to chip in, scan the QR code or visit revolut.me/itsmat32143 — it's entirely optional and genuinely appreciated.",
       "year": 2000,
-      "poster": "https://quickchart.io/qr?text=https://revolut.me/itsmat32143&size=180&margin=4&light=ffffff&dark=000000",
+      "poster": "https://quickchart.io/qr?text=https://revolut.me/itsmat32143&size=180&margin=35&light=ffffff&dark=000000",
       "posterShape": "landscape",
-      "banner": "https://quickchart.io/qr?text=https://revolut.me/itsmat32143&size=180&margin=4&light=ffffff&dark=000000",
+      "banner": "https://quickchart.io/qr?text=https://revolut.me/itsmat32143&size=180&margin=35&light=ffffff&dark=000000",
       "isFree": true,
       "type": "movie"
     },
@@ -38,9 +38,9 @@
       "name": "Scan To See If Nuvio Is Down",
       "description": "Q: Do I need anything else installed? A: Yes — Tailliuir Network connects you to the Studio; the rest is optional.\n\nQ: My TV isn't 4K, what do I do? A: Skip any link tagged 4K when choosing a stream — everything else works fine.\n\nQ: What do the coloured dots on streams mean? A: Green = best link, orange = okay, red = avoid or last resort. This only applies to Tailliuir Network.\n\nQ: Something's not working. A: Check status.torbox.app first — most issues are a TorBox outage, not your setup. If it's still broken, backup addons are on the full website.",
       "year": 2000,
-      "poster": "https://quickchart.io/qr?text=https://status.nuvio.tv/&size=180&margin=4&light=ffffff&dark=000000",
+      "poster": "https://quickchart.io/qr?text=https://status.nuvio.tv/&size=180&margin=35&light=ffffff&dark=000000",
       "posterShape": "landscape",
-      "banner": "https://quickchart.io/qr?text=https://status.nuvio.tv/&size=180&margin=4&light=ffffff&dark=000000",
+      "banner": "https://quickchart.io/qr?text=https://status.nuvio.tv/&size=180&margin=35&light=ffffff&dark=000000",
       "isFree": true,
       "type": "movie"
     },
@@ -49,9 +49,9 @@
       "name": "Scan To See If Torbox Is Down",
       "description": "Q: Do I need anything else installed? A: Yes — Tailliuir Network connects you to the Studio; the rest is optional.\n\nQ: My TV isn't 4K, what do I do? A: Skip any link tagged 4K when choosing a stream — everything else works fine.\n\nQ: What do the coloured dots on streams mean? A: Green = best link, orange = okay, red = avoid or last resort. This only applies to Tailliuir Network.\n\nQ: Something's not working. A: Check status.torbox.app first — most issues are a TorBox outage, not your setup. If it's still broken, backup addons are on the full website.",
       "year": 2000,
-      "poster": "https://quickchart.io/qr?text=https://status.torbox.app/&size=180&margin=4&light=ffffff&dark=000000",
+      "poster": "https://quickchart.io/qr?text=https://status.torbox.app/&size=180&margin=35&light=ffffff&dark=000000",
       "posterShape": "landscape",
-      "banner": "https://quickchart.io/qr?text=https://status.torbox.app/&size=180&margin=4&light=ffffff&dark=000000",
+      "banner": "https://quickchart.io/qr?text=https://status.torbox.app/&size=180&margin=35&light=ffffff&dark=000000",
       "isFree": true,
       "type": "movie"
     },
@@ -60,9 +60,9 @@
       "name": "Tailliuir Studio Support",
       "description": "Having trouble? Start here: 1) Check status.torbox.app for any live TorBox incidents before assuming your setup is broken. 2) If TorBox is down, backup addons are listed on the full Tailliuir Studio website. 3) Still stuck? Reach out via the contact details on the Tailliuir Support tile.",
       "year": 2000,
-      "poster": "https://quickchart.io/qr?text=tel:+447471097569&size=180&margin=4&light=ffffff&dark=000000",
+      "poster": "https://quickchart.io/qr?text=tel:+447471097569&size=180&margin=35&light=ffffff&dark=000000",
       "posterShape": "landscape",
-      "banner": "https://quickchart.io/qr?text=tel:+447471097569&size=180&margin=4&light=ffffff&dark=000000",
+      "banner": "https://quickchart.io/qr?text=tel:+447471097569&size=180&margin=35&light=ffffff&dark=000000",
       "isFree": true,
       "type": "movie"
     }
