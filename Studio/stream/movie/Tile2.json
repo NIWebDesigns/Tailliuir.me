@@ -1,7 +1,75 @@
 {
   "streams": [
     {
-      "availability": 1,
+      "name": "📱 What is Nuvio? 📱",
+      "title": "📱 What is Nuvio? 📱",
+      "description": "Nuvio is an app that plays Stremio-compatible addons, like Tailliuir Network. If you're using Nuvio instead of Stremio, everything else applies to you too.",
+      "url": "https://🦖.tailliuir.me/Studio"
+    },
+    {
+      "name": "❓ How do I install on Nuvio? ❓",
+      "title": "❓ How do I install on Nuvio? ❓",
+      "description": "Open Nuvio → Settings → Addons → Add Addon, then paste the manifest URL. Nuvio has no one-click install — you have to paste the link in manually, one addon at a time.",
+      "url": "https://🦖.tailliuir.me/Studio"
+    },
+    {
+      "name": "🔗 Where do I get the link? 🔗",
+      "title": "🔗 Where do I get the link? 🔗",
+      "description": "Every addon on the Tailliuir Studio website has a Copy Link button next to it. Tap that, then paste the copied link into Nuvio's Add Addon field.",
+      "url": "https://🦖.tailliuir.me/Studio"
+    },
+    {
+      "name": "🚫 Why doesn't Install do anything? 🚫",
+      "title": "🚫 Why doesn't Install do anything? 🚫",
+      "description": "The Install buttons on the website are built for Stremio's deep links. Nuvio doesn't support that — always use Copy Link and paste it in manually instead.",
+      "url": "https://🦖.tailliuir.me/Studio"
+    },
+    {
+      "name": "📶 Does Nuvio need a debrid service? 📶",
+      "title": "📶 Does Nuvio need a debrid service? 📶",
+      "description": "Yes for most sources. Nuvio has no built-in torrent engine, so torrent-based addons only become playable once paired with a debrid service like TorBox.",
+      "url": "https://🦖.tailliuir.me/Studio"
+    },
+    {
+      "name": "🔌 Native TorBox integration 🔌",
+      "title": "🔌 Native TorBox integration 🔌",
+      "description": "Nuvio can link TorBox directly under Settings → Integrations → Connected Services, instead of putting an API key into each addon individually.",
+      "url": "https://🦖.tailliuir.me/Studio"
+    },
+    {
+      "name": "⚠️ Native debrid vs addon debrid ⚠️",
+      "title": "⚠️ Native debrid vs addon debrid ⚠️",
+      "description": "If you link TorBox natively in Nuvio, your addons need to return raw torrent hashes, not pre-resolved links. If an addon already has a debrid key entered into it, Nuvio's native integration gets bypassed.",
+      "url": "https://🦖.tailliuir.me/Studio"
+    },
+    {
+      "name": "📊 Metadata addons come first 📊",
+      "title": "📊 Metadata addons come first 📊",
+      "description": "In Nuvio, keep metadata addons (like AIOMetadata) at the top of your installed list — this is what loads posters and details properly for everything else.",
+      "url": "https://🦖.tailliuir.me/Studio"
+    },
+    {
+      "name": "🔀 Can I reorder addons? 🔀",
+      "title": "🔀 Can I reorder addons? 🔀",
+      "description": "Yes — in Settings → Addons, use the up/down arrows to move addons. Higher priority addons show first in your stream results.",
+      "url": "https://🦖.tailliuir.me/Studio"
+    },
+    {
+      "name": "🔕 Can I disable without deleting? 🔕",
+      "title": "🔕 Can I disable without deleting? 🔕",
+      "description": "Yes — Nuvio lets you toggle addons on and off individually in Settings → Addons, so you don't have to uninstall and reinstall if you just want to pause one.",
+      "url": "https://🦖.tailliuir.me/Studio"
+    },
+    {
+      "name": "⚙️ Where's the settings gear in Nuvio? ⚙️",
+      "title": "⚙️ Where's the settings gear in Nuvio? ⚙️",
+      "description": "Tap the gear icon next to an installed addon in Settings → Addons to open its configuration page in your browser — same idea as the Stremio settings wheel.",
+      "url": "https://🦖.tailliuir.me/Studio"
+    },
+    {
+      "name": "🔁 Do I need to reinstall backups every time? 🔁",
+      "title": "🔁 Do I need to reinstall backups every time? 🔁",
+      "description": "No — install the backup addons once and just leave them lower in your priority order. They'll sit there quietly until TorBox goes down and you need them.",
       "url": "https://🦖.tailliuir.me/Studio"
     }
   ]
