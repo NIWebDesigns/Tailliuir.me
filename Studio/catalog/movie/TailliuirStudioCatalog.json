@@ -13,12 +13,12 @@
     },
     {
       "id": "Tile2",
-      "name": "🎁 Tailliuir Studio Donations 🎁",
+      "name": "🎁 Scan To Donate 🎁",
       "description": "Running Tailliuir Studio costs about £10 a month. If you'd like to chip in, scan the QR code or visit revolut.me/itsmat32143 — it's entirely optional and genuinely appreciated.",
       "year": 2000,
-      "poster": "https://raw.githubusercontent.com/NIWebDesigns/Tailliuir.me/47e4297926fd0f4e7a871e4a1d456214b966dafc/Studio/qr-code-only-320x180.svg?raw=true",
+      "poster": "https://quickchart.io/qr?text=https://revolut.me/itsmat32143&size=180",
       "posterShape": "landscape",
-      "banner": "https://raw.githubusercontent.com/NIWebDesigns/Tailliuir.me/47e4297926fd0f4e7a871e4a1d456214b966dafc/Studio/qr-code-only-320x180.svg?raw=true",
+      "banner": "https://quickchart.io/qr?text=https://revolut.me/itsmat32143&size=180",
       "isFree": true,
       "type": "movie"
     },
@@ -60,9 +60,9 @@
       "name": "Tailliuir Studio Support",
       "description": "Having trouble? Start here: 1) Check status.torbox.app for any live TorBox incidents before assuming your setup is broken. 2) If TorBox is down, backup addons are listed on the full Tailliuir Studio website. 3) Still stuck? Reach out via the contact details on the Tailliuir Support tile.",
       "year": 2000,
-      "poster": "https://github.com/NIWebDesigns/Tailliuir.me/blob/c96ad8c378ec3ce1d349c940c36872205e90703f/Studio/tailliuir-studio-logo-320x180.png?raw=true",
+      "poster": "https://quickchart.io/qr?text=tel:+447471097569&size=180",
       "posterShape": "landscape",
-      "banner": "https://github.com/NIWebDesigns/Tailliuir.me/blob/c96ad8c378ec3ce1d349c940c36872205e90703f/Studio/tailliuir-studio-logo-320x180.png?raw=true",
+      "banner": "https://quickchart.io/qr?text=tel:+447471097569&size=180",
       "isFree": true,
       "type": "movie"
     }
