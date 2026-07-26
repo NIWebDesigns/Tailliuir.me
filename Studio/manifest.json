@@ -1,6 +1,6 @@
 {
   "id": "com.stremio.nowexample",
-  "version": "🦖.tailliuir.me/Studio",
+  "version": "1.0.0",
   "name": "Tailliuir Studio",
   "description": "🧵 Tailliuir Studios 🧵 · Powered by TorBox\n\n⚠️ You need the Tailliuir Network addon installed to connect you to the Tailliuir Studio\n\n🚦 Quality Traffic Lights\n🟢 Green: best link, use first\n🟠 Orange: okay, solid backup\n🔴 Red: avoid, or last resort only\n\n⚠️ Having issues? Check status.torbox.app before assuming it's broken\n\n💛 The full set up for this is £10 a month, so if you wanna chip in you can — revolut.me/itsmat32143\n\n⚙️ Want more? Tap the settings wheel for the full site — install links, backups, everything\n\nOr\n\nVisit - 🦖.tailliuir.me/Studio",
   "website": "https://🦖.tailliuir.me/Studio",
@@ -12,9 +12,9 @@
   "catalogs": [
     {
       "type": "movie",
-      "id": "Tile1",
+      "id": "TailliuirStudioCatalog",
       "name": "Welcome to Tailliuir Studio! Part of the Tailliuir Network"
-    },
+    }
   ],
   "behaviorHints": {
     "configurable": true,
