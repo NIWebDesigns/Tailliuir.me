@@ -68,7 +68,7 @@
     },
             {
       "id": "Tile8",
-      "name": "🌎 Tailliuir Studio Website 🌎",
+      "name": "🌎 Tailliuir Studio Website",
       "description": "Q: Do I need anything else installed? A: Yes — Tailliuir Network connects you to the Studio; the rest is optional.\n\nQ: My TV isn't 4K, what do I do? A: Skip any link tagged 4K when choosing a stream — everything else works fine.\n\nQ: What do the coloured dots on streams mean? A: Green = best link, orange = okay, red = avoid or last resort. This only applies to Tailliuir Network.\n\nQ: Something's not working. A: Check status.torbox.app first — most issues are a TorBox outage, not your setup. If it's still broken, backup addons are on the full website.",
       "year": 2000,
       "poster": "https://quickchart.io/qr?text=https://xn--mt9h.tailliuir.me/Studio&size=180&margin=15&light=ffffff&dark=000000",
