@@ -1,13 +1,9 @@
 {
   "meta": {
     "id": "Tile3",
-    "name": "Tailliuir Studio FAQ",
+    "name": "❓ Tailliuir Studio FAQ ❓",
     "description": "🧵 Tailliuir Studio FAQ 🧵\n\nWelcome! Here are answers to the most common questions.\n\n❓ Do I need to install anything?\n\nNo. Everything is already set up for you. Just open Tailliuir Studio and start watching.\n\n❓ How do I watch something?\n\nChoose a film or TV show, select a stream option, and press play.\n\n❓ What do the thumbs mean?\n\n👍👍 2 Thumbs: Highest quality. Usually 1440p or 4K. Best for 4K TVs.\n\n👍 1 Thumb: 720p to 1080p. Best choice for most TVs and devices.\n\n👎 Thumb Down: Below 720p. Only use if nothing else is available.\n\n❓ Which one should I choose?\n\nIf you are unsure, choose 👍.\n\nOnly choose 👍👍 if your TV or device supports 4K.\n\n❓ Why are there no thumbs showing?\n\nIf a film or TV show has no 👍 or 👍👍 options, there may be a temporary problem finding available choices. Check the 'No Thumbs Showing?' QR code for updates.\n\n❓ Why won't my video start?\n\nIf you press a 👍 option and it doesn't play, keeps loading, or stops, check the 'Thumbs Won't Play?' QR code.\n\n❓ Why does my video keep buffering?\n\nTry another 👍 option first. If everything is buffering, there may be a temporary service issue.\n\n❓ The app won't open or looks empty?\n\nCheck the 'App Not Working?' QR code to see if there is a known problem.\n\n❓ My TV isn't 4K. What should I use?\n\nUse 👍 options. They are designed for most TVs, phones and tablets.\n\n❓ My TV is 4K. What should I use?\n\nYou can use 👍👍 options for the best picture quality, as long as your internet connection and device support it.\n\n❓ What are Backup options?\n\nIf you see Backup 1, Backup 2, Backup 3 and so on, these are alternative options used when the main choices are unavailable.\n\nBackup options do not use the thumb system, so choose the highest quality your device can handle.\n\n❓ Something is still wrong. What do I do?\n\n1️⃣ Check the matching QR code for the problem.\n\n2️⃣ Restart the app.\n\n3️⃣ Try again later if there is an outage.\n\n4️⃣ If you still need help, use the Support QR code.\n\n❤️ Enjoy Tailliuir Studio! 🍿",
     "year": 2026,
-    "poster": "https://github.com/NIWebDesigns/Tailliuir.me/blob/master/Studio/tailliuir-studio-logo-320x180.png?raw=true",
-    "posterShape": "landscape",
-    "logo": "https://github.com/NIWebDesigns/Tailliuir.me/blob/master/Studio/tailliuir-studio-logo-320x180.png?raw=true",
-    "background": "https://github.com/NIWebDesigns/Tailliuir.me/blob/master/Studio/tailliuir-studio-logo-320x180.png?raw=true",
     "isFree": true,
     "type": "movie"
   }
