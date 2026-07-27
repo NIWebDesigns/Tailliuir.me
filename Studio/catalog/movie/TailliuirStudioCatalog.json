@@ -5,9 +5,9 @@
       "name": "📖 How To Use Tailliuir Studio ⭐",
       "description": "Tailliuir Studio is the family's home for streaming addons. You need the Tailliuir Network addon installed to connect you to the network — everything else here (rules, FAQ, support, backups) builds on top of that. Tailliuir Network runs on TorBox and covers every quality from 4K to unknown, with streams colour-coded like a traffic light: green is the best link, orange is okay, red should be avoided or used only as a last resort. Not on a 4K screen? Just skip links tagged 4K when picking a stream.",
       "year": 2000,
-      "poster": "https://quickchart.io/qr?text=https://xn--mt9h.tailliuir.me/Studio/configure&size=180&margin=15&light=ffffff&dark=000000",
+      "poster": "https://github.com/NIWebDesigns/Tailliuir.me/blob/master/Studio/tailliuir-studio-logo-320x180.png?raw=true",
       "posterShape": "landscape",
-      "banner": "https://quickchart.io/qr?text=https://xn--mt9h.tailliuir.me/Studio/configure&size=180&margin=15&light=ffffff&dark=000000",
+      "banner": "https://github.com/NIWebDesigns/Tailliuir.me/blob/master/Studio/tailliuir-studio-logo-320x180.png?raw=true",
       "isFree": true,
       "type": "movie"
     },
