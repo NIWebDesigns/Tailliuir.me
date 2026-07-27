@@ -2,7 +2,7 @@
   "metas": [
     {
       "id": "Tile1",
-      "name": "👋 Welcome Guide 👋",
+      "name": "👋 Welcome Guide",
       "description": "Tailliuir Studio is the family's home for streaming addons. You need the Tailliuir Network addon installed to connect you to the network — everything else here (rules, FAQ, support, backups) builds on top of that. Tailliuir Network runs on TorBox and covers every quality from 4K to unknown, with streams colour-coded like a traffic light: green is the best link, orange is okay, red should be avoided or used only as a last resort. Not on a 4K screen? Just skip links tagged 4K when picking a stream.",
       "year": 2000,
       "poster": "https://github.com/NIWebDesigns/Tailliuir.me/blob/master/Studio/tailliuir-studio-logo-320x180.png?raw=true",
@@ -13,7 +13,7 @@
     },
     {
       "id": "Tile2",
-      "name": "☕ Buy Me a Coffee ☕",
+      "name": "☕ Buy Me a Coffee",
       "description": "Running Tailliuir Studio costs about £10 a month. If you'd like to chip in, scan the QR code or visit revolut.me/itsmat32143 — it's entirely optional and genuinely appreciated.",
       "year": 2000,
       "poster": "https://quickchart.io/qr?text=https://revolut.me/itsmat32143&size=180&margin=15&light=ffffff&dark=000000",
@@ -79,7 +79,7 @@
     },
     {
       "id": "Tile9",
-      "name": "Tailliuir Studio Support",
+      "name": "📞 Tailliuir Studio Support",
       "description": "Having trouble? Start here: 1) Check status.torbox.app for any live TorBox incidents before assuming your setup is broken. 2) If TorBox is down, backup addons are listed on the full Tailliuir Studio website. 3) Still stuck? Reach out via the contact details on the Tailliuir Support tile.",
       "year": 2000,
       "poster": "https://quickchart.io/qr?text=tel:+447471097569&size=180&margin=15&light=ffffff&dark=000000",
