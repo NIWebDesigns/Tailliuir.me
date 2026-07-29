@@ -2,7 +2,7 @@
   "metas": [
     {
       "id": "Tile1",
-      "name": "👋 Welcome Guide 👋",
+      "name": "👋 Welcome Guide",
       "description": "Tailliuir Studio is the family's home for streaming addons. You need the Tailliuir Network addon installed to connect you to the network — everything else here (rules, FAQ, support, backups) builds on top of that. Tailliuir Network runs on TorBox and covers every quality from 4K to unknown, with streams colour-coded like a traffic light: green is the best link, orange is okay, red should be avoided or used only as a last resort. Not on a 4K screen? Just skip links tagged 4K when picking a stream.",
       "year": 2000,
       "poster": "https://github.com/NIWebDesigns/Tailliuir.me/blob/master/Studio/tailliuir-studio-logo-320x180.png?raw=true",
@@ -13,7 +13,7 @@
     },
     {
       "id": "Tile2",
-      "name": "☕ Buy Me a Coffee ☕",
+      "name": "☕ Buy Me a Coffee",
       "description": "Running Tailliuir Studio costs about £10 a month. If you'd like to chip in, scan the QR code or visit revolut.me/itsmat32143 — it's entirely optional and genuinely appreciated.",
       "year": 2000,
       "poster": "https://quickchart.io/qr?text=https://revolut.me/itsmat32143&size=180&margin=15&light=ffffff&dark=000000",
@@ -24,7 +24,7 @@
     },
     {
       "id": "Tile3",
-      "name": "❓ Tailliuir Studio FAQ ❓",
+      "name": "❓ Tailliuir Studio FAQ",
       "description": "Q: Do I need anything else installed? A: Yes — Tailliuir Network connects you to the Studio; the rest is optional.\n\nQ: My TV isn't 4K, what do I do? A: Skip any link tagged 4K when choosing a stream — everything else works fine.\n\nQ: What do the coloured dots on streams mean? A: Green = best link, orange = okay, red = avoid or last resort. This only applies to Tailliuir Network.\n\nQ: Something's not working. A: Check status.torbox.app first — most issues are a TorBox outage, not your setup. If it's still broken, backup addons are on the full website.",
       "year": 2000,
       "poster": "https://github.com/NIWebDesigns/Tailliuir.me/blob/c96ad8c378ec3ce1d349c940c36872205e90703f/Studio/tailliuir-studio-logo-320x180.png?raw=true",
@@ -35,7 +35,7 @@
     },
         {
       "id": "Tile4",
-      "name": "📱 App Not Working? 📱",
+      "name": "📱 App Not Working?",
       "description": "Q: Do I need anything else installed? A: Yes — Tailliuir Network connects you to the Studio; the rest is optional.\n\nQ: My TV isn't 4K, what do I do? A: Skip any link tagged 4K when choosing a stream — everything else works fine.\n\nQ: What do the coloured dots on streams mean? A: Green = best link, orange = okay, red = avoid or last resort. This only applies to Tailliuir Network.\n\nQ: Something's not working. A: Check status.torbox.app first — most issues are a TorBox outage, not your setup. If it's still broken, backup addons are on the full website.",
       "year": 2000,
       "poster": "https://quickchart.io/qr?text=https://status.nuvio.tv/&size=180&margin=15&light=ffffff&dark=000000",
@@ -46,7 +46,7 @@
     },
             {
       "id": "Tile6",
-      "name": "🎬 No Thumbs Appearing? 🎬",
+      "name": "🎬 No Thumbs Appearing?",
       "description": "Q: Do I need anything else installed? A: Yes — Tailliuir Network connects you to the Studio; the rest is optional.\n\nQ: My TV isn't 4K, what do I do? A: Skip any link tagged 4K when choosing a stream — everything else works fine.\n\nQ: What do the coloured dots on streams mean? A: Green = best link, orange = okay, red = avoid or last resort. This only applies to Tailliuir Network.\n\nQ: Something's not working. A: Check status.torbox.app first — most issues are a TorBox outage, not your setup. If it's still broken, backup addons are on the full website.",
       "year": 2000,
       "poster": "https://quickchart.io/qr?text=https://status.elfhosted.com/&size=180&margin=15&light=ffffff&dark=000000",
@@ -57,7 +57,7 @@
     },
         {
       "id": "Tile7",
-      "name": "▶️ Thumbs Won't Play? ▶️",
+      "name": "▶️ Thumbs Won't Play?",
       "description": "Q: Do I need anything else installed? A: Yes — Tailliuir Network connects you to the Studio; the rest is optional.\n\nQ: My TV isn't 4K, what do I do? A: Skip any link tagged 4K when choosing a stream — everything else works fine.\n\nQ: What do the coloured dots on streams mean? A: Green = best link, orange = okay, red = avoid or last resort. This only applies to Tailliuir Network.\n\nQ: Something's not working. A: Check status.torbox.app first — most issues are a TorBox outage, not your setup. If it's still broken, backup addons are on the full website.",
       "year": 2000,
       "poster": "https://quickchart.io/qr?text=https://status.torbox.app/&size=180&margin=15&light=ffffff&dark=000000",
@@ -68,7 +68,7 @@
     },
             {
       "id": "Tile8",
-      "name": "🌎 Tailliuir Studio Website 🌎",
+      "name": "🌎 Tailliuir Studio Website",
       "description": "Q: Do I need anything else installed? A: Yes — Tailliuir Network connects you to the Studio; the rest is optional.\n\nQ: My TV isn't 4K, what do I do? A: Skip any link tagged 4K when choosing a stream — everything else works fine.\n\nQ: What do the coloured dots on streams mean? A: Green = best link, orange = okay, red = avoid or last resort. This only applies to Tailliuir Network.\n\nQ: Something's not working. A: Check status.torbox.app first — most issues are a TorBox outage, not your setup. If it's still broken, backup addons are on the full website.",
       "year": 2000,
       "poster": "https://quickchart.io/qr?text=https://xn--mt9h.tailliuir.me/Studio&size=180&margin=15&light=ffffff&dark=000000",
@@ -79,7 +79,7 @@
     },
     {
       "id": "Tile9",
-      "name": "📞 Tailliuir Studio Support 📞",
+      "name": "📞 Tailliuir Studio Support",
       "description": "Having trouble? Start here: 1) Check status.torbox.app for any live TorBox incidents before assuming your setup is broken. 2) If TorBox is down, backup addons are listed on the full Tailliuir Studio website. 3) Still stuck? Reach out via the contact details on the Tailliuir Support tile.",
       "year": 2000,
       "poster": "https://quickchart.io/qr?text=tel:+447471097569&size=180&margin=15&light=ffffff&dark=000000",
