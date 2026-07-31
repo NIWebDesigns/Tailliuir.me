@@ -2,7 +2,7 @@
   "metas": [
     {
       "id": "Tile1",
-      "name": "-",
+      "name": "Welcome Guide",
       "description": "👋 Welcome Guide",
       "year": 2000,
       "poster": "https://github.com/NIWebDesigns/Tailliuir.me/blob/master/Studio/tailliuir-studio-logo-320x180.png?raw=true",
@@ -13,7 +13,7 @@
     },
     {
       "id": "Tile2",
-      "name": " ",
+      "name": "Buy Me a Coffee",
       "description": "☕ Buy Me a Coffee",
       "year": 2000,
       "poster": "https://quickchart.io/qr?text=https://revolut.me/itsmat32143&size=180&margin=15&light=ffffff&dark=000000",
@@ -24,7 +24,7 @@
     },
     {
       "id": "Tile3",
-      "name": " ",
+      "name": "Tailliuir Studio FAQ",
       "description": "❓ Tailliuir Studio FAQ",
       "year": 2000,
       "poster": "https://github.com/NIWebDesigns/Tailliuir.me/blob/c96ad8c378ec3ce1d349c940c36872205e90703f/Studio/tailliuir-studio-logo-320x180.png?raw=true",
@@ -35,7 +35,7 @@
     },
         {
       "id": "Tile4",
-      "name": " ",
+      "name": "App Not Working?",
       "description": "📱 App Not Working?",
       "year": 2000,
       "poster": "https://quickchart.io/qr?text=https://status.nuvio.tv/&size=180&margin=15&light=ffffff&dark=000000",
@@ -46,7 +46,7 @@
     },
             {
       "id": "Tile6",
-      "name": " ",
+      "name": "No Thumbs Appearing?",
       "description": "🎬 No Thumbs Appearing?",
       "year": 2000,
       "poster": "https://quickchart.io/qr?text=https://status.elfhosted.com/&size=180&margin=15&light=ffffff&dark=000000",
@@ -57,7 +57,7 @@
     },
         {
       "id": "Tile7",
-      "name": " ",
+      "name": "Thumbs Won't Play?",
       "description": "▶️ Thumbs Won't Play?",
       "year": 2000,
       "poster": "https://quickchart.io/qr?text=https://status.torbox.app/&size=180&margin=15&light=ffffff&dark=000000",
@@ -68,7 +68,7 @@
     },
             {
       "id": "Tile8",
-      "name": " ",
+      "name": "Tailliuir Studio Website",
       "description": "🌎 Tailliuir Studio Website",
       "year": 2000,
       "poster": "https://quickchart.io/qr?text=https://xn--mt9h.tailliuir.me/Studio&size=180&margin=15&light=ffffff&dark=000000",
@@ -79,7 +79,7 @@
     },
     {
       "id": "Tile9",
-      "name": " ",
+      "name": "Tailliuir Studio Support",
       "description": "📞 Tailliuir Studio Support",
       "year": 2000,
       "poster": "https://quickchart.io/qr?text=tel:+447471097569&size=180&margin=15&light=ffffff&dark=000000",
