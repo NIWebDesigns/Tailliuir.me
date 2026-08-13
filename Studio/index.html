@@ -6,292 +6,629 @@
   <title>Tailliuir Studio</title>
   <style>
     :root{
-      --bg: #0f1318;
-      --bg2: #151b22;
-      --card: rgba(27, 32, 39, 0.88);
-      --card-2: rgba(35, 42, 51, 0.92);
-      --text: #ece6da;
-      --muted: #a7a193;
-      --gold: #c9a15a;
-      --gold-bright: #e4c487;
-      --line: rgba(255,255,255,0.08);
-      --teal: #7fb0b8;
-      --shadow: 0 20px 60px rgba(0,0,0,0.35);
-      --radius: 18px;
-      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      --serif: Georgia, serif;
+      --bg:#f5f5f7;
+      --card:#ffffff;
+      --soft:#f2f2f7;
+      --line:#e5e5ea;
+      --text:#1d1d1f;
+      --muted:#6e6e73;
+      --blue:#0071e3;
+      --blue-dark:#0058b0;
+      --radius-xl:28px;
+      --radius-lg:22px;
+      --radius-md:16px;
+      --sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",Roboto,Arial,sans-serif;
     }
 
-    * { box-sizing: border-box; }
+    *{box-sizing:border-box}
 
     body{
-      margin: 0;
-      font-family: var(--sans);
-      color: var(--text);
-      background:
-        radial-gradient(circle at top, #1a212a 0%, var(--bg) 45%),
-        linear-gradient(180deg, var(--bg2), var(--bg));
-      min-height: 100vh;
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:var(--sans);
     }
 
     .wrap{
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 40px 20px 70px;
-      text-align: center;
+      max-width:980px;
+      margin:0 auto;
+      padding:22px 16px 60px;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+
+    .title{
+      margin:0;
+      font-size:2.2rem;
+      font-weight:700;
+      letter-spacing:-0.05em;
+    }
+
+    .nav{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .nav a{
+      text-decoration:none;
+      color:var(--blue);
+      font-weight:600;
+      font-size:.98rem;
     }
 
     .hero{
-      margin-bottom: 26px;
+      background:linear-gradient(180deg,#ffffff 0%,#fbfbfd 100%);
+      border-radius:var(--radius-xl);
+      padding:26px 22px;
+      margin-bottom:28px;
+      border:1px solid #ececf1;
     }
 
-    .eyebrow{
-      margin: 0 0 10px;
-      color: var(--teal);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      font-size: 11px;
-      font-weight: 700;
+    .hero .kicker{
+      margin:0 0 8px;
+      color:var(--blue);
+      font-size:.88rem;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.02em;
     }
 
-    h1{
-      margin: 0;
-      font-family: var(--serif);
-      font-size: clamp(2.3rem, 6vw, 3.3rem);
-      color: var(--gold-bright);
-      font-weight: 600;
+    .hero h2{
+      margin:0 0 10px;
+      font-size:2.2rem;
+      line-height:1.03;
+      letter-spacing:-0.05em;
+      max-width:700px;
     }
 
-    .intro{
-      max-width: 680px;
-      margin: 14px auto 0;
-      color: var(--muted);
-      font-size: 1rem;
+    .hero p{
+      margin:0;
+      color:var(--muted);
+      font-size:1.04rem;
+      line-height:1.6;
+      max-width:740px;
     }
 
-    .card{
-      background: var(--card);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 24px;
-      margin-bottom: 18px;
-      box-shadow: var(--shadow);
+    .section{
+      margin-top:28px;
     }
 
-    .card h2{
-      margin: 0 0 12px;
-      font-family: var(--serif);
-      font-size: 1.5rem;
-      color: var(--gold-bright);
-      font-weight: 600;
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:12px;
+      margin-bottom:14px;
+      flex-wrap:wrap;
     }
 
-    .login-box{
-      max-width: 480px;
-      margin: 10px auto 0;
-      padding: 14px 16px;
-      background: rgba(11,15,20,0.7);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      color: var(--text);
-      font-size: 0.98rem;
-      word-break: break-word;
+    .section-head h3{
+      margin:0;
+      font-size:1.65rem;
+      letter-spacing:-0.04em;
     }
 
-    .login-box strong{
-      color: var(--gold-bright);
+    .section-head p{
+      margin:0;
+      color:var(--muted);
+      font-size:.96rem;
     }
 
-    .buttons{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 16px;
+    .app-list{
+      display:grid;
+      gap:14px;
+    }
+
+    .app-card{
+      background:var(--card);
+      border-radius:var(--radius-lg);
+      padding:18px;
+      border:1px solid var(--line);
+      cursor:pointer;
+      transition:transform .15s ease, box-shadow .15s ease;
+    }
+
+    .app-card:hover{
+      transform:translateY(-1px);
+      box-shadow:0 6px 18px rgba(0,0,0,.05);
+    }
+
+    .app-row{
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+
+    .icon{
+      width:74px;
+      height:74px;
+      border-radius:20px;
+      background:linear-gradient(135deg,#dfe8f6,#f6f7fb);
+      border:1px solid #d9dce3;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.35rem;
+      font-weight:700;
+      flex:none;
+    }
+
+    .app-main{
+      flex:1;
+      min-width:0;
+    }
+
+    .app-main h4{
+      margin:0 0 4px;
+      font-size:1.14rem;
+      letter-spacing:-0.03em;
+    }
+
+    .app-main p{
+      margin:0;
+      color:var(--muted);
+      font-size:.96rem;
+      line-height:1.5;
+    }
+
+    .tap{
+      color:var(--blue);
+      font-size:.92rem;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .status-card,
+    .addon-card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius-lg);
+      padding:18px;
+    }
+
+    .status-card ul{
+      margin:0 0 16px 18px;
+      color:var(--muted);
+      line-height:1.8;
+    }
+
+    .button-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
     }
 
     .btn{
-      appearance: none;
-      border: 1px solid transparent;
-      text-decoration: none;
-      border-radius: 999px;
-      padding: 11px 18px;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform .12s ease, background .15s ease, border-color .15s ease, color .15s ease;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
+      min-height:38px;
+      padding:0 16px;
+      border-radius:999px;
+      border:none;
+      text-decoration:none;
+      font-size:.92rem;
+      font-weight:700;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
     }
 
-    .btn:hover{
-      transform: translateY(-1px);
+    .btn-primary{
+      background:var(--blue);
+      color:#fff;
     }
 
-    .btn-main{
-      background: linear-gradient(180deg, var(--gold-bright), var(--gold));
-      color: #241b0c;
-      box-shadow: 0 10px 24px rgba(201,161,90,0.22);
+    .btn-primary:hover{
+      background:var(--blue-dark);
     }
 
-    .btn-main:hover{
-      filter: brightness(1.04);
+    .btn-soft{
+      background:var(--soft);
+      color:var(--blue);
+      border:1px solid #e1e1e8;
     }
 
-    .btn-ghost{
-      background: transparent;
-      color: var(--teal);
-      border-color: rgba(127,176,184,0.45);
+    .addon-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:14px;
     }
 
-    .btn-ghost:hover{
-      background: rgba(127,176,184,0.08);
-      color: #a8d2d9;
+    .addon-card h4{
+      margin:0 0 8px;
+      font-size:1.08rem;
     }
 
-    .help-list{
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .help-list li{
-      margin: 8px 0;
-    }
-
-    .addon{
-      background: var(--card-2);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 18px;
-      margin-top: 14px;
-    }
-
-    .addon h3{
-      margin: 0 0 8px;
-      color: var(--text);
-      font-size: 1.12rem;
-      font-weight: 700;
-    }
-
-    .addon p{
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.95rem;
+    .addon-card p{
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.55;
     }
 
     footer{
-      margin-top: 26px;
-      color: var(--muted);
-      font-size: 13px;
+      margin-top:36px;
+      text-align:center;
+      color:var(--muted);
+      font-size:.92rem;
     }
 
-    @media (max-width: 640px){
-      .buttons{
-        flex-direction: column;
-      }
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.35);
+      display:none;
+      align-items:flex-end;
+      justify-content:center;
+      padding:20px;
+      z-index:1000;
+    }
 
-      .btn{
-        width: 100%;
-      }
+    .modal.open{
+      display:flex;
+    }
 
-      .card{
-        padding: 20px;
-      }
+    .sheet{
+      width:min(760px, 100%);
+      max-height:90vh;
+      overflow:auto;
+      background:#fff;
+      border-radius:28px 28px 0 0;
+      padding:22px;
+      box-shadow:0 -10px 30px rgba(0,0,0,.12);
+      animation:slideUp .2s ease;
+    }
 
-      .addon{
-        padding: 16px;
-      }
+    @keyframes slideUp{
+      from{transform:translateY(20px); opacity:.7}
+      to{transform:translateY(0); opacity:1}
+    }
+
+    .sheet-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:18px;
+    }
+
+    .close{
+      border:none;
+      background:var(--soft);
+      color:var(--text);
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      cursor:pointer;
+      font-size:18px;
+      flex:none;
+    }
+
+    .detail-head{
+      display:flex;
+      gap:16px;
+      align-items:flex-start;
+    }
+
+    .detail-icon{
+      width:88px;
+      height:88px;
+      border-radius:24px;
+      background:linear-gradient(135deg,#dfe8f6,#f6f7fb);
+      border:1px solid #d9dce3;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.6rem;
+      font-weight:700;
+      flex:none;
+    }
+
+    .detail-info h4{
+      margin:0 0 6px;
+      font-size:1.5rem;
+      letter-spacing:-0.04em;
+    }
+
+    .detail-info p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+    }
+
+    .detail-actions{
+      margin:18px 0;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .detail-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:8px;
+    }
+
+    .detail-box{
+      background:var(--soft);
+      border:1px solid #e5e5ea;
+      border-radius:18px;
+      padding:14px;
+    }
+
+    .detail-box span{
+      display:block;
+      font-size:.78rem;
+      color:var(--muted);
+      text-transform:uppercase;
+      font-weight:700;
+      margin-bottom:6px;
+      letter-spacing:.04em;
+    }
+
+    .detail-box strong{
+      font-size:.97rem;
+      word-break:break-word;
+    }
+
+    @media (max-width:700px){
+      .hero h2{font-size:1.85rem}
+      .app-row{align-items:flex-start}
+      .detail-head{flex-direction:column}
+      .detail-grid{grid-template-columns:1fr}
+      .button-row,.detail-actions{flex-direction:column}
+      .btn{width:100%}
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="hero">
-      <p class="eyebrow">Family Hub</p>
-      <h1>Tailliuir Studio</h1>
-      <p class="intro">
-        Nuvio login, quick status checks, and the three addon links in one place.
-      </p>
-    </div>
-
-    <div class="card">
-      <h2>Nuvio Login</h2>
-      <div class="login-box"><strong>Username</strong><br>xzsa@gmx.com</div>
-      <div class="login-box"><strong>Password</strong><br>Ead36a86@@</div>
-
-      <div class="buttons">
-        <a class="btn btn-main" href="https://www.nuvio.app/" target="_blank" rel="noopener">Open Nuvio</a>
-        <button class="btn btn-ghost copy-btn" data-copy="xzsa@gmx.com">Copy Username</button>
-        <button class="btn btn-ghost copy-btn" data-copy="Ead36a86@@">Copy Password</button>
+    <div class="topbar">
+      <h1 class="title">Tailliuir Studio</h1>
+      <div class="nav">
+        <a href="#apps">Apps</a>
+        <a href="#status">Status</a>
+        <a href="#addons">Addons</a>
       </div>
     </div>
 
-    <div class="card">
-      <h2>If Something Is Wrong</h2>
-      <ul class="help-list">
-        <li>Log out.</li>
-        <li>Log back in.</li>
-        <li>If it is still broken, check the status buttons below.</li>
-      </ul>
+    <section class="hero">
+      <p class="kicker">Family Hub</p>
+      <h2>Everything the family needs, all in one place.</h2>
+      <p>Tap any app to view its details, login, and download options.</p>
+    </section>
 
-      <div class="buttons">
-        <a class="btn btn-ghost" href="https://status.torbox.app/" target="_blank" rel="noopener">TorBox</a>
-        <a class="btn btn-ghost" href="https://www.premiumize.me/" target="_blank" rel="noopener">Premiumize</a>
-        <a class="btn btn-ghost" href="https://mypikpak.com/" target="_blank" rel="noopener">PikPak</a>
-        <a class="btn btn-ghost" href="https://fortheweak.cloud/status" target="_blank" rel="noopener">For The Weak</a>
+    <section class="section" id="apps">
+      <div class="section-head">
+        <h3>Apps</h3>
+        <p>Tap an app to open details</p>
       </div>
-    </div>
 
-    <div class="card">
-      <h2>Addons</h2>
+      <div class="app-list" id="app-list"></div>
+    </section>
 
-      <div class="addon">
-        <h3>1. Tailliuir Studio</h3>
-        <div class="buttons">
-          <a class="btn btn-main" href="stremio://xn--mt9h.tailliuir.me/Studio/manifest.json">Install</a>
-          <button class="btn btn-ghost copy-btn" data-copy="https://xn--mt9h.tailliuir.me/Studio/manifest.json">Copy Link</button>
+    <section class="section" id="status">
+      <div class="section-head">
+        <h3>If Something Is Wrong</h3>
+        <p>Quick things to check first</p>
+      </div>
+
+      <div class="status-card">
+        <ul>
+          <li>Log out.</li>
+          <li>Log back in.</li>
+          <li>If it still is not working, check the services below.</li>
+        </ul>
+        <div class="button-row">
+          <a class="btn btn-soft" href="https://status.torbox.app/" target="_blank">TorBox Status</a>
+          <a class="btn btn-soft" href="https://www.premiumize.me/" target="_blank">Premiumize</a>
+          <a class="btn btn-soft" href="https://mypikpak.com/" target="_blank">PikPak</a>
+          <a class="btn btn-soft" href="https://fortheweak.cloud/status" target="_blank">For The Weak Status</a>
         </div>
       </div>
+    </section>
 
-      <div class="addon">
-        <h3>2. Tailliuir TV</h3>
-        <div class="buttons">
-          <a class="btn btn-main" href="stremio://iptvbridge.vercel.app/N4IgLgngDgpiBcIC2BmAriANCAFgewGcwEQsQ0CYAnAOwEMk5Eyo6CCB3PKgExLNRoAqlQA2JHGDBQC8APRywANwCMAJhQA6RnICWUZXLVqADAE4AbCgAscgNIBzADIBFHACUAxgDV3AIzkAATA8KDIwJB4-AEEoXTsYCH5sXRpPUTQeGCddJSYwKjQYFLSMrIBZPCVdGAIEADM6UUoS9MyYAGVqGrr4RubikFS2rJ4AYTowGAduHoQAbXAqGBoeVIcQAF0AXyA/manifest.json">Install</a>
-          <button class="btn btn-ghost copy-btn" data-copy="https://iptvbridge.vercel.app/N4IgLgngDgpiBcIC2BmAriANCAFgewGcwEQsQ0CYAnAOwEMk5Eyo6CCB3PKgExLNRoAqlQA2JHGDBQC8APRywANwCMAJhQA6RnICWUZXLVqADAE4AbCgAscgNIBzADIBFHACUAxgDV3AIzkAATA8KDIwJB4-AEEoXTsYCH5sXRpPUTQeGCddJSYwKjQYFLSMrIBZPCVdGAIEADM6UUoS9MyYAGVqGrr4RubikFS2rJ4AYTowGAduHoQAbXAqGBoeVIcQAF0AXyA/manifest.json">Copy Link</button>
-        </div>
+    <section class="section" id="addons">
+      <div class="section-head">
+        <h3>Addons</h3>
+        <p>For anyone who wants their own setup</p>
       </div>
 
-      <div class="addon">
-        <h3>3. Tailliuir Network</h3>
-        <p>Main AIOStreams addon using TorBox, Premiumize and PikPak.</p>
-        <div class="buttons">
-          <a class="btn btn-main" href="stremio://aiostreams.fortheweak.cloud/stremio/7a2c74ed-a79c-4b41-acc7-26708a9030e8/eyJpIjoiQjk1dkdENFZkN21xekc2bFl3czdhUT09IiwiZSI6InJSbW9TWU5RVzE3SHhlbktCYmZkemtpaFRROTJhOEh2emtiSElRVi9mR0k9IiwidCI6ImEifQ/manifest.json">Install</a>
-          <button class="btn btn-ghost copy-btn" data-copy="https://aiostreams.fortheweak.cloud/stremio/7a2c74ed-a79c-4b41-acc7-26708a9030e8/eyJpIjoiQjk1dkdENFZkN21xekc2bFl3czdhUT09IiwiZSI6InJSbW9TWU5RVzE3SHhlbktCYmZkemtpaFRROTJhOEh2emtiSElRVi9mR0k9IiwidCI6ImEifQ/manifest.json">Copy Link</button>
+      <div class="addon-grid">
+        <div class="addon-card">
+          <h4>1. Tailliuir Studio</h4>
+          <p>Main Tailliuir Studio addon.</p>
+          <div class="button-row">
+            <a class="btn btn-primary" href="stremio://xn--mt9h.tailliuir.me/Studio/manifest.json">Install</a>
+            <button class="btn btn-soft copy-btn" data-copy="https://xn--mt9h.tailliuir.me/Studio/manifest.json">Copy Link</button>
+          </div>
+        </div>
+
+        <div class="addon-card">
+          <h4>2. Tailliuir TV</h4>
+          <p>Live TV addon.</p>
+          <div class="button-row">
+            <a class="btn btn-primary" href="stremio://iptvbridge.vercel.app/N4IgLgngDgpiBcIC2BmAriANCAFgewGcwEQsQ0CYAnAOwEMk5Eyo6CCB3PKgExLNRoAqlQA2JHGDBQC8APRywANwCMAJhQA6RnICWUZXLVqADAE4AbCgAscgNIBzADIBFHACUAxgDV3AIzkAATA8KDIwJB4-AEEoXTsYCH5sXRpPUTQeGCddJSYwKjQYFLSMrIBZPCVdGAIEADM6UUoS9MyYAGVqGrr4RubikFS2rJ4AYTowGAduHoQAbXAqGBoeVIcQAF0AXyA/manifest.json">Install</a>
+            <button class="btn btn-soft copy-btn" data-copy="https://iptvbridge.vercel.app/N4IgLgngDgpiBcIC2BmAriANCAFgewGcwEQsQ0CYAnAOwEMk5Eyo6CCB3PKgExLNRoAqlQA2JHGDBQC8APRywANwCMAJhQA6RnICWUZXLVqADAE4AbCgAscgNIBzADIBFHACUAxgDV3AIzkAATA8KDIwJB4-AEEoXTsYCH5sXRpPUTQeGCddJSYwKjQYFLSMrIBZPCVdGAIEADM6UUoS9MyYAGVqGrr4RubikFS2rJ4AYTowGAduHoQAbXAqGBoeVIcQAF0AXyA/manifest.json">Copy Link</button>
+          </div>
+        </div>
+
+        <div class="addon-card">
+          <h4>3. Tailliuir Network</h4>
+          <p>Main AIOStreams addon using TorBox, Premiumize and PikPak.</p>
+          <div class="button-row">
+            <a class="btn btn-primary" href="stremio://aiostreams.fortheweak.cloud/stremio/7a2c74ed-a79c-4b41-acc7-26708a9030e8/eyJpIjoiQjk1dkdENFZkN21xekc2bFl3czdhUT09IiwiZSI6InJSbW9TWU5RVzE3SHhlbktCYmZkemtpaFRROTJhOEh2emtiSElRVi9mR0k9IiwidCI6ImEifQ/manifest.json">Install</a>
+            <button class="btn btn-soft copy-btn" data-copy="https://aiostreams.fortheweak.cloud/stremio/7a2c74ed-a79c-4b41-acc7-26708a9030e8/eyJpIjoiQjk1dkdENFZkN21xekc2bFl3czdhUT09IiwiZSI6InJSbW9TWU5RVzE3SHhlbktCYmZkemtpaFRROTJhOEh2emtiSElRVi9mR0k9IiwidCI6ImEifQ/manifest.json">Copy Link</button>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <footer>Tailliuir Studio — family use only.</footer>
   </div>
 
+  <div class="modal" id="app-modal">
+    <div class="sheet">
+      <div class="sheet-top">
+        <div class="detail-head">
+          <div class="detail-icon" id="modal-icon"></div>
+          <div class="detail-info">
+            <h4 id="modal-name"></h4>
+            <p id="modal-desc"></p>
+          </div>
+        </div>
+        <button class="close" id="close-modal">×</button>
+      </div>
+
+      <div class="detail-actions" id="modal-actions"></div>
+
+      <div class="detail-grid">
+        <div class="detail-box">
+          <span>Username</span>
+          <strong>xzsa@gmx.com</strong>
+        </div>
+        <div class="detail-box">
+          <span>Password</span>
+          <strong>Ead36a86@@</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
+    const apps = [
+      {
+        name: "Nuvio",
+        icon: "N",
+        desc: "Main family app.",
+        buttons: [
+          { label: "Android Mobile", url: "#" },
+          { label: "Android TV", url: "#" }
+        ]
+      },
+      {
+        name: "Tuvora",
+        icon: "T",
+        desc: "Alternative app option.",
+        buttons: [
+          { label: "Android Mobile", url: "#" },
+          { label: "Android TV", url: "#" }
+        ]
+      },
+      {
+        name: "Arvio",
+        icon: "A",
+        desc: "Another app option.",
+        buttons: [
+          { label: "Android Mobile", url: "#" },
+          { label: "Android TV", url: "#" }
+        ]
+      },
+      {
+        name: "Stremio",
+        icon: "S",
+        desc: "Best for custom setups and web playback.",
+        buttons: [
+          { label: "Android Mobile", url: "https://play.google.com/store/apps/details?id=com.stremio.one" },
+          { label: "Android TV", url: "https://play.google.com/store/apps/details?id=com.stremio.one" },
+          { label: "Web Player", url: "https://web.stremio.com/" }
+        ]
+      },
+      {
+        name: "Plex",
+        icon: "P",
+        desc: "Extra app option for anyone who wants it.",
+        buttons: [
+          { label: "Android Mobile", url: "#" },
+          { label: "Android TV", url: "#" }
+        ]
+      },
+      {
+        name: "Emby",
+        icon: "E",
+        desc: "Media server app option.",
+        buttons: [
+          { label: "Android Mobile", url: "#" },
+          { label: "Android TV", url: "#" }
+        ]
+      },
+      {
+        name: "UGREEN NAS",
+        icon: "U",
+        desc: "Access and manage the family NAS.",
+        buttons: [
+          { label: "Android Mobile", url: "#" },
+          { label: "Android TV", url: "#" }
+        ]
+      }
+    ];
+
+    const list = document.getElementById("app-list");
+    const modal = document.getElementById("app-modal");
+    const modalIcon = document.getElementById("modal-icon");
+    const modalName = document.getElementById("modal-name");
+    const modalDesc = document.getElementById("modal-desc");
+    const modalActions = document.getElementById("modal-actions");
+
+    apps.forEach((app) => {
+      const card = document.createElement("div");
+      card.className = "app-card";
+      card.innerHTML = `
+        <div class="app-row">
+          <div class="icon">${app.icon}</div>
+          <div class="app-main">
+            <h4>${app.name}</h4>
+            <p>${app.desc}</p>
+          </div>
+          <div class="tap">View</div>
+        </div>
+      `;
+      card.addEventListener("click", () => openModal(app));
+      list.appendChild(card);
+    });
+
+    function openModal(app){
+      modalIcon.textContent = app.icon;
+      modalName.textContent = app.name;
+      modalDesc.textContent = app.desc;
+      modalActions.innerHTML = "";
+
+      app.buttons.forEach((btn, i) => {
+        const a = document.createElement("a");
+        a.className = i === 0 ? "btn btn-primary" : "btn btn-soft";
+        a.href = btn.url;
+        a.target = "_blank";
+        a.rel = "noopener";
+        a.textContent = btn.label;
+        modalActions.appendChild(a);
+      });
+
+      modal.classList.add("open");
+    }
+
+    document.getElementById("close-modal").addEventListener("click", () => {
+      modal.classList.remove("open");
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) modal.classList.remove("open");
+    });
+
     document.body.addEventListener("click", async (e) => {
       const btn = e.target.closest(".copy-btn");
       if (!btn) return;
-
       try {
         await navigator.clipboard.writeText(btn.dataset.copy);
         const oldText = btn.textContent;
         btn.textContent = "Copied";
-        setTimeout(() => {
-          btn.textContent = oldText;
-        }, 1200);
+        setTimeout(() => btn.textContent = oldText, 1200);
       } catch {
         alert("Could not copy");
       }
