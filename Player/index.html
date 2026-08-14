@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Tailliuir Player</title>
+  <title>Tailliuir TV Player</title>
 
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
@@ -61,9 +61,12 @@
       z-index:20;
       backdrop-filter:blur(8px);
       font-size:16px;
-      transition:opacity .3s;
+      transition:opacity .2s ease;
     }
-    .bottom-bar.hidden{opacity:0;pointer-events:none}
+    .bottom-bar.hidden{
+      opacity:0;
+      pointer-events:none;
+    }
     .bottom-bar input[type="url"],
     .bottom-bar input[type="text"]{
       min-width:220px;
@@ -108,20 +111,34 @@
       font-weight:700;
       color:var(--text);
       z-index:10;
-      transition:opacity .3s;
+      transition:opacity .2s ease;
     }
     .top-time{right:24px}
     .clock{left:50%;transform:translateX(-50%)}
-    .top-time.hidden,.clock.hidden{opacity:0;pointer-events:none}
-    :focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+    .top-time.hidden,.clock.hidden{
+      opacity:0;
+      pointer-events:none;
+    }
+    :focus-visible{
+      outline:3px solid var(--accent);
+      outline-offset:3px;
+    }
     @media (max-width:800px){
-      .top-time,.clock{top:16px;font-size:16px;padding:8px 10px}
-      .bottom-bar{left:10px;right:10px;bottom:10px}
+      .top-time,.clock{
+        top:16px;
+        font-size:16px;
+        padding:8px 10px;
+      }
+      .bottom-bar{
+        left:10px;
+        right:10px;
+        bottom:10px;
+      }
     }
   </style>
 </head>
 <body>
-  <video id="video" playsinline webkit-playsinline preload="metadata" controls></video>
+  <video id="video" playsinline webkit-playsinline preload="metadata"></video>
 
   <div class="top-time" id="time">00:00:00 / 00:00:00</div>
   <div class="clock" id="clock"></div>
@@ -149,47 +166,32 @@
     const jumpBtn = document.getElementById("jumpBtn");
     const status = document.getElementById("status");
 
-    let barVisible = true;
-    let tapTimeout;
     let hls = null;
     let dashPlayer = null;
+    let currentUrl = "";
 
     function setStatus(text) {
       status.textContent = text;
     }
 
-    function cleanupPlayer() {
-      if (hls) {
-        hls.destroy();
-        hls = null;
-      }
-      if (dashPlayer) {
-        dashPlayer.reset();
-        dashPlayer = null;
-      }
-      while (video.firstChild) video.removeChild(video.firstChild);
-      video.pause();
-      video.removeAttribute("src");
-      video.load();
+    function showBar() {
+      bottomBar.classList.remove("hidden");
     }
 
-    function toggleBar(force) {
-      barVisible = typeof force === "boolean" ? force : !barVisible;
-      bottomBar.classList.toggle("hidden", !barVisible);
+    function hideBar() {
+      bottomBar.classList.add("hidden");
     }
 
-    function updateTopVisibility() {
+    function updateBarAndTop() {
       const playing = !video.paused && !video.ended;
-      timeEl.classList.toggle("hidden", playing);
-      clockEl.classList.toggle("hidden", playing);
-    }
-
-    function hideBarDelayed() {
-      clearTimeout(tapTimeout);
-      if (!video.paused && !video.ended) {
-        tapTimeout = setTimeout(() => {
-          if (barVisible) toggleBar(false);
-        }, 3000);
+      if (playing) {
+        hideBar();
+        timeEl.classList.add("hidden");
+        clockEl.classList.add("hidden");
+      } else {
+        showBar();
+        timeEl.classList.remove("hidden");
+        clockEl.classList.remove("hidden");
       }
     }
 
@@ -206,10 +208,12 @@
     }
 
     function clampTime(t) {
-      return Math.max(0, Math.min(isFinite(video.duration) ? video.duration : t, t));
+      if (!isFinite(video.duration)) return Math.max(0, t);
+      return Math.max(0, Math.min(video.duration, t));
     }
 
     function seekTo(t) {
+      if (!video.src) return;
       if (!isFinite(video.duration)) {
         setStatus("Wait for media to load");
         return;
@@ -221,6 +225,7 @@
     function parseJump(value) {
       const v = (value || "").trim().replace(/[^0-9:]/g, "");
       if (!v) return null;
+
       if (v.includes(":")) {
         const parts = v.split(":").map(Number);
         if (parts.some(n => Number.isNaN(n))) return null;
@@ -228,12 +233,28 @@
         if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
         return null;
       }
+
       if (v.length === 4) {
         const h = parseInt(v.slice(0, 2), 10);
         const m = parseInt(v.slice(2, 4), 10);
         return h * 3600 + m * 60;
       }
+
       return Number(v);
+    }
+
+    function cleanupPlayer() {
+      if (hls) {
+        hls.destroy();
+        hls = null;
+      }
+      if (dashPlayer) {
+        dashPlayer.reset();
+        dashPlayer = null;
+      }
+      video.pause();
+      video.removeAttribute("src");
+      video.load();
     }
 
     function looksLikeM3U8(url) {
@@ -249,7 +270,7 @@
     }
 
     async function tryFetch(url) {
-      const res = await fetch(url);
+      const res = await fetch(url, { mode: "cors" });
       if (!res.ok) throw new Error("Fetch failed");
       return {
         text: await res.text(),
@@ -257,21 +278,38 @@
       };
     }
 
-    async function loadM3UPlaylist(text, baseUrl = location.href) {
+    function parseM3ULines(text, baseUrl) {
       const lines = text
         .split(/\r?\n/)
         .map(l => l.trim())
-        .filter(l => l && !l.startsWith("#"));
+        .filter(Boolean);
 
-      if (!lines.length) {
+      const entries = [];
+
+      for (const line of lines) {
+        if (line.startsWith("#")) continue;
+        if (/^(https?:)?\/\//i.test(line)) {
+          entries.push(line);
+          continue;
+        }
+        try {
+          entries.push(new URL(line, baseUrl).href);
+        } catch {}
+      }
+
+      return entries;
+    }
+
+    async function loadM3UPlaylist(text, baseUrl = location.href) {
+      const entries = parseM3ULines(text, baseUrl);
+
+      if (!entries.length) {
         setStatus("Playlist is empty");
         return;
       }
 
-      const firstEntry = lines[0];
-      const resolved = new URL(firstEntry, baseUrl).href;
-      await loadMedia(resolved);
-      setStatus(`Loaded playlist item 1 of ${lines.length}`);
+      await loadMedia(entries[0], true);
+      setStatus(`Loaded playlist item 1 of ${entries.length}`);
     }
 
     async function loadHls(url) {
@@ -285,18 +323,16 @@
       }
 
       if (window.Hls && Hls.isSupported()) {
-        hls = new Hls({ enableWorker: true });
+        hls = new Hls({
+          enableWorker: true
+        });
         hls.loadSource(url);
         hls.attachMedia(video);
-
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
           setStatus("HLS ready");
         });
-
         hls.on(Hls.Events.ERROR, (_, data) => {
-          if (data?.fatal) {
-            setStatus("HLS error");
-          }
+          if (data?.fatal) setStatus("HLS error");
         });
         return;
       }
@@ -340,10 +376,7 @@
         return true;
       }
 
-      if (
-        text.includes("<MPD") ||
-        /dash\+xml|application\/mpd/i.test(contentType)
-      ) {
+      if (text.includes("<MPD") || /dash\+xml|application\/mpd/i.test(contentType)) {
         await loadDash(url);
         return true;
       }
@@ -351,22 +384,15 @@
       return false;
     }
 
-    async function loadMedia(url) {
+    async function loadMedia(url, fromPlaylist = false) {
       const clean = (url || "").trim();
       if (!clean) {
         setStatus("Paste a media URL");
         return;
       }
 
-      if (/^magnet:/i.test(clean)) {
-        setStatus("Magnet links are not supported");
-        return;
-      }
-
-      if (/youtube\.com|youtu\.be/i.test(clean)) {
-        setStatus("YouTube page URLs are not direct media links");
-        return;
-      }
+      currentUrl = clean;
+      if (!fromPlaylist) urlInput.value = clean;
 
       if (looksLikeM3U8(clean)) {
         await loadHls(clean);
@@ -396,9 +422,7 @@
         video.removeEventListener("error", retryHandler);
         try {
           const detected = await detectAndLoadByContent(clean);
-          if (!detected) {
-            setStatus("Could not play this source");
-          }
+          if (!detected) setStatus("Could not play this source");
         } catch {
           setStatus("Could not play this source");
         }
@@ -411,16 +435,22 @@
       } catch (err) {
         console.error(err);
         setStatus("Could not load URL");
+        showBar();
       }
     }
 
-    loadBtn.addEventListener("click", safeLoadUrl);
+    loadBtn.addEventListener("click", e => {
+      e.stopPropagation();
+      safeLoadUrl();
+    });
 
     urlInput.addEventListener("keydown", e => {
+      e.stopPropagation();
       if (e.key === "Enter") safeLoadUrl();
     });
 
-    jumpBtn.addEventListener("click", () => {
+    jumpBtn.addEventListener("click", e => {
+      e.stopPropagation();
       const secs = parseJump(jumpInput.value);
       if (secs === null) {
         setStatus("Enter 0123, 1:23, or 01:02:03");
@@ -431,63 +461,81 @@
     });
 
     jumpInput.addEventListener("keydown", e => {
+      e.stopPropagation();
       if (e.key === "Enter") jumpBtn.click();
     });
 
     function updateClock() {
       clockEl.textContent = new Date().toLocaleTimeString("en-GB", { hour12: false });
     }
+
     updateClock();
     setInterval(updateClock, 1000);
 
     video.addEventListener("loadedmetadata", () => {
       setStatus("Ready");
       updateTime();
-      updateTopVisibility();
+      updateBarAndTop();
     });
 
     video.addEventListener("timeupdate", updateTime);
 
     video.addEventListener("play", () => {
       setStatus("Playing");
-      updateTopVisibility();
-      hideBarDelayed();
+      updateBarAndTop();
     });
 
     video.addEventListener("pause", () => {
       setStatus("Paused");
-      updateTopVisibility();
-      toggleBar(true);
+      updateBarAndTop();
     });
 
-    video.addEventListener("waiting", () => setStatus("Buffering"));
+    video.addEventListener("waiting", () => {
+      setStatus("Buffering");
+    });
 
     video.addEventListener("ended", () => {
       setStatus("Ended");
-      updateTopVisibility();
-      toggleBar(true);
+      updateBarAndTop();
     });
 
     video.addEventListener("error", () => {
-      updateTopVisibility();
+      updateBarAndTop();
     });
 
-    document.addEventListener("click", e => {
+    document.addEventListener("click", async e => {
       if (e.target.closest(".bottom-bar")) return;
-      toggleBar();
-      updateTopVisibility();
-      hideBarDelayed();
+      if (!video.src) {
+        showBar();
+        return;
+      }
+
+      try {
+        if (video.paused || video.ended) {
+          await video.play();
+        } else {
+          video.pause();
+        }
+      } catch (err) {
+        console.error(err);
+        setStatus("Playback failed");
+        showBar();
+      }
     });
 
     document.addEventListener("keydown", async e => {
       const tag = document.activeElement?.tagName;
-      const typing = tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT";
+      const typing = tag === "INPUT" || tag === "TEXTAREA";
 
-      if (!typing && e.code === "Space") {
+      if (!typing && (e.code === "Space" || e.key === "Enter")) {
         e.preventDefault();
         try {
-          if (video.paused) await video.play();
-          else video.pause();
+          if (!video.src) return;
+          if (video.paused || video.ended) {
+            await video.play();
+          } else {
+            video.pause();
+          }
         } catch {}
       }
 
@@ -501,6 +549,8 @@
         seekTo(video.currentTime + 10);
       }
     });
+
+    updateBarAndTop();
   </script>
 </body>
 </html>
