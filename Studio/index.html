@@ -422,7 +422,6 @@
         <h3>Apps</h3>
         <p>Tap an app to open details</p>
       </div>
-
       <div class="app-list" id="app-list"></div>
     </section>
 
@@ -431,7 +430,6 @@
         <h3>If Something Is Wrong</h3>
         <p>Quick things to check first</p>
       </div>
-
       <div class="status-card">
         <ul>
           <li>Log out.</li>
@@ -439,10 +437,10 @@
           <li>If it still is not working, check the services below.</li>
         </ul>
         <div class="button-row">
-          <a class="btn btn-soft" href="https://status.torbox.app/" target="_blank">TorBox Status</a>
-          <a class="btn btn-soft" href="https://www.premiumize.me/" target="_blank">Premiumize</a>
-          <a class="btn btn-soft" href="https://mypikpak.com/" target="_blank">PikPak</a>
-          <a class="btn btn-soft" href="https://fortheweak.cloud/status" target="_blank">For The Weak Status</a>
+          <a class="btn btn-soft" href="https://status.torbox.app/" target="_blank" rel="noopener">TorBox Status</a>
+          <a class="btn btn-soft" href="https://www.premiumize.me/" target="_blank" rel="noopener">Premiumize</a>
+          <a class="btn btn-soft" href="https://mypikpak.com/" target="_blank" rel="noopener">PikPak</a>
+          <a class="btn btn-soft" href="https://fortheweak.cloud/status" target="_blank" rel="noopener">For The Weak Status</a>
         </div>
       </div>
     </section>
@@ -452,7 +450,6 @@
         <h3>Addons</h3>
         <p>For anyone who wants their own setup</p>
       </div>
-
       <div class="addon-grid">
         <div class="addon-card">
           <h4>1. Tailliuir Studio</h4>
@@ -496,7 +493,7 @@
             <p id="modal-desc"></p>
           </div>
         </div>
-        <button class="close" id="close-modal">×</button>
+        <button class="close" id="close-modal" aria-label="Close">×</button>
       </div>
 
       <div class="detail-actions" id="modal-actions"></div>
@@ -504,11 +501,11 @@
       <div class="detail-grid">
         <div class="detail-box">
           <span>Username</span>
-          <strong>xzsa@gmx.com</strong>
+          <strong id="modal-username"></strong>
         </div>
         <div class="detail-box">
           <span>Password</span>
-          <strong>Ead36a86@@</strong>
+          <strong id="modal-password"></strong>
         </div>
       </div>
     </div>
@@ -520,33 +517,41 @@
         name: "Nuvio",
         icon: "https://play-lh.googleusercontent.com/hae5SIdkvlE-BRF3M3x0vHhKYuGY8wKjeVv575hYYu9rECVehlLCc7E0gqVvqmlgTUCW-eTXBFFlgyOinz2H-2w=w240-h480-rw",
         desc: "Main family app.",
+        username: "xzsa@gmx.com",
+        password: "Ead36a86@@",
         buttons: [
-          { label: "Android Mobile", url: "#" },
-          { label: "Android TV", url: "#" }
+          { label: "Android Mobile", url: "https://github.com/NuvioMedia/NuvioMobile/releases/latest" },
+          { label: "Android TV", url: "https://github.com/NuvioMedia/NuvioTV/releases/latest" }
         ]
       },
       {
         name: "Tuvora",
         icon: "https://play-lh.googleusercontent.com/BWP7_6Q1rBYYwE2MAheyZWaMig_ktClSymnA7CvU9RPwHZ-KiZw7GhBjLtV8fOZU6vVNHbNpzp-XCLL57BxD=w240-h480-rw",
         desc: "Alternative app option.",
+        username: "xzsa@gmx.com",
+        password: "Ead36a86@@",
         buttons: [
-          { label: "Android Mobile", url: "#" },
-          { label: "Android TV", url: "#" }
+          { label: "Android Mobile", url: "https://tuvora.co/apk" },
+          { label: "Android TV", url: "https://tuvora.co/tv" }
         ]
       },
       {
         name: "Arvio",
         icon: "https://play-lh.googleusercontent.com/SnnfPXviftncQEPcs565nE81VhQQM03F-9_0bGyUo9f-crfLUoI6URN5lgt9IXNrgsyPK1J1g-dutRAtUT9g0Ws=w240-h480-rw",
         desc: "Another app option.",
+        username: "xzsa@gmx.com",
+        password: "Ead36a86@@",
         buttons: [
           { label: "Android Mobile", url: "#" },
-          { label: "Android TV", url: "#" }
+          { label: "Android TV", url: "https://github.com/ProdigyV21/ARVIO/releases/latest" }
         ]
       },
       {
         name: "Stremio",
         icon: "https://play-lh.googleusercontent.com/OvTwEXzvUbeyfqdXd1vZiTfbBOTdMAA6EWw5TV00PiSirn7C1iz__HVD6PfXCHkN9quH_XdoPwCIT3GhB1Ukmw=w240-h480-rw",
         desc: "Best for custom setups and web playback.",
+        username: "xzsa@gmx.com",
+        password: "Ead36a86@@",
         buttons: [
           { label: "Android Mobile", url: "https://play.google.com/store/apps/details?id=com.stremio.one" },
           { label: "Android TV", url: "https://play.google.com/store/apps/details?id=com.stremio.one" },
@@ -557,27 +562,36 @@
         name: "Plex",
         icon: "https://play-lh.googleusercontent.com/0-rSvTIYVEveysANiSS5FITkkD-kpe6TG91nJRy7ht2J0BHlPWXiGaMcDRYUOwTVuZsE4-HyI-qSL0KkNEvQ=w240-h480-rw",
         desc: "Extra app option for anyone who wants it.",
+        username: "xzsa@gmx.com",
+        password: "Ead36a86@@",
         buttons: [
           { label: "Android Mobile", url: "#" },
-          { label: "Android TV", url: "#" }
+          { label: "Android TV", url: "#" },
+          { label: "Web Player", url: "https://ctrl-ugnas.duckdns.org:32400" }
         ]
       },
       {
         name: "Emby",
         icon: "https://play-lh.googleusercontent.com/Bk51lWrmrTuY0_5B3bmyZX9W8AYMUnYLP83gtlKTSZpuylZuWC9-M7qCiVQBa8DYa9Hhw1mZNl-O06Wep2box7Y=w240-h480-rw",
         desc: "Media server app option.",
+        username: "Guest",
+        password: "password47",
         buttons: [
           { label: "Android Mobile", url: "#" },
-          { label: "Android TV", url: "#" }
+          { label: "Android TV", url: "#" },
+          { label: "Web Player", url: "https://esc-ugnas.duckdns.org:8096" }
         ]
       },
       {
         name: "UGREEN NAS",
         icon: "https://play-lh.googleusercontent.com/bsn2ab6zcAntKCrTcXha8jjdLgmWypSX4Z3YQlFiQV5lsTKMa7hik8P4AVfis5EspD9T98ttWIDdFo1mKC6tuZ0=w240-h480-rw",
         desc: "Access and manage the family NAS.",
+        username: "ugreen_user@example.com",
+        password: "UGreenPass123!",
         buttons: [
           { label: "Android Mobile", url: "#" },
-          { label: "Android TV", url: "#" }
+          { label: "Android TV", url: "#" },
+          { label: "Web Player", url: "https://ctrl-ugnas.duckdns.org:9443" }
         ]
       }
     ];
@@ -588,6 +602,9 @@
     const modalName = document.getElementById("modal-name");
     const modalDesc = document.getElementById("modal-desc");
     const modalActions = document.getElementById("modal-actions");
+    const modalUsername = document.getElementById("modal-username");
+    const modalPassword = document.getElementById("modal-password");
+    const closeModalBtn = document.getElementById("close-modal");
 
     apps.forEach((app) => {
       const card = document.createElement("div");
@@ -612,6 +629,8 @@
       modalIcon.innerHTML = `<img src="${app.icon}" alt="${app.name} logo">`;
       modalName.textContent = app.name;
       modalDesc.textContent = app.desc;
+      modalUsername.textContent = app.username || "Not provided";
+      modalPassword.textContent = app.password || "Not provided";
       modalActions.innerHTML = "";
 
       app.buttons.forEach((btn, i) => {
@@ -627,22 +646,31 @@
       modal.classList.add("open");
     }
 
-    document.getElementById("close-modal").addEventListener("click", () => {
+    function closeModal(){
       modal.classList.remove("open");
-    });
+    }
+
+    closeModalBtn.addEventListener("click", closeModal);
 
     modal.addEventListener("click", (e) => {
-      if (e.target === modal) modal.classList.remove("open");
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
     });
 
     document.body.addEventListener("click", async (e) => {
       const btn = e.target.closest(".copy-btn");
       if (!btn) return;
+
       try {
         await navigator.clipboard.writeText(btn.dataset.copy);
         const oldText = btn.textContent;
         btn.textContent = "Copied";
-        setTimeout(() => btn.textContent = oldText, 1200);
+        setTimeout(() => {
+          btn.textContent = oldText;
+        }, 1200);
       } catch {
         alert("Could not copy");
       }
