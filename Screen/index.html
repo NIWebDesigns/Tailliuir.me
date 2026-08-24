@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oi! Put This Screen to Bed!</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Comic Sans MS", "Trebuchet MS", sans-serif;
+      background:
+        radial-gradient(circle at 20% 20%, #fff59d 0 10%, transparent 11%),
+        radial-gradient(circle at 80% 15%, #ffcc80 0 8%, transparent 9%),
+        radial-gradient(circle at 70% 70%, #ce93d8 0 9%, transparent 10%),
+        linear-gradient(180deg, #8be0ff 0%, #dff7ff 45%, #fff4b5 100%);
+      color: #263238;
+      overflow-x: hidden;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.94);
+      border: 5px solid #333;
+      border-radius: 28px;
+      padding: 22px;
+      box-shadow: 0 12px 0 #333, 0 18px 30px rgba(0,0,0,0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::after {
+      content: "✨";
+      position: absolute;
+      right: 18px;
+      top: 14px;
+      font-size: 1.6rem;
+      transform: rotate(18deg);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 10px 16px;
+      border: 4px solid #333;
+      border-radius: 999px;
+      background: #ffd54f;
+      font-weight: 900;
+      margin-bottom: 14px;
+      transform: rotate(-2deg);
+    }
+
+    h1, h2 {
+      margin: 0 0 12px;
+      line-height: 1.1;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.3rem);
+    }
+
+    h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+    }
+
+    .big-message {
+      font-size: 1.4rem;
+      font-weight: 900;
+      background: #fff8d6;
+      border: 4px dashed #333;
+      border-radius: 20px;
+      padding: 16px;
+      margin: 14px 0;
+      transform: rotate(-1deg);
+    }
+
+    .small-goofy {
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+
+    .mascot-box {
+      margin-top: 18px;
+      padding: 16px;
+      background: #e8faff;
+      border: 4px solid #333;
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    .mascot {
+      font-size: 5rem;
+      animation: bounce 1.6s infinite;
+      display: inline-block;
+    }
+
+    .speech {
+      margin-top: 10px;
+      font-size: 1.15rem;
+      font-weight: bold;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    button {
+      border: 4px solid #333;
+      background: #ff8a80;
+      color: #222;
+      border-radius: 18px;
+      padding: 14px 18px;
+      font-size: 1rem;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 5px 0 #333;
+      font-family: inherit;
+      transform: rotate(-1deg);
+    }
+
+    button:nth-child(2n) {
+      background: #ffd54f;
+      transform: rotate(1deg);
+    }
+
+    button:nth-child(3n) {
+      background: #81d4fa;
+    }
+
+    button:hover {
+      transform: scale(1.03) rotate(0deg);
+    }
+
+    button:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 #333;
+    }
+
+    .hud {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .stat {
+      background: #fdfdfd;
+      border: 4px solid #333;
+      border-radius: 18px;
+      padding: 10px;
+      text-align: center;
+      font-weight: 900;
+    }
+
+    .value {
+      display: block;
+      font-size: 1.5rem;
+      margin-top: 4px;
+    }
+
+    .game-area {
+      position: relative;
+      height: 380px;
+      border: 5px dashed #333;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 10% 20%, #fff59d 0 8%, transparent 9%),
+        radial-gradient(circle at 85% 15%, #ffcc80 0 7%, transparent 8%),
+        radial-gradient(circle at 70% 80%, #ce93d8 0 8%, transparent 9%),
+        linear-gradient(180deg, #fefefe 0%, #e8faff 100%);
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .target {
+      position: absolute;
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      border: 4px solid #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      cursor: pointer;
+      box-shadow: 0 7px 14px rgba(0,0,0,0.14);
+      animation: wobble 0.5s infinite alternate;
+    }
+
+    .good { background: #b9f6ca; }
+    .bad { background: #ffccbc; }
+    .bonus { background: #ffe082; }
+
+    .float {
+      position: absolute;
+      font-weight: 900;
+      font-size: 1.1rem;
+      pointer-events: none;
+      animation: rise 0.9s ease-out forwards;
+      text-shadow: 1px 1px 0 white;
+    }
+
+    .goodText { color: #1b5e20; }
+    .badText { color: #b71c1c; }
+
+    .status {
+      margin-top: 14px;
+      font-weight: 900;
+      min-height: 28px;
+      font-size: 1.05rem;
+      background: #fff8d6;
+      border: 3px dashed #333;
+      border-radius: 16px;
+      padding: 10px;
+    }
+
+    .legend {
+      margin-top: 12px;
+      font-size: 0.98rem;
+      line-height: 1.5;
+      background: #f6fbff;
+      border: 3px solid #333;
+      border-radius: 16px;
+      padding: 12px;
+    }
+
+    .tiny-note {
+      margin-top: 12px;
+      font-size: 0.95rem;
+      opacity: 0.85;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(6deg); }
+    }
+
+    @keyframes wobble {
+      from { transform: rotate(-10deg) scale(1); }
+      to { transform: rotate(10deg) scale(1.05); }
+    }
+
+    @keyframes rise {
+      from { transform: translateY(0) scale(0.8); opacity: 1; }
+      to { transform: translateY(-38px) scale(1.1); opacity: 0; }
+    }
+
+    @media (max-width: 950px) {
+      .page {
+        grid-template-columns: 1fr;
+      }
+      .hud {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .game-area {
+        height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <div class="tag">OFFICIAL NOODLE BRAIN SCREEN REMINDER DEPARTMENT</div>
+      <h1>OI YOU GLORIOUS CHAOS MUFFIN</h1>
+
+      <div class="big-message" id="reminderText">
+        If you're walking away... please turn the screen off before it gets lonely and starts telling ghost stories to the keyboard.
+      </div>
+
+      <p class="small-goofy">
+        This is a very serious message from Professor Wobblepants, Doctor Biscuit,
+        and the International Society of Sleepy Monitors.
+      </p>
+
+      <div class="buttons">
+        <button id="newReminderBtn">Give me another daft reminder</button>
+        <button id="celebrateBtn">I support screen naps</button>
+        <button id="mascotBtn">Make mascot say nonsense</button>
+      </div>
+
+      <div class="mascot-box">
+        <div class="mascot" id="mascotFace">🖥️😴</div>
+        <div class="speech" id="mascotSpeech">
+          "Please tuck me in. I am but a sleepy rectangle."
+        </div>
+      </div>
+
+      <div class="legend">
+        <strong>Real life mission:</strong> switch the screen off when you leave.<br>
+        <strong>Fake dramatic consequence:</strong> the disco potatoes become too powerful.
+      </div>
+
+      <div class="tiny-note">
+        P.S. Whoever turns screens off is automatically promoted to Supreme Captain of Sensible Nonsense.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Game: Attack of the Sleepy Screens</h2>
+      <p>
+        Click <strong>Sleepy Screens 😴</strong> for points,
+        avoid <strong>Gremlin Goblins 👹</strong>,
+        and catch <strong>Disco Potatoes 🥔✨</strong> for bonus points.
+      </p>
+
+      <div class="hud">
+        <div class="stat">POINTS<span class="value" id="score">0</span></div>
+        <div class="stat">TIME<span class="value" id="time">30</span></div>
+        <div class="stat">LIVES<span class="value" id="lives">3</span></div>
+        <div class="stat">BEST<span class="value" id="best">0</span></div>
+      </div>
+
+      <div class="game-area" id="gameArea"></div>
+
+      <div class="status" id="statusText">
+        Press START and begin your extremely important anti-goblin potato business.
+      </div>
+
+      <div class="buttons">
+        <button id="startBtn">START THE NONSENSE</button>
+        <button id="stopBtn">STOP THE NONSENSE</button>
+      </div>
+
+      <div class="legend">
+        <strong>How to play:</strong><br>
+        😴 = good<br>
+        👹 = bad<br>
+        🥔✨ = bonus glory potato
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const reminderText = document.getElementById("reminderText");
+    const newReminderBtn = document.getElementById("newReminderBtn");
+    const celebrateBtn = document.getElementById("celebrateBtn");
+    const mascotBtn = document.getElementById("mascotBtn");
+    const mascotSpeech = document.getElementById("mascotSpeech");
+    const mascotFace = document.getElementById("mascotFace");
+
+    const reminders = [
+      "If you're walking away... please turn the screen off before it gets lonely and starts telling ghost stories to the keyboard.",
+      "Leaving the room? Bonk the screen off button and go forth, mighty turner-offer of things.",
+      "This monitor has done enough glowing for one day. Let the poor noodle rest.",
+      "Please turn the screen off, unless you want the goblins to learn spreadsheets.",
+      "A sleeping screen is a happy screen. A glowing screen with nobody there is just being dramatic.",
+      "Be a hero. Be a legend. Be a person who switches the screen off before wandering away like a mysterious potato wizard."
+    ];
+
+    const celebrations = [
+      "MAGNIFICENT. The monitor sings songs of your wisdom.",
+      "HOORAY! The sleepy screen appreciation committee is thrilled.",
+      "Congratulations, noble waffle captain of sensible behaviour!",
+      "YES! You have pleased the tiny invisible office disco chickens."
+    ];
+
+    const mascotLines = [
+      "\"Please tuck me in. I am but a sleepy rectangle.\"",
+      "\"I have seen too many spreadsheets. Let me rest.\"",
+      "\"Turn me off and I shall dream of dancing mice.\"",
+      "\"Do not abandon me to the goblins, Susan.\"",
+      "\"Behold! I am Screenjamin Button, prince of naps.\"",
+      "\"If left on too long, I become emotionally complicated.\""
+    ];
+
+    const mascotFaces = ["🖥️😴", "💻🫠", "🖥️✨", "📺🥴", "💾🕺", "🖥️👑"];
+
+    function pick(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    newReminderBtn.addEventListener("click", () => {
+      reminderText.textContent = pick(reminders);
+    });
+
+    celebrateBtn.addEventListener("click", () => {
+      reminderText.textContent = pick(celebrations);
+    });
+
+    mascotBtn.addEventListener("click", () => {
+      mascotSpeech.textContent = pick(mascotLines);
+      mascotFace.textContent = pick(mascotFaces);
+    });
+
+    const gameArea = document.getElementById("gameArea");
+    const scoreEl = document.getElementById("score");
+    const timeEl = document.getElementById("time");
+    const livesEl = document.getElementById("lives");
+    const bestEl = document.getElementById("best");
+    const statusText = document.getElementById("statusText");
+    const startBtn = document.getElementById("startBtn");
+    const stopBtn = document.getElementById("stopBtn");
+
+    let score = 0;
+    let timeLeft = 30;
+    let lives = 3;
+    let best = 0;
+    let gameRunning = false;
+    let gameTimer = null;
+    let spawnTimer = null;
+
+    const goodMsgs = [
+      "BONK! Sleepy screen saved!",
+      "Lovely tapwork, you absolute noodle!",
+      "That screen is now snoozing peacefully.",
+      "Beautiful. One less awake rectangle.",
+      "You clicked with the energy of a determined goose."
+    ];
+
+    const badMsgs = [
+      "NOOO! You poked a gremlin goblin!",
+      "The goblin is laughing at your choices!",
+      "Disaster! Mild, cartoony disaster!",
+      "You have upset the goblin union."
+    ];
+
+    const bonusMsgs = [
+      "DISCO POTATO BONUS!",
+      "Potato glory achieved!",
+      "You found the sacred sparkle spud!",
+      "Bonus tuber acquired!"
+    ];
+
+    function updateHUD() {
+      scoreEl.textContent = score;
+      timeEl.textContent = timeLeft;
+      livesEl.textContent = lives;
+      bestEl.textContent = best;
+    }
+
+    function clearGameArea() {
+      gameArea.innerHTML = "";
+    }
+
+    function showFloat(text, x, y, good = true) {
+      const f = document.createElement("div");
+      f.className = `float ${good ? "goodText" : "badText"}`;
+      f.textContent = text;
+      f.style.left = x + "px";
+      f.style.top = y + "px";
+      gameArea.appendChild(f);
+      setTimeout(() => f.remove(), 850);
+    }
+
+    function endGame(message) {
+      gameRunning = false;
+      clearInterval(gameTimer);
+      clearInterval(spawnTimer);
+      gameTimer = null;
+      spawnTimer = null;
+      clearGameArea();
+
+      if (score > best) best = score;
+      updateHUD();
+      statusText.textContent = message;
+    }
+
+    function spawnTarget() {
+      if (!gameRunning) return;
+
+      const target = document.createElement("div");
+      const roll = Math.random();
+
+      let type = "good";
+      let emoji = "😴";
+      let points = 1;
+      let lifeTime = 1200;
+
+      if (roll < 0.22) {
+        type = "bad";
+        emoji = "👹";
+        points = -1;
+        lifeTime = 1300;
+      } else if (roll > 0.84) {
+        type = "bonus";
+        emoji = "🥔✨";
+        points = 3;
+        lifeTime = 1000;
+      }
+
+      target.className = `target ${type}`;
+      target.textContent = emoji;
+
+      const maxX = gameArea.clientWidth - 90;
+      const maxY = gameArea.clientHeight - 90;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      target.style.left = x + "px";
+      target.style.top = y + "px";
+
+      let clicked = false;
+
+      target.addEventListener("click", () => {
+        if (!gameRunning || clicked) return;
+        clicked = true;
+
+        if (type === "good") {
+          score += 1;
+          statusText.textContent = pick(goodMsgs);
+          showFloat("+1 nap point", x, y, true);
+        } else if (type === "bonus") {
+          score += 3;
+          statusText.textContent = pick(bonusMsgs);
+          showFloat("+3 potato power", x, y, true);
+        } else {
+          lives -= 1;
+          statusText.textContent = pick(badMsgs);
+          showFloat("-1 poor choice", x, y, false);
+        }
+
+        if (score > best) best = score;
+        updateHUD();
+        target.remove();
+
+        if (lives <= 0) {
+          endGame("GAME OVER. The goblins have won this round. Please restore honour by turning the screen off in real life.");
+        }
+      });
+
+      gameArea.appendChild(target);
+
+      setTimeout(() => {
+        if (!clicked && target.parentNode && gameRunning) {
+          target.remove();
+
+          if (type === "good" || type === "bonus") {
+            lives -= 1;
+            statusText.textContent = "A sleepy thing escaped! Absolute scenes!";
+            showFloat("MISSED THE THING!", x, y, false);
+            updateHUD();
+
+            if (lives <= 0) {
+              endGame("GAME OVER. The sleepy screens drifted away into the night. Real mission remains: switch the screen off.");
+            }
+          }
+        }
+      }, lifeTime);
+    }
+
+    function startGame() {
+      clearInterval(gameTimer);
+      clearInterval(spawnTimer);
+      clearGameArea();
+
+      score = 0;
+      timeLeft = 30;
+      lives = 3;
+      gameRunning = true;
+      updateHUD();
+      statusText.textContent = "GO! Tap things with honour, confusion, and perhaps a bit of potato energy.";
+
+      gameTimer = setInterval(() => {
+        timeLeft -= 1;
+        updateHUD();
+
+        if (timeLeft <= 0) {
+          endGame("TIME UP! You did marvellous nonsense. Final real-world task: turn the screen off before leaving.");
+        }
+      }, 1000);
+
+      spawnTimer = setInterval(() => {
+        spawnTarget();
+      }, 700);
+    }
+
+    startBtn.addEventListener("click", startGame);
+
+    stopBtn.addEventListener("click", () => {
+      if (gameRunning) {
+        endGame("Nonsense halted. A wise and powerful decision.");
+      }
+    });
+
+    updateHUD();
+  </script>
+</body>
+</html>
