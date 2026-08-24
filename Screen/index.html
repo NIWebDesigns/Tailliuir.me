@@ -3,147 +3,450 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Oi! Put This Screen to Bed!</title>
+  <title>Blue Button First!</title>
   <style>
     * { box-sizing: border-box; }
+
+    :root{
+      --ink:#2f2f2f;
+      --sky1:#7fe7ff;
+      --sky2:#dffbff;
+      --sky3:#fff2a9;
+      --yellow:#ffd54f;
+      --blue:#5cc8ff;
+      --pink:#ffb6c8;
+      --green:#bff5ae;
+      --peach:#ffd7bd;
+      --lav:#d9b8ff;
+      --mint:#bcffe6;
+      --cream:#fff8cc;
+      --panel:#ffffffef;
+    }
 
     body {
       margin: 0;
       font-family: "Comic Sans MS", "Trebuchet MS", sans-serif;
       background:
-        radial-gradient(circle at 20% 20%, #fff59d 0 10%, transparent 11%),
-        radial-gradient(circle at 80% 15%, #ffcc80 0 8%, transparent 9%),
-        radial-gradient(circle at 70% 70%, #ce93d8 0 9%, transparent 10%),
-        linear-gradient(180deg, #8be0ff 0%, #dff7ff 45%, #fff4b5 100%);
-      color: #263238;
+        radial-gradient(circle at 10% 12%, rgba(255,255,255,0.35) 0 4%, transparent 5%),
+        radial-gradient(circle at 88% 14%, rgba(255,255,255,0.28) 0 5%, transparent 6%),
+        radial-gradient(circle at 30% 24%, rgba(255,255,255,0.22) 0 4%, transparent 5%),
+        linear-gradient(180deg, var(--sky1) 0%, var(--sky2) 40%, var(--sky3) 100%);
+      min-height: 100vh;
+      color: #2d2d2d;
       overflow-x: hidden;
     }
 
-    .page {
-      min-height: 100vh;
-      padding: 20px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+    .scene {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
     }
 
-    .card {
-      background: rgba(255,255,255,0.94);
-      border: 5px solid #333;
-      border-radius: 28px;
-      padding: 22px;
-      box-shadow: 0 12px 0 #333, 0 18px 30px rgba(0,0,0,0.12);
+    .sun {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      width: 180px;
+      height: 180px;
+      background: var(--yellow);
+      border: 8px solid var(--ink);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 20px rgba(255,213,79,0.18),
+        0 0 50px rgba(255,213,79,0.25);
+    }
+
+    .sun-eye {
+      position: absolute;
+      top: 58px;
+      width: 12px;
+      height: 18px;
+      background: var(--ink);
+      border-radius: 50%;
+    }
+
+    .sun-eye.left { left: 50px; }
+    .sun-eye.right { right: 50px; }
+
+    .sun-mouth {
+      position: absolute;
+      left: 50%;
+      top: 96px;
+      width: 48px;
+      height: 20px;
+      transform: translateX(-50%);
+      border-bottom: 8px solid var(--ink);
+      border-radius: 0 0 30px 30px;
+    }
+
+    .sun-ray {
+      position: absolute;
+      width: 18px;
+      height: 46px;
+      background: var(--yellow);
+      border: 5px solid var(--ink);
+      border-radius: 20px;
+    }
+
+    .r1 { top: -28px; left: 79px; }
+    .r2 { bottom: -28px; left: 79px; }
+    .r3 { left: -32px; top: 68px; transform: rotate(90deg); }
+    .r4 { right: -32px; top: 68px; transform: rotate(90deg); }
+    .r5 { top: 2px; left: 10px; transform: rotate(-45deg); }
+    .r6 { top: 2px; right: 10px; transform: rotate(45deg); }
+    .r7 { bottom: 2px; left: 10px; transform: rotate(45deg); }
+    .r8 { bottom: 2px; right: 10px; transform: rotate(-45deg); }
+
+    .cloud {
+      position: absolute;
+      background: white;
+      border: 7px solid var(--ink);
+      border-radius: 999px;
+      box-shadow: 0 6px 0 rgba(0,0,0,0.06);
+    }
+
+    .cloud::before,
+    .cloud::after {
+      content: "";
+      position: absolute;
+      background: white;
+      border: 7px solid var(--ink);
+      border-radius: 50%;
+    }
+
+    .cloud1 {
+      width: 220px;
+      height: 80px;
+      top: 72px;
+      left: 34px;
+    }
+
+    .cloud1::before {
+      width: 78px;
+      height: 78px;
+      left: 14px;
+      top: -30px;
+    }
+
+    .cloud1::after {
+      width: 98px;
+      height: 98px;
+      right: 10px;
+      top: -42px;
+    }
+
+    .cloud2 {
+      width: 250px;
+      height: 82px;
+      top: 178px;
+      left: 320px;
+    }
+
+    .cloud2::before {
+      width: 86px;
+      height: 86px;
+      left: 18px;
+      top: -32px;
+    }
+
+    .cloud2::after {
+      width: 106px;
+      height: 106px;
+      right: 14px;
+      top: -46px;
+    }
+
+    .ground {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 140px;
+      background: #7fd85e;
+      border-top: 8px solid var(--ink);
+    }
+
+    .rainbow {
+      position: absolute;
+      left: 4px;
+      bottom: 104px;
+      width: 320px;
+      height: 175px;
+    }
+
+    .arc {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 999px 999px 0 0;
+      border: 8px solid var(--ink);
+      border-bottom: none;
+      background: transparent;
+    }
+
+    .a1 { width: 320px; height: 175px; top: 0; box-shadow: inset 0 0 0 24px #ff6b6b; }
+    .a2 { width: 274px; height: 148px; top: 22px; box-shadow: inset 0 0 0 24px #ffb74d; }
+    .a3 { width: 228px; height: 121px; top: 44px; box-shadow: inset 0 0 0 24px #fff176; }
+    .a4 { width: 182px; height: 94px; top: 66px; box-shadow: inset 0 0 0 24px #81c784; }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .poster {
+      width: min(1320px, 100%);
+      background: var(--panel);
+      border: 8px solid var(--ink);
+      border-radius: 46px;
+      padding: 20px;
+      box-shadow: 0 20px 38px rgba(0,0,0,0.16);
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 20px;
       position: relative;
       overflow: hidden;
     }
 
-    .card::after {
-      content: "✨";
-      position: absolute;
-      right: 18px;
-      top: 14px;
-      font-size: 1.6rem;
-      transform: rotate(18deg);
+    .left-side,
+    .right-side {
+      position: relative;
+      border: 7px solid var(--ink);
+      border-radius: 38px;
+      overflow: hidden;
     }
 
-    .tag {
-      display: inline-block;
-      padding: 10px 16px;
-      border: 4px solid #333;
-      border-radius: 999px;
-      background: #ffd54f;
+    .left-side {
+      background:
+        radial-gradient(circle at 14% 20%, rgba(255,182,200,0.22) 0 7%, transparent 8%),
+        radial-gradient(circle at 86% 22%, rgba(92,200,255,0.18) 0 8%, transparent 9%),
+        radial-gradient(circle at 28% 84%, rgba(217,184,255,0.2) 0 7%, transparent 8%),
+        linear-gradient(180deg, #ffffff 0%, #f2fcff 100%);
+      padding: 28px;
+    }
+
+    .right-side {
+      background:
+        radial-gradient(circle at 12% 18%, rgba(255,182,200,0.18) 0 7%, transparent 8%),
+        radial-gradient(circle at 84% 14%, rgba(92,200,255,0.18) 0 8%, transparent 9%),
+        radial-gradient(circle at 18% 86%, rgba(191,245,174,0.2) 0 7%, transparent 8%),
+        radial-gradient(circle at 82% 84%, rgba(217,184,255,0.2) 0 7%, transparent 8%),
+        linear-gradient(180deg, #ffffff 0%, #f8fdff 100%);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .big-title, .message, .little-line,
+    .character-world, .game-title, .hud, .game-shell,
+    .status, .buttons, .legend {
+      position: relative;
+      z-index: 3;
+    }
+
+    .big-title {
+      font-size: clamp(3rem, 5vw, 5.2rem);
       font-weight: 900;
-      margin-bottom: 14px;
-      transform: rotate(-2deg);
-    }
-
-    h1, h2 {
-      margin: 0 0 12px;
-      line-height: 1.1;
-    }
-
-    h1 {
-      font-size: clamp(2rem, 4vw, 3.3rem);
-    }
-
-    h2 {
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-    }
-
-    .big-message {
-      font-size: 1.4rem;
-      font-weight: 900;
-      background: #fff8d6;
-      border: 4px dashed #333;
-      border-radius: 20px;
-      padding: 16px;
-      margin: 14px 0;
-      transform: rotate(-1deg);
-    }
-
-    .small-goofy {
-      font-size: 1.05rem;
-      line-height: 1.5;
-    }
-
-    .mascot-box {
-      margin-top: 18px;
-      padding: 16px;
-      background: #e8faff;
-      border: 4px solid #333;
-      border-radius: 20px;
       text-align: center;
+      line-height: 0.92;
+      margin-bottom: 16px;
+      text-shadow: 0 3px 0 #fff, 4px 4px 0 rgba(0,0,0,0.05);
     }
 
-    .mascot {
-      font-size: 5rem;
-      animation: bounce 1.6s infinite;
+    .message {
+      max-width: 720px;
+      margin: 0 auto 14px;
+      background: var(--cream);
+      border: 8px dashed var(--ink);
+      border-radius: 34px;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 900;
+      line-height: 1.22;
+      box-shadow: 0 6px 0 rgba(0,0,0,0.05);
+    }
+
+    .blue-word {
       display: inline-block;
+      background: var(--blue);
+      border: 5px solid var(--ink);
+      border-radius: 999px;
+      padding: 4px 14px;
+      color: #103b4d;
+    }
+
+    .little-line {
+      text-align: center;
+      font-size: 1.22rem;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    .character-world {
+      max-width: 760px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, #e8faff 0%, #ffffff 100%);
+      border: 7px solid var(--ink);
+      border-radius: 40px;
+      padding: 28px 24px 24px;
+      min-height: 520px;
+      overflow: hidden;
+      box-shadow: inset 0 10px 0 rgba(255,255,255,0.35);
+    }
+
+    .monitor {
+      position: relative;
+      width: 390px;
+      margin: 64px auto 0;
+      z-index: 3;
+    }
+
+    .screen {
+      width: 390px;
+      height: 272px;
+      background: linear-gradient(180deg, #8fe8ff 0%, #9be7ff 100%);
+      border: 8px solid var(--ink);
+      border-radius: 44px;
+      position: relative;
+      box-shadow: inset 0 12px 0 rgba(255,255,255,0.3), 0 10px 0 rgba(0,0,0,0.05);
+    }
+
+    .screen.smile-1 .mouth { width: 68px; }
+    .screen.smile-2 .mouth { width: 84px; top: 158px; }
+    .screen.smile-3 .mouth { width: 54px; top: 164px; }
+
+    .screen-glow {
+      position: absolute;
+      top: 24px;
+      left: 28px;
+      width: 120px;
+      height: 36px;
+      background: rgba(255,255,255,0.42);
+      border-radius: 999px;
+      transform: rotate(-12deg);
+    }
+
+    .eye {
+      position: absolute;
+      top: 86px;
+      width: 20px;
+      height: 28px;
+      background: var(--ink);
+      border-radius: 50%;
+    }
+
+    .eye.left { left: 98px; }
+    .eye.right { right: 98px; }
+
+    .cheek {
+      position: absolute;
+      width: 26px;
+      height: 14px;
+      background: #ff9eb5;
+      border-radius: 50%;
+      top: 132px;
+    }
+
+    .cheek.left { left: 64px; }
+    .cheek.right { right: 64px; }
+
+    .mouth {
+      position: absolute;
+      left: 50%;
+      top: 160px;
+      width: 68px;
+      height: 24px;
+      transform: translateX(-50%);
+      border-bottom: 8px solid var(--ink);
+      border-radius: 0 0 40px 40px;
+    }
+
+    .button-arrow {
+      position: absolute;
+      right: -120px;
+      top: 116px;
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--ink);
+      z-index: 4;
+    }
+
+    .arrow-text {
+      position: absolute;
+      right: -160px;
+      top: 76px;
+      font-size: 1.12rem;
+      font-weight: 900;
+      width: 138px;
+      text-align: center;
+      color: var(--ink);
+      background: #fff;
+      border: 5px solid var(--ink);
+      border-radius: 20px;
+      padding: 8px 6px;
+      box-shadow: 0 4px 0 var(--ink);
+      z-index: 4;
+    }
+
+    .side-button {
+      position: absolute;
+      right: -24px;
+      top: 108px;
+      width: 32px;
+      height: 74px;
+      background: #42a5f5;
+      border: 5px solid var(--ink);
+      border-radius: 18px;
+      box-shadow: 0 0 0 12px rgba(66,165,245,0.18);
+      z-index: 4;
+    }
+
+    .stand {
+      width: 64px;
+      height: 44px;
+      background: #b0bec5;
+      border: 8px solid var(--ink);
+      border-top: none;
+      margin: 0 auto;
+    }
+
+    .base {
+      width: 180px;
+      height: 28px;
+      background: #cfd8dc;
+      border: 8px solid var(--ink);
+      border-radius: 22px;
+      margin: 0 auto;
+      margin-top: -4px;
     }
 
     .speech {
-      margin-top: 10px;
-      font-size: 1.15rem;
-      font-weight: bold;
-    }
-
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 14px;
-    }
-
-    button {
-      border: 4px solid #333;
-      background: #ff8a80;
-      color: #222;
-      border-radius: 18px;
-      padding: 14px 18px;
-      font-size: 1rem;
+      margin: 24px auto 0;
+      max-width: 500px;
+      background: var(--cream);
+      border: 7px solid var(--ink);
+      border-radius: 30px;
+      padding: 16px;
+      text-align: center;
+      font-size: 1.5rem;
       font-weight: 900;
-      cursor: pointer;
-      box-shadow: 0 5px 0 #333;
-      font-family: inherit;
-      transform: rotate(-1deg);
+      z-index: 3;
     }
 
-    button:nth-child(2n) {
-      background: #ffd54f;
-      transform: rotate(1deg);
-    }
-
-    button:nth-child(3n) {
-      background: #81d4fa;
-    }
-
-    button:hover {
-      transform: scale(1.03) rotate(0deg);
-    }
-
-    button:active {
-      transform: translateY(3px);
-      box-shadow: 0 2px 0 #333;
+    .game-title {
+      font-size: clamp(2.4rem, 3vw, 3.2rem);
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 14px;
     }
 
     .hud {
@@ -154,436 +457,588 @@
     }
 
     .stat {
-      background: #fdfdfd;
-      border: 4px solid #333;
-      border-radius: 18px;
-      padding: 10px;
+      background: #fff;
+      border: 7px solid var(--ink);
+      border-radius: 28px;
+      padding: 12px 8px;
       text-align: center;
       font-weight: 900;
+      box-shadow: 0 6px 0 var(--ink);
     }
 
-    .value {
+    .stat span {
       display: block;
-      font-size: 1.5rem;
+      font-size: 1.9rem;
       margin-top: 4px;
+    }
+
+    .game-shell {
+      background: #fff;
+      border: 7px solid var(--ink);
+      border-radius: 36px;
+      padding: 12px;
+      box-shadow: inset 0 4px 0 rgba(255,255,255,0.5);
     }
 
     .game-area {
       position: relative;
-      height: 380px;
-      border: 5px dashed #333;
-      border-radius: 24px;
+      width: 100%;
+      height: 430px;
+      border: 8px dashed var(--ink);
+      border-radius: 32px;
       background:
-        radial-gradient(circle at 10% 20%, #fff59d 0 8%, transparent 9%),
-        radial-gradient(circle at 85% 15%, #ffcc80 0 7%, transparent 8%),
-        radial-gradient(circle at 70% 80%, #ce93d8 0 8%, transparent 9%),
-        linear-gradient(180deg, #fefefe 0%, #e8faff 100%);
+        radial-gradient(circle at 16% 20%, #fff59d 0 6%, transparent 7%),
+        radial-gradient(circle at 84% 22%, #ffe082 0 5%, transparent 6%),
+        radial-gradient(circle at 30% 75%, #ce93d8 0 5%, transparent 6%),
+        radial-gradient(circle at 70% 65%, #ffccbc 0 5%, transparent 6%),
+        linear-gradient(180deg, #ffffff 0%, #e8faff 100%);
       overflow: hidden;
-      user-select: none;
     }
 
     .target {
       position: absolute;
-      width: 78px;
-      height: 78px;
+      width: 108px;
+      height: 108px;
       border-radius: 50%;
-      border: 4px solid #333;
+      border: 7px solid var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.14);
+      animation: wiggle 0.45s infinite alternate;
+      z-index: 3;
+    }
+
+    .good { background: var(--green); }
+    .bonus { background: #fff59d; }
+    .bad { background: var(--peach); }
+
+    .status {
+      margin-top: 14px;
+      background: var(--cream);
+      border: 7px dashed var(--ink);
+      border-radius: 28px;
+      padding: 14px;
+      text-align: center;
+      font-weight: 900;
+      font-size: 1.18rem;
+      min-height: 70px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    button {
+      border: 7px solid var(--ink);
+      border-radius: 30px;
+      padding: 16px 28px;
+      font-size: 1.18rem;
+      font-weight: 900;
+      font-family: inherit;
+      cursor: pointer;
+      box-shadow: 0 6px 0 var(--ink);
+    }
+
+    .start-btn { background: var(--green); }
+    .stop-btn { background: var(--blue); }
+
+    button:active {
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 var(--ink);
+    }
+
+    .legend {
+      margin-top: 14px;
+      background: #eefbff;
+      border: 7px solid var(--ink);
+      border-radius: 28px;
+      padding: 12px;
+      text-align: center;
+      font-size: 1.08rem;
+      font-weight: 900;
+      line-height: 1.7;
+    }
+
+    /* FOREGROUND CHAOS */
+    .front-chaos {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .front-sticker {
+      position: absolute;
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      border: 6px solid var(--ink);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 2.2rem;
-      cursor: pointer;
-      box-shadow: 0 7px 14px rgba(0,0,0,0.14);
-      animation: wobble 0.5s infinite alternate;
+      box-shadow: 0 6px 0 var(--ink);
+      background: white;
     }
 
-    .good { background: #b9f6ca; }
-    .bad { background: #ffccbc; }
-    .bonus { background: #ffe082; }
-
-    .float {
+    .front-tape {
       position: absolute;
+      width: 80px;
+      height: 26px;
+      background: rgba(255,255,255,0.75);
+      border: 4px solid rgba(47,47,47,0.25);
+      border-radius: 10px;
+      transform: rotate(var(--rot, 0deg));
+    }
+
+    .front-scribble {
+      position: absolute;
+      font-size: 34px;
       font-weight: 900;
-      font-size: 1.1rem;
+      color: rgba(47,47,47,0.24);
+      transform: rotate(var(--rot, 0deg));
+    }
+
+    .front-dot {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      z-index: 5;
+      opacity: 0.95;
+    }
+
+    .front-star {
+      position: absolute;
+      font-size: 34px;
+      z-index: 5;
+    }
+
+    .front-heart {
+      position: absolute;
+      font-size: 28px;
+      z-index: 5;
+    }
+
+    .front-strip {
+      position: absolute;
+      display: flex;
+      gap: 8px;
+      z-index: 5;
+      opacity: 0.95;
+    }
+
+    .front-strip span {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 4px solid var(--ink);
+      background: white;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      box-shadow: 0 3px 0 var(--ink);
+    }
+
+    .confetti {
+      position: absolute;
+      font-size: 28px;
       pointer-events: none;
-      animation: rise 0.9s ease-out forwards;
-      text-shadow: 1px 1px 0 white;
+      animation: fall 1s linear forwards;
+      z-index: 40;
     }
 
-    .goodText { color: #1b5e20; }
-    .badText { color: #b71c1c; }
-
-    .status {
-      margin-top: 14px;
-      font-weight: 900;
-      min-height: 28px;
-      font-size: 1.05rem;
-      background: #fff8d6;
-      border: 3px dashed #333;
-      border-radius: 16px;
-      padding: 10px;
+    @keyframes wiggle {
+      from { transform: rotate(-7deg) scale(1); }
+      to { transform: rotate(7deg) scale(1.07); }
     }
 
-    .legend {
-      margin-top: 12px;
-      font-size: 0.98rem;
-      line-height: 1.5;
-      background: #f6fbff;
-      border: 3px solid #333;
-      border-radius: 16px;
-      padding: 12px;
+    @keyframes fall {
+      0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(180px) rotate(180deg); opacity: 0; }
     }
 
-    .tiny-note {
-      margin-top: 12px;
-      font-size: 0.95rem;
-      opacity: 0.85;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-10px) rotate(6deg); }
-    }
-
-    @keyframes wobble {
-      from { transform: rotate(-10deg) scale(1); }
-      to { transform: rotate(10deg) scale(1.05); }
-    }
-
-    @keyframes rise {
-      from { transform: translateY(0) scale(0.8); opacity: 1; }
-      to { transform: translateY(-38px) scale(1.1); opacity: 0; }
-    }
-
-    @media (max-width: 950px) {
-      .page {
-        grid-template-columns: 1fr;
-      }
-      .hud {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .game-area {
-        height: 320px;
-      }
+    @media (max-width: 1100px) {
+      .poster { grid-template-columns: 1fr; }
+      .rainbow, .ground { display: none; }
+      .button-arrow, .arrow-text { display: none; }
+      .monitor { width: 310px; }
+      .screen { width: 310px; height: 228px; }
     }
   </style>
 </head>
 <body>
+  <div class="scene">
+    <div class="sun">
+      <div class="sun-ray r1"></div><div class="sun-ray r2"></div><div class="sun-ray r3"></div><div class="sun-ray r4"></div>
+      <div class="sun-ray r5"></div><div class="sun-ray r6"></div><div class="sun-ray r7"></div><div class="sun-ray r8"></div>
+      <div class="sun-eye left"></div>
+      <div class="sun-eye right"></div>
+      <div class="sun-mouth"></div>
+    </div>
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="rainbow">
+      <div class="arc a1"></div><div class="arc a2"></div><div class="arc a3"></div><div class="arc a4"></div>
+    </div>
+    <div class="ground"></div>
+  </div>
+
   <div class="page">
-    <div class="card">
-      <div class="tag">OFFICIAL NOODLE BRAIN SCREEN REMINDER DEPARTMENT</div>
-      <h1>OI YOU GLORIOUS CHAOS MUFFIN</h1>
+    <div class="poster">
+      <div class="left-side">
+        <div class="big-title">Blue button first!</div>
 
-      <div class="big-message" id="reminderText">
-        If you're walking away... please turn the screen off before it gets lonely and starts telling ghost stories to the keyboard.
-      </div>
+        <div class="message">
+          Use the <span class="blue-word">side blue button</span> to turn the screen off when you leave.
+        </div>
 
-      <p class="small-goofy">
-        This is a very serious message from Professor Wobblepants, Doctor Biscuit,
-        and the International Society of Sleepy Monitors.
-      </p>
+        <div class="little-line">Then have a little game 🎉</div>
 
-      <div class="buttons">
-        <button id="newReminderBtn">Give me another daft reminder</button>
-        <button id="celebrateBtn">I support screen naps</button>
-        <button id="mascotBtn">Make mascot say nonsense</button>
-      </div>
+        <div class="character-world">
+          <div class="monitor">
+            <div class="screen smile-1" id="monitorScreen">
+              <div class="screen-glow"></div>
+              <div class="eye left"></div>
+              <div class="eye right"></div>
+              <div class="cheek left"></div>
+              <div class="cheek right"></div>
+              <div class="mouth"></div>
+            </div>
+            <div class="side-button"></div>
+            <div class="arrow-text">blue button</div>
+            <div class="button-arrow">→</div>
+            <div class="stand"></div>
+            <div class="base"></div>
+          </div>
 
-      <div class="mascot-box">
-        <div class="mascot" id="mascotFace">🖥️😴</div>
-        <div class="speech" id="mascotSpeech">
-          "Please tuck me in. I am but a sleepy rectangle."
+          <div class="speech" id="speechBubble">Boop!</div>
+        </div>
+
+        <!-- FOREGROUND CHAOS LEFT -->
+        <div class="front-chaos">
+          <div class="front-sticker" style="top:-18px; left:-10px; background:#ffb6c8;">⭐</div>
+          <div class="front-sticker" style="top:18px; right:-8px; background:#ffd54f;">🌈</div>
+          <div class="front-sticker" style="bottom:18px; left:-16px; background:#bff5ae;">🧁</div>
+          <div class="front-sticker" style="bottom:-12px; right:8px; background:#d9b8ff;">🐻</div>
+
+          <div class="front-tape" style="top:10px; left:140px; --rot:-18deg;"></div>
+          <div class="front-tape" style="bottom:26px; right:170px; --rot:16deg;"></div>
+
+          <div class="front-scribble" style="top:24px; left:240px; --rot:-8deg;">★ ★</div>
+          <div class="front-scribble" style="top:110px; right:20px; --rot:10deg;">✦ ♥ ✦</div>
+          <div class="front-scribble" style="bottom:120px; left:24px; --rot:-12deg;">☺ ☁</div>
+          <div class="front-scribble" style="bottom:58px; right:48px; --rot:8deg;">★ ✿</div>
+
+          <div class="front-star" style="top:130px; left:20px;">✨</div>
+          <div class="front-star" style="top:220px; right:28px;">⭐</div>
+          <div class="front-star" style="bottom:190px; left:110px;">🌟</div>
+          <div class="front-star" style="bottom:150px; right:110px;">✨</div>
+
+          <div class="front-heart" style="top:80px; left:90px;">💖</div>
+          <div class="front-heart" style="top:250px; right:90px;">💖</div>
+          <div class="front-heart" style="bottom:100px; left:210px;">💖</div>
+
+          <div class="front-dot" style="top:86px; left:178px; background:#5cc8ff;"></div>
+          <div class="front-dot" style="top:150px; left:214px; background:#ffb6c8;"></div>
+          <div class="front-dot" style="bottom:130px; left:60px; background:#ffd54f;"></div>
+          <div class="front-dot" style="bottom:92px; right:60px; background:#bff5ae;"></div>
+          <div class="front-dot" style="top:62px; right:180px; background:#d9b8ff;"></div>
+
+          <div class="front-strip" style="top:8px; left:320px;">
+            <span>⭐</span><span>💖</span><span>✨</span>
+          </div>
+
+          <div class="front-strip" style="bottom:12px; left:240px;">
+            <span>🌈</span><span>🧁</span><span>☁️</span>
+          </div>
         </div>
       </div>
 
-      <div class="legend">
-        <strong>Real life mission:</strong> switch the screen off when you leave.<br>
-        <strong>Fake dramatic consequence:</strong> the disco potatoes become too powerful.
-      </div>
+      <div class="right-side">
+        <div class="game-title">Game Time!</div>
 
-      <div class="tiny-note">
-        P.S. Whoever turns screens off is automatically promoted to Supreme Captain of Sensible Nonsense.
-      </div>
-    </div>
+        <div class="hud">
+          <div class="stat">Score<span id="score">0</span></div>
+          <div class="stat">Time<span id="time">20</span></div>
+          <div class="stat">Lives<span id="lives">3</span></div>
+          <div class="stat">Best<span id="best">0</span></div>
+        </div>
 
-    <div class="card">
-      <h2>Game: Attack of the Sleepy Screens</h2>
-      <p>
-        Click <strong>Sleepy Screens 😴</strong> for points,
-        avoid <strong>Gremlin Goblins 👹</strong>,
-        and catch <strong>Disco Potatoes 🥔✨</strong> for bonus points.
-      </p>
+        <div class="game-shell">
+          <div class="game-area" id="gameArea"></div>
+        </div>
 
-      <div class="hud">
-        <div class="stat">POINTS<span class="value" id="score">0</span></div>
-        <div class="stat">TIME<span class="value" id="time">30</span></div>
-        <div class="stat">LIVES<span class="value" id="lives">3</span></div>
-        <div class="stat">BEST<span class="value" id="best">0</span></div>
-      </div>
+        <div class="status" id="statusText">Press Start Game!</div>
 
-      <div class="game-area" id="gameArea"></div>
+        <div class="buttons">
+          <button class="start-btn" id="startBtn">Start Game</button>
+          <button class="stop-btn" id="stopBtn">Stop Game</button>
+        </div>
 
-      <div class="status" id="statusText">
-        Press START and begin your extremely important anti-goblin potato business.
-      </div>
+        <div class="legend">
+          😴 = 1 point<br>
+          ⭐ = 3 points<br>
+          🐝 = don’t click the bee
+        </div>
 
-      <div class="buttons">
-        <button id="startBtn">START THE NONSENSE</button>
-        <button id="stopBtn">STOP THE NONSENSE</button>
-      </div>
+        <!-- FOREGROUND CHAOS RIGHT -->
+        <div class="front-chaos">
+          <div class="front-sticker" style="top:-18px; left:-12px; background:#ffd54f;">⭐</div>
+          <div class="front-sticker" style="top:-10px; right:10px; background:#ffb6c8;">💖</div>
+          <div class="front-sticker" style="bottom:18px; left:6px; background:#d9b8ff;">☁️</div>
+          <div class="front-sticker" style="bottom:-16px; right:-10px; background:#bff5ae;">🌈</div>
 
-      <div class="legend">
-        <strong>How to play:</strong><br>
-        😴 = good<br>
-        👹 = bad<br>
-        🥔✨ = bonus glory potato
+          <div class="front-tape" style="top:80px; right:34px; --rot:18deg;"></div>
+          <div class="front-tape" style="bottom:90px; left:24px; --rot:-14deg;"></div>
+
+          <div class="front-scribble" style="top:26px; left:120px; --rot:-8deg;">★ ✦ ★</div>
+          <div class="front-scribble" style="top:180px; right:12px; --rot:10deg;">☺ ♥</div>
+          <div class="front-scribble" style="bottom:170px; left:20px; --rot:-14deg;">✿ ✦</div>
+          <div class="front-scribble" style="bottom:34px; right:32px; --rot:8deg;">☁ ★</div>
+
+          <div class="front-star" style="top:108px; left:26px;">✨</div>
+          <div class="front-star" style="top:240px; right:18px;">⭐</div>
+          <div class="front-star" style="bottom:150px; left:76px;">🌟</div>
+          <div class="front-star" style="bottom:90px; right:80px;">✨</div>
+
+          <div class="front-heart" style="top:150px; left:160px;">💖</div>
+          <div class="front-heart" style="bottom:210px; right:130px;">💖</div>
+
+          <div class="front-dot" style="top:66px; left:210px; background:#ffd54f;"></div>
+          <div class="front-dot" style="top:130px; right:100px; background:#5cc8ff;"></div>
+          <div class="front-dot" style="bottom:126px; left:40px; background:#ffb6c8;"></div>
+          <div class="front-dot" style="bottom:76px; right:40px; background:#bff5ae;"></div>
+          <div class="front-dot" style="bottom:200px; right:210px; background:#d9b8ff;"></div>
+
+          <div class="front-strip" style="top:14px; right:110px;">
+            <span>⭐</span><span>💖</span><span>🧁</span>
+          </div>
+
+          <div class="front-strip" style="bottom:14px; left:120px;">
+            <span>✨</span><span>🌈</span><span>☁️</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
-    const reminderText = document.getElementById("reminderText");
-    const newReminderBtn = document.getElementById("newReminderBtn");
-    const celebrateBtn = document.getElementById("celebrateBtn");
-    const mascotBtn = document.getElementById("mascotBtn");
-    const mascotSpeech = document.getElementById("mascotSpeech");
-    const mascotFace = document.getElementById("mascotFace");
+    var score = 0;
+    var timeLeft = 20;
+    var lives = 3;
+    var running = false;
+    var timer = null;
+    var currentTarget = null;
+    var currentTimeout = null;
+    var best = 0;
 
-    const reminders = [
-      "If you're walking away... please turn the screen off before it gets lonely and starts telling ghost stories to the keyboard.",
-      "Leaving the room? Bonk the screen off button and go forth, mighty turner-offer of things.",
-      "This monitor has done enough glowing for one day. Let the poor noodle rest.",
-      "Please turn the screen off, unless you want the goblins to learn spreadsheets.",
-      "A sleeping screen is a happy screen. A glowing screen with nobody there is just being dramatic.",
-      "Be a hero. Be a legend. Be a person who switches the screen off before wandering away like a mysterious potato wizard."
-    ];
-
-    const celebrations = [
-      "MAGNIFICENT. The monitor sings songs of your wisdom.",
-      "HOORAY! The sleepy screen appreciation committee is thrilled.",
-      "Congratulations, noble waffle captain of sensible behaviour!",
-      "YES! You have pleased the tiny invisible office disco chickens."
-    ];
-
-    const mascotLines = [
-      "\"Please tuck me in. I am but a sleepy rectangle.\"",
-      "\"I have seen too many spreadsheets. Let me rest.\"",
-      "\"Turn me off and I shall dream of dancing mice.\"",
-      "\"Do not abandon me to the goblins, Susan.\"",
-      "\"Behold! I am Screenjamin Button, prince of naps.\"",
-      "\"If left on too long, I become emotionally complicated.\""
-    ];
-
-    const mascotFaces = ["🖥️😴", "💻🫠", "🖥️✨", "📺🥴", "💾🕺", "🖥️👑"];
+    var scoreEl = document.getElementById("score");
+    var timeEl = document.getElementById("time");
+    var livesEl = document.getElementById("lives");
+    var bestEl = document.getElementById("best");
+    var gameArea = document.getElementById("gameArea");
+    var statusEl = document.getElementById("statusText");
+    var startBtn = document.getElementById("startBtn");
+    var stopBtn = document.getElementById("stopBtn");
+    var speechBubble = document.getElementById("speechBubble");
+    var monitorScreen = document.getElementById("monitorScreen");
 
     function pick(arr) {
       return arr[Math.floor(Math.random() * arr.length)];
     }
 
-    newReminderBtn.addEventListener("click", () => {
-      reminderText.textContent = pick(reminders);
-    });
-
-    celebrateBtn.addEventListener("click", () => {
-      reminderText.textContent = pick(celebrations);
-    });
-
-    mascotBtn.addEventListener("click", () => {
-      mascotSpeech.textContent = pick(mascotLines);
-      mascotFace.textContent = pick(mascotFaces);
-    });
-
-    const gameArea = document.getElementById("gameArea");
-    const scoreEl = document.getElementById("score");
-    const timeEl = document.getElementById("time");
-    const livesEl = document.getElementById("lives");
-    const bestEl = document.getElementById("best");
-    const statusText = document.getElementById("statusText");
-    const startBtn = document.getElementById("startBtn");
-    const stopBtn = document.getElementById("stopBtn");
-
-    let score = 0;
-    let timeLeft = 30;
-    let lives = 3;
-    let best = 0;
-    let gameRunning = false;
-    let gameTimer = null;
-    let spawnTimer = null;
-
-    const goodMsgs = [
-      "BONK! Sleepy screen saved!",
-      "Lovely tapwork, you absolute noodle!",
-      "That screen is now snoozing peacefully.",
-      "Beautiful. One less awake rectangle.",
-      "You clicked with the energy of a determined goose."
-    ];
-
-    const badMsgs = [
-      "NOOO! You poked a gremlin goblin!",
-      "The goblin is laughing at your choices!",
-      "Disaster! Mild, cartoony disaster!",
-      "You have upset the goblin union."
-    ];
-
-    const bonusMsgs = [
-      "DISCO POTATO BONUS!",
-      "Potato glory achieved!",
-      "You found the sacred sparkle spud!",
-      "Bonus tuber acquired!"
-    ];
-
-    function updateHUD() {
+    function updateStats() {
       scoreEl.textContent = score;
       timeEl.textContent = timeLeft;
       livesEl.textContent = lives;
       bestEl.textContent = best;
     }
 
-    function clearGameArea() {
-      gameArea.innerHTML = "";
+    function setMonitorMood(text) {
+      speechBubble.textContent = text;
+      var moods = ["smile-1", "smile-2", "smile-3"];
+      monitorScreen.className = "screen " + pick(moods);
     }
 
-    function showFloat(text, x, y, good = true) {
-      const f = document.createElement("div");
-      f.className = `float ${good ? "goodText" : "badText"}`;
-      f.textContent = text;
-      f.style.left = x + "px";
-      f.style.top = y + "px";
-      gameArea.appendChild(f);
-      setTimeout(() => f.remove(), 850);
+    function clearTarget() {
+      if (currentTarget) {
+        currentTarget.remove();
+        currentTarget = null;
+      }
+      if (currentTimeout) {
+        clearTimeout(currentTimeout);
+        currentTimeout = null;
+      }
     }
 
-    function endGame(message) {
-      gameRunning = false;
-      clearInterval(gameTimer);
-      clearInterval(spawnTimer);
-      gameTimer = null;
-      spawnTimer = null;
-      clearGameArea();
-
-      if (score > best) best = score;
-      updateHUD();
-      statusText.textContent = message;
+    function confettiBurst() {
+      var icons = ["🎉", "⭐", "✨", "🌈", "💖"];
+      for (var i = 0; i < 14; i++) {
+        var c = document.createElement("div");
+        c.className = "confetti";
+        c.textContent = pick(icons);
+        c.style.left = Math.floor(Math.random() * (gameArea.clientWidth - 20)) + "px";
+        c.style.top = "0px";
+        gameArea.appendChild(c);
+        setTimeout((function(el){ return function(){ if(el.parentNode) el.remove(); }; })(c), 1000);
+      }
     }
 
-    function spawnTarget() {
-      if (!gameRunning) return;
+    function finishGame(message) {
+      running = false;
+      clearInterval(timer);
+      timer = null;
+      clearTarget();
 
-      const target = document.createElement("div");
-      const roll = Math.random();
-
-      let type = "good";
-      let emoji = "😴";
-      let points = 1;
-      let lifeTime = 1200;
-
-      if (roll < 0.22) {
-        type = "bad";
-        emoji = "👹";
-        points = -1;
-        lifeTime = 1300;
-      } else if (roll > 0.84) {
-        type = "bonus";
-        emoji = "🥔✨";
-        points = 3;
-        lifeTime = 1000;
+      if (score > best) {
+        best = score;
       }
 
-      target.className = `target ${type}`;
+      updateStats();
+      statusEl.textContent = message;
+      setMonitorMood(message);
+
+      if (message === "Time’s up!") {
+        confettiBurst();
+      }
+    }
+
+    function spawnOne() {
+      if (!running) return;
+
+      clearTarget();
+
+      var target = document.createElement("div");
+      target.className = "target";
+
+      var roll = Math.random();
+      var type = "good";
+      var emoji = "😴";
+      var lifetime = 1200;
+
+      if (roll < 0.2) {
+        type = "bad";
+        emoji = "🐝";
+        target.className += " bad";
+        lifetime = 1300;
+      } else if (roll > 0.8) {
+        type = "bonus";
+        emoji = "⭐";
+        target.className += " bonus";
+        lifetime = 1000;
+      } else {
+        target.className += " good";
+      }
+
       target.textContent = emoji;
 
-      const maxX = gameArea.clientWidth - 90;
-      const maxY = gameArea.clientHeight - 90;
-      const x = Math.random() * maxX;
-      const y = Math.random() * maxY;
+      var maxX = Math.max(0, gameArea.clientWidth - 108);
+      var maxY = Math.max(0, gameArea.clientHeight - 108);
+      var x = Math.floor(Math.random() * (maxX + 1));
+      var y = Math.floor(Math.random() * (maxY + 1));
 
       target.style.left = x + "px";
       target.style.top = y + "px";
 
-      let clicked = false;
-
-      target.addEventListener("click", () => {
-        if (!gameRunning || clicked) return;
-        clicked = true;
+      target.onclick = function() {
+        if (!running) return;
 
         if (type === "good") {
           score += 1;
-          statusText.textContent = pick(goodMsgs);
-          showFloat("+1 nap point", x, y, true);
+          var goodMsg = pick(["Yay!", "Nice!", "Good job!", "Boop!", "Awesome!"]);
+          statusEl.textContent = goodMsg;
+          setMonitorMood(goodMsg);
         } else if (type === "bonus") {
           score += 3;
-          statusText.textContent = pick(bonusMsgs);
-          showFloat("+3 potato power", x, y, true);
+          var bonusMsg = pick(["Bonus star!", "Woohoo!", "Super star!", "Sparkle time!"]);
+          statusEl.textContent = bonusMsg;
+          setMonitorMood(bonusMsg);
+          confettiBurst();
         } else {
           lives -= 1;
-          statusText.textContent = pick(badMsgs);
-          showFloat("-1 poor choice", x, y, false);
+          var badMsg = pick(["Oops! Bee!", "Try again!", "Uh oh!"]);
+          statusEl.textContent = badMsg;
+          setMonitorMood(badMsg);
         }
 
-        if (score > best) best = score;
-        updateHUD();
-        target.remove();
+        updateStats();
+        clearTarget();
 
         if (lives <= 0) {
-          endGame("GAME OVER. The goblins have won this round. Please restore honour by turning the screen off in real life.");
+          finishGame("Game over!");
+          return;
         }
-      });
+
+        setTimeout(spawnOne, 250);
+      };
 
       gameArea.appendChild(target);
+      currentTarget = target;
 
-      setTimeout(() => {
-        if (!clicked && target.parentNode && gameRunning) {
-          target.remove();
+      currentTimeout = setTimeout(function() {
+        if (!running || !currentTarget) return;
 
-          if (type === "good" || type === "bonus") {
-            lives -= 1;
-            statusText.textContent = "A sleepy thing escaped! Absolute scenes!";
-            showFloat("MISSED THE THING!", x, y, false);
-            updateHUD();
+        if (type === "good" || type === "bonus") {
+          lives -= 1;
+          statusEl.textContent = "Oops! Missed it!";
+          setMonitorMood("Oops! Missed it!");
+          updateStats();
 
-            if (lives <= 0) {
-              endGame("GAME OVER. The sleepy screens drifted away into the night. Real mission remains: switch the screen off.");
-            }
+          if (lives <= 0) {
+            finishGame("Game over!");
+            return;
           }
         }
-      }, lifeTime);
+
+        clearTarget();
+        setTimeout(spawnOne, 250);
+      }, lifetime);
     }
 
     function startGame() {
-      clearInterval(gameTimer);
-      clearInterval(spawnTimer);
-      clearGameArea();
-
       score = 0;
-      timeLeft = 30;
+      timeLeft = 20;
       lives = 3;
-      gameRunning = true;
-      updateHUD();
-      statusText.textContent = "GO! Tap things with honour, confusion, and perhaps a bit of potato energy.";
+      running = true;
+      updateStats();
+      statusEl.textContent = "Go go go!";
+      setMonitorMood("Go go go!");
 
-      gameTimer = setInterval(() => {
+      clearInterval(timer);
+      clearTarget();
+
+      spawnOne();
+
+      timer = setInterval(function() {
         timeLeft -= 1;
-        updateHUD();
+        updateStats();
 
         if (timeLeft <= 0) {
-          endGame("TIME UP! You did marvellous nonsense. Final real-world task: turn the screen off before leaving.");
+          finishGame("Time’s up!");
         }
       }, 1000);
-
-      spawnTimer = setInterval(() => {
-        spawnTarget();
-      }, 700);
     }
 
-    startBtn.addEventListener("click", startGame);
+    startBtn.onclick = function() {
+      startGame();
+    };
 
-    stopBtn.addEventListener("click", () => {
-      if (gameRunning) {
-        endGame("Nonsense halted. A wise and powerful decision.");
+    stopBtn.onclick = function() {
+      if (running) {
+        finishGame("Game stopped!");
       }
-    });
+    };
 
-    updateHUD();
+    updateStats();
   </script>
 </body>
 </html>
